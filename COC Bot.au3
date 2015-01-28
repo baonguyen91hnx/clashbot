@@ -1,7 +1,8 @@
 #RequireAdmin
 ;#AutoIt3Wrapper_Icon="We need to specify absolute path to \COCBot\Icons\cocbot.ico so it compiles with proper icon"
 
-$sBotTitle = "COC Bot v5.5"
+$sBotVersion = "5.5"
+$sBotTitle = "COC Bot v" & $sBotVersion
 
 If _Singleton($sBotTitle, 1) = 0 Then
 	MsgBox(0, "", "Bot is already running.")
@@ -23,7 +24,14 @@ DirCreate(@ScriptDir & "\COCBot\logs\")
 #include-once
 
 While 1
-	Sleep(5000)
+	Switch TrayGetMsg()
+        Case $tiAbout
+			MsgBox(64 + $MB_APPLMODAL + $MB_TOPMOST, $sBotTitle, "Clash of Clans Bot" & @CRLF & @CRLF & _
+					"Version: " & $sBotVersion & @CRLF & _
+					"Released under the GNU GPLv3 license.", 0, $frmBot)
+		Case $tiExit
+			ExitLoop
+	EndSwitch
 WEnd
 
 Func runBot() ;Bot that runs everything in order

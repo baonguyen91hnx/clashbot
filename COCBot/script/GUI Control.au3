@@ -1,6 +1,7 @@
 Opt("GUIOnEventMode", 1)
 Opt("MouseClickDelay", 10)
 Opt("MouseClickDownDelay", 10)
+Opt("TrayMenuMode", 3)
 
 _GDIPlus_Startup()
 
