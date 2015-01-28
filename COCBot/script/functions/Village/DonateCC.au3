@@ -3,8 +3,8 @@
 Func DonateCC()
 	Global $Donate = True
 	Local $y = 119
+	SetLog("Donating Troops", $COLOR_BLUE)
 	While $Donate
-		SetLog("Donating Troops", $COLOR_BLUE)
 		Click(1, 1) ;Click Away
 		If _ColorCheck(_GetPixelColor(331, 330), Hex(0xF0A03B, 6), 20) = False Then
 			Click(19, 349) ;Clicks chat thing
@@ -16,8 +16,8 @@ Func DonateCC()
 			If $ichkDonateBarbarians = 1 Or $ichkDonateArchers = 1 Or $ichkDonateGiants = 1 Then
 				_CaptureRegion(0, 0, 435, $DonatePixel[1] + 50)
 				Local $String = getString($DonatePixel[1] - 17)
+				SetLog("Chat Text: " & $String, $COLOR_GREEN)
 				If $ichkDonateBarbarians = 1 Then
-					SetLog("Donate Text: " & $String, $COLOR_GREEN)
 					Local $Barbs = StringSplit($itxtDonateBarbarians, @CRLF)
 					For $i = 0 to UBound($Barbs) - 1
 						If $String = $Barbs[$i] Then
@@ -28,7 +28,6 @@ Func DonateCC()
 				EndIf
 
 				If $ichkDonateArchers = 1 Then
-					SetLog("Donate Text: " & $String, $COLOR_GREEN)
 					Local $Archers = StringSplit($itxtDonateArchers, @CRLF)
 					For $i = 0 to UBound($Archers) - 1
 						If $String = $Archers[$i] Then
@@ -39,7 +38,6 @@ Func DonateCC()
 				EndIf
 
 				If $ichkDonateGiants = 1 Then
-					SetLog("Donate Text: " & $String, $COLOR_GREEN)
 					Local $Giants = StringSplit($itxtDonateGiants, @CRLF)
 					For $i = 0 to UBound($Giants) - 1
 						If $String = $Giants[$i] Then
