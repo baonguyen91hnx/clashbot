@@ -64,6 +64,12 @@ Func applyConfig() ;Applies the data from config to the controls in GUI
 	Else
 		GUICtrlSetState($chkQueenAttackAllBases, $GUI_UNCHECKED)
 	EndIf
+
+	If $checkUseClanCastle = 1 Then
+		GUICtrlSetState($chkUseClanCastle, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkUseClanCastle, $GUI_UNCHECKED)
+	EndIf
 	;Donate Settings-------------------------------------------------------------------------
 	If $ichkRequest = 1 Then
 		GUICtrlSetState($chkRequest, $GUI_CHECKED)

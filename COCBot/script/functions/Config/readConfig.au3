@@ -21,6 +21,8 @@ Func readConfig() ;Reads config and sets it to the variables
 
 		$QueenAttack[0] = IniRead($config, "attack", "queen-dead", "0")
 		$QueenAttack[2] = IniRead($config, "attack", "queen-all", "0")
+
+		$checkUseClanCastle = IniRead($config, "attack", "use-cc", "0")
 		;Donate Settings-------------------------------------------------------------------------
 		$CCPos[0] = IniRead($config, "donate", "xCCPos", "0")
 		$CCPos[1] = IniRead($config, "donate", "yCCPos", "0")

@@ -64,7 +64,7 @@ Func Barch() ;Attack Algorithm for Barch
 
 				dropHeroes($TopLeft[3][0], $TopLeft[3][1], $King, $Queen)
 				If _Sleep(1000) Then ExitLoop
-				If $CC <> -1 Then dropCC($TopLeft[3][0], $TopLeft[3][1], $CC)
+				dropCC($TopLeft[3][0], $TopLeft[3][1], $CC)
 			Case 1 ;Three sides ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 				SetLog("~Attacking in three sides...")
 				If _Sleep(1000) Then ExitLoop
@@ -115,7 +115,7 @@ Func Barch() ;Attack Algorithm for Barch
 
 				dropHeroes($TopRight[3][0], $TopRight[3][1], $King, $Queen)
 				If _Sleep(1000) Then ExitLoop
-				If $CC <> -1 Then dropCC($TopRight[3][0], $TopRight[3][1], $CC)
+				dropCC($TopRight[3][0], $TopRight[3][1], $CC)
 			Case 2 ;Four sides ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 				SetLog("~Attacking in all sides...")
 				If _Sleep(1000) Then ExitLoop
@@ -170,7 +170,7 @@ Func Barch() ;Attack Algorithm for Barch
 
 				dropHeroes($BottomLeft[3][0], $BottomLeft[3][1], $King, $Queen)
 				If _Sleep(1000) Then ExitLoop
-				If $CC <> -1 Then dropCC($BottomLeft[3][0], $BottomLeft[3][1], $CC)
+				dropCC($BottomLeft[3][0], $BottomLeft[3][1], $CC)
 		EndSwitch
 
 		If _Sleep(100) Then ExitLoop

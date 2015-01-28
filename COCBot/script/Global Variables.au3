@@ -72,6 +72,7 @@ Global $QueenAttack[3] ;Queen attack settings
 Global $checkKPower = -1 ;Check for King and Queen activate power
 Global $checkQPower = -1
 Global $delayActivateKQ = 20000 ;Delay before activating KQ
+Global $checkUseClanCastle ; Use Clan Castle settings
 Global $iradAttackMode ;Attack mode, 0 1 2
 
 ;Donate Settings

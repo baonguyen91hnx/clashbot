@@ -57,6 +57,12 @@ Func saveConfig() ;Saves the controls settings to the config
 	Else
 		IniWrite($config, "attack", "queen-all", 0)
 	EndIf
+
+	If GUICtrlRead($chkUseClanCastle) = $GUI_CHECKED Then
+		IniWrite($config, "attack", "use-cc", 1)
+	Else
+		IniWrite($config, "attack", "use-cc", 0)
+	EndIf
 	;Donate Settings-------------------------------------------------------------------------
 	If GUICtrlRead($chkRequest) = $GUI_CHECKED Then
 		IniWrite($config, "donate", "chkRequest", 1)
