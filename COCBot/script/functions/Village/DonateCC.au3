@@ -13,7 +13,7 @@ Func DonateCC()
 		Local $offColors[3][3] = [[0x000000, 0, -2], [0x262926, 0, 1], [0xF8FCF0, 0, 11]]
 		Global $DonatePixel = _MultiPixelSearch(202, $y, 203, 670, 1, 1, Hex(0x262926, 6), $offColors, 20)
 		If IsArray($DonatePixel) Then
-			If $ichkDonateBarbarians = 1 Or $ichkDonateArchers = 1 Or $ichkDonateGiants = 1 Then
+			If ($ichkDonateAllBarbarians = 0 Or $ichkDonateAllArchers = 0 Or $ichkDonateAllGiants = 0) And ($ichkDonateBarbarians = 1 Or $ichkDonateArchers = 1 Or $ichkDonateGiants = 1) Then
 				_CaptureRegion(0, 0, 435, $DonatePixel[1] + 50)
 				Local $String = getString($DonatePixel[1] - 17)
 				SetLog("Chat Text: " & $String, $COLOR_GREEN)
