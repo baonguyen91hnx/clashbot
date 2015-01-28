@@ -60,3 +60,5 @@
 #include "functions\Village\LocateCollectors.au3"
 #include "functions\Village\RequestCC.au3"
 #include "functions\Village\Train.au3"
+#include "functions\Village\isGoldFull.au3"
+#include "functions\Village\isElixirFull.au3"
