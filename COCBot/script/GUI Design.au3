@@ -1,4 +1,6 @@
 $frmBot = GUICreate($sBotTitle, 417, 392, 207, 158)
+GUISetIcon(@ScriptDir & "\COCBot\Icons\cocbot.ico")
+TraySetIcon(@ScriptDir & "\COCBot\Icons\cocbot.ico")
 $tabMain = GUICtrlCreateTab(8, 8, 401, 355)
 GUICtrlSetOnEvent(-1, "tabMain")
 $pageGeneral = GUICtrlCreateTabItem("General")

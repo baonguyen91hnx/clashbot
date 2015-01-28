@@ -1,4 +1,5 @@
 #RequireAdmin
+;#AutoIt3Wrapper_Icon="We need to specify absolute path to \COCBot\Icons\cocbot.ico so it compiles with proper icon"
 
 $sBotTitle = "COC Bot v5.5"
 
