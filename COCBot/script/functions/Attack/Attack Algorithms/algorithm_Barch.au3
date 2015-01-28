@@ -197,16 +197,16 @@ Func Barch() ;Attack Algorithm for Barch
 		If _Sleep(100) Then ExitLoop
 
 		;Activate KQ's power
-		If $checkKPower <> -1 Or $checkQPower <> -1 Then
+		If $checkKPower = True Or $checkQPower = True Then
 			SetLog("Waiting " & $delayActivateKQ / 1000 & " seconds before activating King/Queen", $COLOR_GREEN)
 			_Sleep($delayActivateKQ)
-			If $checkKPower <> -1 Then
+			If $checkKPower = True Then
 				SetLog("Activate King's power", $COLOR_BLUE)
-				Click(68 + (72 * $checkKPower), 595)
+				Click(68 + (72 * $King), 595)
 			EndIf
-			If $checkQPower <> -1 Then
+			If $checkQPower = True Then
 				SetLog("Activate Queen's power", $COLOR_BLUE)
-				Click(68 + (72 * $checkQPower), 595)
+				Click(68 + (72 * $Queen), 595)
 			EndIf
 		EndIf
 

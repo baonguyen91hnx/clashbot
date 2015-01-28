@@ -10,7 +10,7 @@ Func dropHeroes($x, $y, $KingSlot = -1, $QueenSlot = -1) ;Drops for king and que
 					SetLog("Dropping King", $COLOR_BLUE)
 					Click(68 + (72 * $KingSlot), 595) ;Select King
 					Click($x, $y)
-					$checkKPower = $KingSlot
+					$checkKPower = True
 				EndIf
 
 				If _Sleep(1000) Then ExitLoop
@@ -19,7 +19,7 @@ Func dropHeroes($x, $y, $KingSlot = -1, $QueenSlot = -1) ;Drops for king and que
 					SetLog("Dropping Queen", $COLOR_BLUE)
 					Click(68 + (72 * $QueenSlot), 595) ;Select Queen
 					Click($x, $y)
-					$checkQPower = $QueenSlot
+					$checkQPower = True
 				EndIf
 			Case 1 ;Weak Base
 				;--------------------------------
@@ -28,7 +28,7 @@ Func dropHeroes($x, $y, $KingSlot = -1, $QueenSlot = -1) ;Drops for king and que
 					SetLog("Dropping King", $COLOR_BLUE)
 					Click(68 + (72 * $KingSlot), 595) ;Select King
 					Click($x, $y)
-					$checkKPower = $KingSlot
+					$checkKPower = True
 				EndIf
 
 				If _Sleep(1000) Then ExitLoop
@@ -37,7 +37,7 @@ Func dropHeroes($x, $y, $KingSlot = -1, $QueenSlot = -1) ;Drops for king and que
 					SetLog("Dropping Queen", $COLOR_BLUE)
 					Click(68 + (72 * $QueenSlot), 595) ;Select Queen
 					Click($x, $y)
-					$checkQPower = $QueenSlot
+					$checkQPower = True
 				EndIf
 		EndSwitch
 		ExitLoop
