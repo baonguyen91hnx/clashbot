@@ -1,6 +1,6 @@
 ;Searches for a village that until meets conditions
 
-Func VillageSearch() ;Control for searching a village that meets conditions
+Func VillageSearch($TakeSS=false) ;Control for searching a village that meets conditions
 	While 1
 		Switch $iradAttackMode
 			Case 0
@@ -18,6 +18,14 @@ Func VillageSearch() ;Control for searching a village that meets conditions
 			GetResources() ;Reads Resource Values
 
 			If $Restart = True Then ExitLoop (2)
+
+			If $TakeSS = True Then
+			   SetLog("Taking snapshot of your loot", $COLOR_ORANGE)
+			   Local $Date = @MDAY & "." & @MON & "." & @YEAR
+			   Local $Time = @HOUR & "." & @MIN & "." & @SEC
+			   _CaptureRegion()
+			   _GDIPlus_ImageSaveToFile($hBitmap, @ScriptDir & "\AllTowns\" & $Date & " at " & $Time & ".jpg")
+			EndIf
 			If CompareResources() Then
 				If $iradAttackMode = 0 Then
 					If checkDeadBase() Then

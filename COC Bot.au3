@@ -93,13 +93,13 @@ EndFunc   ;==>Idle
 Func AttackMain() ;Main control for attack functions
 		PrepareSearch()
 	 If _Sleep(1000) Then Return
-		VillageSearch()
+		VillageSearch($TakeAllTownSnapShot)
 	 If _Sleep(1000) Or $Restart = True Then Return
 		PrepareAttack()
 	 If _Sleep(1000) Then Return
 		Attack()
 	 If _Sleep(1000) Then Return
-		ReturnHome()
+		ReturnHome($TakeLootSnapShot)
 	 If _Sleep(1000) Then Return
 EndFunc   ;==>AttackMain
 

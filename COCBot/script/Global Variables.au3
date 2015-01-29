@@ -41,6 +41,9 @@ Global $sLogPath ; `Will create a new log file every time the start button is pr
 Global $hLogFileHandle
 Global $Restart = False
 Global $RunState = False
+Global $TakeLootSnapShot = True
+Global $TakeAllTownSnapShot = True
+
 
 Global $cmbTroopComp ;For Event change on ComboBox Troop Compositions
 Global $iCollectCounter = 0 ; Collect counter, when reaches $COLLECTATCOUNT, it will collect
