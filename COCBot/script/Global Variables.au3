@@ -75,6 +75,10 @@ Global $delayActivateKQ = 20000 ;Delay before activating KQ
 Global $checkUseClanCastle ; Use Clan Castle settings
 Global $iradAttackMode ;Attack mode, 0 1 2
 
+;Boosts Settings
+Global $remainingBoosts = 0 ;  remaining boost to active during session
+Global $boostsEnabled = 1 ; is this function enabled
+
 ;Donate Settings
 Global $CCPos[2] = [-1, -1] ;Position of clan castle
 

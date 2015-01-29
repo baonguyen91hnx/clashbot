@@ -7,7 +7,7 @@ Func BoostBarracks()
 		If _Sleep(2000) Then Return
 	  EndIf
 	  While 1
-		 SetLog("Boosting Barracks")
+		 SetLog("Boosting Barracks", $COLOR_BLUE)
 
 
 			   Click(1, 1)
@@ -20,11 +20,11 @@ Func BoostBarracks()
 					Click($Boost[0], $Boost[1])
 					 If _Sleep(1000) Then Return
 					 _CaptureRegion()
-					 If _ColorCheckVariation(_PixelGetColor_GetPixel(420, 375), Hex(0xd2ec78, 6), 20) Then
+					 If _ColorCheck(_GetPixelColor(420, 375), Hex(0xd2ec78, 6), 20) Then
 						 Click(420, 375)
 						 If _Sleep(2000) Then Return
 							_CaptureRegion()
-						   If _ColorCheckVariation(_PixelGetColor_GetPixel(586, 267), Hex(0xd80405, 6), 20) Then
+						   If _ColorCheck(_GetPixelColor(586, 267), Hex(0xd80405, 6), 20) Then
 							  _GUICtrlComboBox_SetCurSel($cmbBoostBarracks, 0)
 							  SetLog("Not enough gems", $COLOR_BLUE)
 						   Else
@@ -32,12 +32,12 @@ Func BoostBarracks()
 							  SetLog('Boost done. Remaining :' & (GUICtrlRead($cmbBoostBarracks)), $COLOR_BLUE)
 						   EndIf
 					 Else
-						 SetLog("Barracks are already Boosted", $COLOR_BLUE)
+						 SetLog("Barracks are already Boosted", $COLOR_ORANGE)
 					 EndIf
 					 If _Sleep(500) Then ExitLoop
 					 Click(1, 1)
 				 Else
-					 SetLog("Barracks are already Boosted", $COLOR_BLUE)
+					 SetLog("Barracks are already Boosted", $COLOR_ORANGE)
 					 If _Sleep(10000) Then Return
 				 EndIf
 

@@ -62,3 +62,4 @@
 #include "functions\Village\Train.au3"
 #include "functions\Village\isGoldFull.au3"
 #include "functions\Village\isElixirFull.au3"
+#include "functions\Village\BoostBarracks.au3"

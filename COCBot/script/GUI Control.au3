@@ -78,6 +78,7 @@ Func btnStart()
 				SetLog("Bot is starting...", $COLOR_ORANGE)
 
 				$RunState = True
+				GUICtrlSetState($cmbBoostBarracks, $GUI_DISABLE)
 				GUICtrlSetState($btnLocateBarracks, $GUI_DISABLE)
 				GUICtrlSetState($btnSearchMode, $GUI_DISABLE)
 				GUICtrlSetState($cmbTroopComp, $GUI_DISABLE)
@@ -107,7 +108,7 @@ Func btnStop()
 		GUICtrlSetState($cmbTroopComp, $GUI_ENABLE)
 		GUICtrlSetState($btnLocateCollectors, $GUI_ENABLE)
 		GUICtrlSetState($chkBackground, $GUI_ENABLE)
-
+	    GUICtrlSetState($cmbBoostBarracks, $GUI_ENABLE)
 		GUICtrlSetState($btnStart, $GUI_SHOW)
 		GUICtrlSetState($btnStop, $GUI_HIDE)
 
