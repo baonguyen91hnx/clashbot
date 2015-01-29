@@ -24,7 +24,8 @@ Func DonateCC()
 				If $ichkDonateBarbarians = 1 Then
 					Local $Barbs = StringSplit($itxtDonateBarbarians, @CRLF)
 					For $i = 0 to UBound($Barbs) - 1
-						If $String = $Barbs[$i] Then
+						If StringInStr($String,$Barbs[$i],1) Then
+						    SetLog("Match Found ! Giving Barbarians", $COLOR_BLUE)
 						    $MatchFound = 1
 							DonateBarbs()
 							ExitLoop
@@ -35,7 +36,8 @@ Func DonateCC()
 				If $ichkDonateArchers = 1 Then
 					Local $Archers = StringSplit($itxtDonateArchers, @CRLF)
 					For $i = 0 to UBound($Archers) - 1
-						If $String = $Archers[$i] Then
+						If StringInStr($String,$Archers[$i],1) Then
+						    SetLog("Match Found ! Giving Archers", $COLOR_BLUE)
 						    $MatchFound = 1
 							DonateArchers()
 							ExitLoop
@@ -46,7 +48,8 @@ Func DonateCC()
 				If $ichkDonateGiants = 1 Then
 					Local $Giants = StringSplit($itxtDonateGiants, @CRLF)
 					For $i = 0 to UBound($Giants) - 1
-						If $String = $Giants[$i] Then
+						If StringInStr($String,$Giants[$i],1) Then
+						    SetLog("Match Found ! Giving Giants", $COLOR_BLUE)
 						    $MatchFound = 1
 							DonateGiants()
 							ExitLoop
@@ -55,18 +58,11 @@ Func DonateCC()
 				EndIf
 
 			   If $MatchFound = 0 Then
-				  SetLog("No matches Found, switching to manual donate for this request", $COLOR_BLUE)
+				  SetLog("No matches Found, switching to manual donate for this request", $COLOR_ORANGE)
 				  ManualDonate()
 			   EndIf
 			Else
-				Select
-					Case $ichkDonateAllBarbarians = 1
-						DonateBarbs()
-					Case $ichkDonateAllArchers = 1
-						DonateArchers()
-					Case $ichkDonateAllGiants = 1
-						DonateGiants()
-				EndSelect
+				ManualDonate()
 			 EndIf
 		   $y = $DonatePixel[1] + 10
 		Else
