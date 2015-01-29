@@ -180,14 +180,14 @@ Func AdvancedAttack() ;Attack Algorithm for all existing troops
 	    Next
 
 		;Activate KQ's power
-		If $checkKPower <> -1 Or $checkQPower <> -1 Then
+		If $checkKPower Or $checkQPower  Then
 			SetLog("Waiting " & $delayActivateKQ / 1000 & " seconds before activating King/Queen")
 			_Sleep($delayActivateKQ)
-			If $checkKPower <> -1 Then
+			If $checkKPower Then
 				SetLog("Activate King's power")
 				SelectDropTroupe($checkKPower)
 			EndIf
-			If $checkQPower <> -1 Then
+			If $checkQPower Then
 				SetLog("Activate Queen's power")
 				SelectDropTroupe($checkQPower)
 			EndIf

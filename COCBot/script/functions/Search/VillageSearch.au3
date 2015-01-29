@@ -1,6 +1,6 @@
 ;Searches for a village that until meets conditions
 
-Func VillageSearch($TakeSS=false) ;Control for searching a village that meets conditions
+Func VillageSearch($TakeSS=False) ;Control for searching a village that meets conditions
 	While 1
 		Switch $iradAttackMode
 			Case 0
@@ -24,7 +24,10 @@ Func VillageSearch($TakeSS=false) ;Control for searching a village that meets co
 			   Local $Date = @MDAY & "." & @MON & "." & @YEAR
 			   Local $Time = @HOUR & "." & @MIN & "." & @SEC
 			   _CaptureRegion()
-			   _GDIPlus_ImageSaveToFile($hBitmap, @ScriptDir & "\AllTowns\" & $Date & " at " & $Time & ".jpg")
+			   SetLog("Saving snapshoot of the town in " & @ScriptDir & "\AllTowns\" & $Date & " at " & $Time & ".png", $COLOR_ORANGE)
+			   _GDIPlus_ImageSaveToFile($hBitmap, @ScriptDir & "\AllTowns\" & $Date & " at " & $Time & ".png")
+			Else
+			   SetLog("Skip saving snapshoot of the town", $COLOR_GREEN)
 			EndIf
 			If CompareResources() Then
 				If $iradAttackMode = 0 Then
