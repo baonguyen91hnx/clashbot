@@ -37,33 +37,32 @@ WEnd
 Func runBot() ;Bot that runs everything in order
 	While 1
 		$Restart = False
-		If _Sleep(1000) Then ExitLoop
+		If _Sleep(1000) Then Return
 		checkMainScreen()
-		If _Sleep(1000) Then ExitLoop
+		If _Sleep(1000) Then Return
 		ZoomOut()
-		If _Sleep(1000) Then ExitLoop
+		If _Sleep(1000) Then Return
 		ReArm()
-		If _Sleep(1000) Then ExitLoop
+		If _Sleep(1000) Then Return
 		Train()
 		If _Sleep(1000) Then ExitLoop
 		BoostBarracks()
 		If _Sleep(1000) Then ExitLoop
 		RequestCC()
-		If _Sleep(1000) Then ExitLoop
+		If _Sleep(1000) Then Return
 		DonateCC()
-		If _Sleep(1000) Then ExitLoop
+		If _Sleep(1000) Then Return
 		Collect()
-		If _Sleep(1000) Then ExitLoop
+		If _Sleep(1000) Then Return
 		Idle()
-		If _Sleep(1000) Then ExitLoop
+		If _Sleep(1000) Then Return
 		AttackMain()
-		If _Sleep(1000) Then ExitLoop
+		If _Sleep(1000) Then Return
 	WEnd
 EndFunc   ;==>runBot
 
 Func Idle() ;Sequence that runs until Full Army
 	Local $TimeIdle = 0 ;In Seconds
-	While 1
 		If $fullArmy = False Then
 			SetLog("~~~Waiting for full army~~~")
 			While $fullArmy = False
@@ -72,55 +71,47 @@ Func Idle() ;Sequence that runs until Full Army
 				checkMainScreen()
 				If _Sleep(1000) Then ExitLoop
 				ZoomOut()
-				If _Sleep(30000) Then ExitLoop (2)
+		  If _Sleep(30000) Then ExitLoop
 				If $iCollectCounter > $COLLECTATCOUNT Then ; This is prevent from collecting all the time which isn't needed anyway
 					Collect()
-					If _Sleep(1000) Or $RunState = False Then ExitLoop (2)
+			  If _Sleep(1000) Or $RunState = False Then ExitLoop
 					$iCollectCounter = 0
 				EndIf
 				$iCollectCounter = $iCollectCounter + 1
 				Train()
-				If $fullArmy Then ExitLoop (2)
-				If _Sleep(1000) Then ExitLoop (2)
+		  If $fullArmy Then ExitLoop
+		  If _Sleep(1000) Then ExitLoop
 				DropTrophy()
-				If _Sleep(1000) Then ExitLoop (2)
+		  If _Sleep(1000) Then ExitLoop
 				DonateCC()
 				$TimeIdle += Round(TimerDiff($hTimer) / 1000, 2) ;In Seconds
 				SetLog("Time Idle: " & Floor(Floor($TimeIdle / 60) / 60) & " hours " & Floor(Mod(Floor($TimeIdle / 60), 60)) & " minutes " & Floor(Mod($TimeIdle, 60)) & " seconds", $COLOR_ORANGE)
 			WEnd
 		EndIf
-		ExitLoop
-	WEnd
 EndFunc   ;==>Idle
 
 Func AttackMain() ;Main control for attack functions
-	While 1
 		PrepareSearch()
-		If _Sleep(1000) Then ExitLoop
+	 If _Sleep(1000) Then Return
 		VillageSearch()
-		If _Sleep(1000) Or $Restart = True Then ExitLoop
+	 If _Sleep(1000) Or $Restart = True Then Return
 		PrepareAttack()
-		If _Sleep(1000) Then ExitLoop
+	 If _Sleep(1000) Then Return
 		Attack()
-		If _Sleep(1000) Then ExitLoop
+	 If _Sleep(1000) Then Return
 		ReturnHome()
-		If _Sleep(1000) Then ExitLoop
-		ExitLoop
-	WEnd
+	 If _Sleep(1000) Then Return
 EndFunc   ;==>AttackMain
 
 Func Attack() ;Selects which algorithm
-	While 1
 		SetLog("======Beginning Attack======")
 		Switch $icmbAlgorithm
 			Case 0 ;Barbarians + Archers
-				Barch()
+		  AdvancedAttack()
 			Case 1 ;Use All Troops
 				SetLog("Not Available yet, using Barch instead...", $COLOR_RED)
-				If _Sleep(2000) Then ExitLoop
-				Barch()
+		  If _Sleep(2000) Then Return
+		  AdvancedAttack()
 		EndSwitch
-		ExitLoop
-	WEnd
 EndFunc   ;==>Attack
 
