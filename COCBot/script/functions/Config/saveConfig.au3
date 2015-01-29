@@ -140,5 +140,8 @@ Func saveConfig() ;Saves the controls settings to the config
 	For $i = 0 To 16 ;Covers all Collectors
 		IniWrite($config, "general", "xCollector" & $i + 1, $collectorPos[$i][0])
 		IniWrite($config, "general", "yCollector" & $i + 1, $collectorPos[$i][1])
-	Next
+	 Next
+	 ;Traps Settings
+	 IniWrite($config, "general", "xTrap", $TrapPos[0])
+	IniWrite($config, "general", "yTrap", $TrapPos[1])
 EndFunc   ;==>saveConfig

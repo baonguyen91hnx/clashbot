@@ -42,6 +42,8 @@ Func runBot() ;Bot that runs everything in order
 		If _Sleep(1000) Then ExitLoop
 		ZoomOut()
 		If _Sleep(1000) Then ExitLoop
+		ReArm()
+		If _Sleep(1000) Then ExitLoop
 		Train()
 		If _Sleep(1000) Then ExitLoop
 		BoostBarracks()

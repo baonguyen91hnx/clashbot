@@ -61,5 +61,8 @@ Func readConfig() ;Reads config and sets it to the variables
 	For $i = 0 To 16 ;Covers all Collectors
 		$collectorPos[$i][0] = IniRead($config, "general", "xCollector" & $i + 1, "0")
 		$collectorPos[$i][1] = IniRead($config, "general", "yCollector" & $i + 1, "0")
-	Next
+	 Next
+	 ;traps Settings
+	 $TrapPos[0] = IniRead($config, "general", "xTrap", "-1")
+	 $TrapPos[1] = IniRead($config, "general", "yTrap", "-1")
 EndFunc   ;==>readConfig
