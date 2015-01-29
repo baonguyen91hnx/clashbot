@@ -110,9 +110,9 @@ $deploySettings = GUICtrlCreateGroup("Deploy Settings", 15, 270, 385, 85)
 $chkAttackTH = GUICtrlCreateCheckbox("Attack Townhall (Outside)", 250, 320, 142, 17)
 GUICtrlSetState(-1, $GUI_DISABLE)
 $cmbDeploy = GUICtrlCreateCombo("", 30, 290, 360, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
-GUICtrlSetData(-1, "Attack on a single side, penetrates through base|Attack on two sides, penetrates through base|Attack on three sides, gets outer and some inside of base|Attack on all sides equally, gets most of outer base", "Attack on all sides equally, gets most of outer base")
+GUICtrlSetData(-1, "Attack on two sides, penetrates through base|Attack on three sides, gets outer and some inside of base|Attack on all sides equally, gets most of outer base", "Attack on all sides equally, gets most of outer base")
 $cmbAlgorithm = GUICtrlCreateCombo("", 30, 320, 215, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
-GUICtrlSetData(-1, "Use all troops|Use all troops(bis)", "Use all troops") ;"Archers|Barbarians|Goblins|Barbarians + Archers|Barb + Arch + Goblin + Giant|Barb + Arch + Giant|Barb + Arch + Goblin|Barb + Arch + Goblin + Giant + Wallbreakers|Use Barracks"
+GUICtrlSetData(-1, "Barbarians + Archers|Use all troops", "Barbarians + Archers") ;"Archers|Barbarians|Goblins|Barbarians + Archers|Barb + Arch + Goblin + Giant|Barb + Arch + Giant|Barb + Arch + Goblin|Barb + Arch + Goblin + Giant + Wallbreakers|Use Barracks"
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 $pageDonateSettings = GUICtrlCreateTabItem("Donate Settings")
 $Donation = GUICtrlCreateGroup("", 15, 30, 385, 325)
@@ -177,13 +177,13 @@ $lblBarrack2 = GUICtrlCreateLabel("Barrack 2:", 220, 178, 53, 17)
 $lblBarrack3 = GUICtrlCreateLabel("Barrack 3:", 220, 203, 53, 17)
 $lblBarrack4 = GUICtrlCreateLabel("Barrack 4:", 220, 228, 53, 17)
 $cmbBarrack1 = GUICtrlCreateCombo("", 275, 150, 110, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
-GUICtrlSetData(-1, "Barbarians|Archers|Giants|Goblins", "Barbarians") ; "Barbarians|Archers|Giants|Goblins"
+GUICtrlSetData(-1, "Barbarians|Archers", "Barbarians") ; "Barbarians|Archers|Giants|Goblins"
 $cmbBarrack2 = GUICtrlCreateCombo("", 275, 175, 110, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
-GUICtrlSetData(-1, "Barbarians|Archers|Giants|Goblins", "Archers") ; "Barbarians|Archers|Giants|Goblins"
+GUICtrlSetData(-1, "Barbarians|Archers", "Barbarians") ; "Barbarians|Archers|Giants|Goblins"
 $cmbBarrack3 = GUICtrlCreateCombo("", 275, 200, 110, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
-GUICtrlSetData(-1, "Barbarians|Archers|Giants|Goblins", "Archers") ; "Barbarians|Archers|Giants|Goblins"
+GUICtrlSetData(-1, "Barbarians|Archers", "Archers") ; "Barbarians|Archers|Giants|Goblins"
 $cmbBarrack4 = GUICtrlCreateCombo("", 275, 225, 110, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
-GUICtrlSetData(-1, "Barbarians|Archers|Giants|Goblins", "Goblins") ; "Barbarians|Archers|Giants|Goblins"
+GUICtrlSetData(-1, "Barbarians|Archers", "Archers") ; "Barbarians|Archers|Giants|Goblins"
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 $OtherBarrackSettings = GUICtrlCreateGroup("Other Settings", 20, 255, 375, 100)
 $btnLocateBarracks = GUICtrlCreateButton("Locate Barracks Manually", 30, 320, 355, 25)

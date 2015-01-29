@@ -14,7 +14,7 @@ Func GUIControl($hWind, $iMsg, $wParam, $lParam)
 		Case 273
 			Switch $nID
 				Case $GUI_EVENT_CLOSE
-					If WinExists($Title) Then
+					If WinExists("BlueStacks App Player") Then
 						EnableBS($HWnD, $SC_MINIMIZE)
 						EnableBS($HWnD, $SC_CLOSE)
 						EnableBS($HWnD, $SC_MOVE)
@@ -37,7 +37,7 @@ Func GUIControl($hWind, $iMsg, $wParam, $lParam)
 		Case 274
 			Switch $wParam
 				Case 0xf060
-					If WinExists($Title) Then
+					If WinExists("BlueStacks App Player") Then
 						EnableBS($HWnD, $SC_MINIMIZE)
 						EnableBS($HWnD, $SC_CLOSE)
 						EnableBS($HWnD, $SC_MOVE)
@@ -60,18 +60,18 @@ Func btnStart()
 
 	_GUICtrlEdit_SetText($txtLog, "")
 
-	If WinExists($Title) Then
+	If WinExists("BlueStacks App Player") Then
 		DisableBS($HWnD, $SC_MINIMIZE)
 		DisableBS($HWnD, $SC_CLOSE)
 		DisableBS($HWnD, $SC_MOVE)
-		If IsArray(ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")) Then
-			Local $BSsize = [ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")[2], ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")[3]]
+		If IsArray(ControlGetPos("BlueStacks App Player", "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")) Then
+			Local $BSsize = [ControlGetPos("BlueStacks App Player", "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")[2], ControlGetPos("BlueStacks App Player", "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")[3]]
 			If $BSsize[0] <> 860 Or $BSsize[1] <> 720 Then
 				SetLog("BlueStacks is not set to 860x720!", $COLOR_RED)
 				SetLog("Download the '860x720.reg' file and run it, restart BlueStacks", $COLOR_ORANGE)
 				SetLog("Download the '860x720.reg' here: http://www.goo.gl/YgQ5II", $COLOR_ORANGE)
 			Else
-				WinActivate($Title)
+				WinActivate("BlueStacks App Player")
 
 				SetLog("~~~~Welcome to " & @ScriptName & "!~~~~")
 				SetLog($Compiled & " running on " & @OSArch & " OS", $COLOR_GREEN)
@@ -167,17 +167,17 @@ EndFunc   ;==>btnSearchMode
 Func btnHide()
 	If $Hide = False Then
 		GUICtrlSetData($btnHide, "Show")
-		$botPos[0] = WinGetPos($Title)[0]
-		$botPos[1] = WinGetPos($Title)[1]
-		WinMove($Title, "", -32000, -32000)
+		$botPos[0] = WinGetPos("BlueStacks App Player")[0]
+		$botPos[1] = WinGetPos("BlueStacks App Player")[1]
+		WinMove("BlueStacks App Player", "", -32000, -32000)
 		$Hide = True
 	Else
 		GUICtrlSetData($btnHide, "Hide")
 
 		If $botPos[0] = -32000 Then
-			WinMove($Title, "", 0, 0)
+			WinMove("BlueStacks App Player", "", 0, 0)
 		Else
-			WinMove($Title, "", $botPos[0], $botPos[1])
+			WinMove("BlueStacks App Player", "", $botPos[0], $botPos[1])
 		EndIf
 		$Hide = False
 	EndIf
