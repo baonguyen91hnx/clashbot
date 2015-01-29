@@ -1,0 +1,49 @@
+;==>BoostBarracks
+Func BoostBarracks()
+   If (GUICtrlRead($cmbBoostBarracks) > 0) And ($boostsEnabled = 1)  Then
+	  If $barrackPos[0][0] = "" Then
+		LocateBarrack()
+		SaveConfig()
+		If _Sleep(2000) Then Return
+	  EndIf
+	  While 1
+		 SetLog("Boosting Barracks")
+
+
+			   Click(1, 1)
+				 If _Sleep(1000) Then ExitLoop
+				 Click($barrackPos[0][0], $barrackPos[0][1])
+				 If _Sleep(1000) Then ExitLoop
+				 _CaptureRegion()
+				 $Boost = _PixelSearch(466, 603, 493, 621, Hex(0xfffd70, 6), 10)
+				 If IsArray($Boost) Then
+					Click($Boost[0], $Boost[1])
+					 If _Sleep(1000) Then Return
+					 _CaptureRegion()
+					 If _ColorCheckVariation(_PixelGetColor_GetPixel(420, 375), Hex(0xd2ec78, 6), 20) Then
+						 Click(420, 375)
+						 If _Sleep(2000) Then Return
+							_CaptureRegion()
+						   If _ColorCheckVariation(_PixelGetColor_GetPixel(586, 267), Hex(0xd80405, 6), 20) Then
+							  _GUICtrlComboBox_SetCurSel($cmbBoostBarracks, 0)
+							  SetLog("Not enough gems", $COLOR_BLUE)
+						   Else
+							  _GUICtrlComboBox_SetCurSel($cmbBoostBarracks, (GUICtrlRead($cmbBoostBarracks)-1))
+							  SetLog('Boost done. Remaining :' & (GUICtrlRead($cmbBoostBarracks)), $COLOR_BLUE)
+						   EndIf
+					 Else
+						 SetLog("Barracks are already Boosted", $COLOR_BLUE)
+					 EndIf
+					 If _Sleep(500) Then ExitLoop
+					 Click(1, 1)
+				 Else
+					 SetLog("Barracks are already Boosted", $COLOR_BLUE)
+					 If _Sleep(10000) Then Return
+				 EndIf
+
+		ExitLoop
+	  WEnd
+   EndIf
+
+
+EndFunc ;==>BoostBarracks
