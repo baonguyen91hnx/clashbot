@@ -105,13 +105,13 @@ EndFunc   ;==>AttackMain
 
 Func Attack() ;Selects which algorithm
 		SetLog("======Beginning Attack======")
-		Switch $icmbAlgorithm
-			Case 0 ;Barbarians + Archers
+;~ 		Switch $icmbAlgorithm
+;~ 			Case 0 ;Barbarians + Archers
 		  AdvancedAttack()
-			Case 1 ;Use All Troops
-				SetLog("Not Available yet, using Barch instead...", $COLOR_RED)
-		  If _Sleep(2000) Then Return
-		  AdvancedAttack()
-		EndSwitch
+;~ 			Case 1 ;Use All Troops
+;~ 				SetLog("Not Available yet, using Barch instead...", $COLOR_RED)
+;~ 		  If _Sleep(2000) Then Return
+;~ 		  AdvancedAttack()
+;~ 		EndSwitch
 EndFunc   ;==>Attack
 

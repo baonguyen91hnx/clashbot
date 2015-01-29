@@ -1,7 +1,7 @@
 ;Donates troops
 
 Func DonateCC()
-	Global $Donate = True
+	Global $Donate = $ichkDonateBarbarians = 1 Or $ichkDonateArchers = 1 Or $ichkDonateGiants = 1
 	Local $y = 119
 	Local $MatchFound = 0
 	SetLog("Donating Troops", $COLOR_BLUE)
