@@ -3,12 +3,15 @@
 #include "functions\Attack\GoldElixirChange.au3"
 #include "functions\Attack\PrepareAttack.au3"
 #include "functions\Attack\ReturnHome.au3"
+#include "functions\Attack\NameOfTroop.au3"
 
 #include "functions\Attack\Attack Algorithms\algorithm_Barch.au3"
+#include "functions\Attack\Attack Algorithms\complete.au3"
 
 #include "functions\Config\applyConfig.au3"
 #include "functions\Config\readConfig.au3"
 #include "functions\Config\saveConfig.au3"
+#include "functions\Config\ScreenCoordinates.au3"
 
 #include "functions\Dead Base\checkDeadBase.au3"
 

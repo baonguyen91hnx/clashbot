@@ -20,4 +20,10 @@ Func _ColorCheck($nColor1, $nColor2, $sVari = 5)
 	If Abs($Green1 - $Green2) > $sVari Then Return False
 	If Abs($Red1 - $Red2) > $sVari Then Return False
 	Return True
-EndFunc   ;==>_ColorCheck
+ EndFunc   ;==>_ColorCheck
+
+ ; CheckPixel : takes an array[4] as a parameter, [x, y, color, tolerance]
+Func CheckPixel($tab)
+   If _ColorCheck(_GetPixelColor($tab[0], $tab[1]), Hex($tab[2], 6), $tab[3]) Then return True
+   return False;
+EndFunc

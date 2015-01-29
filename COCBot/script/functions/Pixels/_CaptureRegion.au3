@@ -7,7 +7,7 @@ Func _CaptureRegion($iLeft = 0, $iTop = 0, $iRight = 860, $iBottom = 720, $Retur
 	If $ichkBackground = 1 Then
 		Local $iW = Number($iRight) - Number($iLeft), $iH = Number($iBottom) - Number($iTop)
 
-		Local $hDC_Capture = _WinAPI_GetWindowDC(ControlGetHandle("BlueStacks App Player", "", "[CLASS:BlueStacksApp; INSTANCE:1]"))
+		Local $hDC_Capture = _WinAPI_GetWindowDC(ControlGetHandle($Title, "", "[CLASS:BlueStacksApp; INSTANCE:1]"))
 		Local $hMemDC = _WinAPI_CreateCompatibleDC($hDC_Capture)
 		Local $hHBitmap = _WinAPI_CreateCompatibleBitmap($hDC_Capture, $iW, $iH)
 		Local $hObjectOld = _WinAPI_SelectObject($hMemDC, $hHBitmap)

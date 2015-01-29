@@ -33,7 +33,8 @@ EndIf
 Global $hBitmap; Image for pixel functions
 Global $hHBitmap; Handle Image for pixel functions
 
-Global $HWnD = WinGetHandle("BlueStacks App Player") ;Handle for Bluestacks window
+Global $Title = "BlueStacks App Player" ; Name of the Window
+Global $HWnD = WinGetHandle($Title) ;Handle for Bluestacks window
 
 Global $config = @ScriptDir & "\COCBot\config.ini"
 Global $sLogPath ; `Will create a new log file every time the start button is pressed
@@ -54,11 +55,15 @@ Global $chkConditions[3] ;Conditions (meet gold...)
 
 Global $SearchCount = 0 ;Number of searches
 
+;Troop types
+Global Enum $eBarbarian, $eArcher, $eGiant, $eGoblin, $eWallbreaker, $eKing, $eQueen, $eCastle
+
 ;Attack Settings
 Global $TopLeft[5][2] = [[110, 250], [170, 205], [234, 162], [296, 115], [368, 66]]
 Global $TopRight[5][2] = [[480, 63], [540, 104], [589, 146], [655, 190], [717, 240]]
 Global $BottomLeft[5][2] = [[79, 342], [142, 389], [210, 446], [276, 492], [339, 539]]
 Global $BottomRight[5][2] = [[523, 537], [595, 484], [654, 440], [715, 393], [779, 344]]
+Global $Edges[4] = [$BottomRight, $TopRight, $BottomLeft, $TopLeft ]
 
 Global $atkTroops[7][2] ;7 Slots of troops -  Name,Amount
 Global $icmbAlgorithm ;Algorithm to use when attacking
@@ -71,7 +76,7 @@ Global $QueenAttack[3] ;Queen attack settings
 
 Global $checkKPower = False ; Check for King activate power
 Global $checkQPower = False ; Check for Queen activate power
-Global $delayActivateKQ = 20000 ;Delay before activating KQ
+Global $delayActivateKQ = 6000 ;Delay before activating KQ
 Global $checkUseClanCastle ; Use Clan Castle settings
 Global $iradAttackMode ;Attack mode, 0 1 2
 

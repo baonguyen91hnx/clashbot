@@ -15,11 +15,11 @@ Func waitMainScreen() ;Waits for main screen to popup
 	Next
 
 	SetLog("Unable to load Clash Of Clans, Restarting...", $COLOR_RED)
-	Local $RestartApp = StringReplace(_WinAPI_GetProcessFileName(WinGetProcess("BlueStacks App Player")), "Frontend", "Restart")
+	Local $RestartApp = StringReplace(_WinAPI_GetProcessFileName(WinGetProcess($Title)), "Frontend", "Restart")
 	Run($RestartApp & " Android")
 	If _Sleep(10000) Then Return
 
 	Do
 		If _Sleep(5000) Then Return
-	Until ControlGetHandle("BlueStacks App Player", "", "BlueStacksApp1") <> 0
+	Until ControlGetHandle($Title, "", "BlueStacksApp1") <> 0
 EndFunc   ;==>waitMainScreen

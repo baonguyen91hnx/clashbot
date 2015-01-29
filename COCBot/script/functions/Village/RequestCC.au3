@@ -20,7 +20,7 @@ Func RequestCC()
 						Click(430, 140) ;Select text for request
 						If _Sleep(1000) Then ExitLoop
 						$TextRequest = GUICtrlRead($txtRequest)
-						ControlSend("BlueStacks App Player", "", "", $TextRequest, 0)
+						ControlSend($Title, "", "", $TextRequest, 0)
 					EndIf
 					If _Sleep(1000) Then ExitLoop
 					Click(524, 228)
