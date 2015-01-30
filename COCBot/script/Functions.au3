@@ -5,8 +5,8 @@
 #include "functions\Attack\ReturnHome.au3"
 #include "functions\Attack\NameOfTroop.au3"
 
+#include "functions\Attack\Attack Algorithms\algorithm_AllTroops.au3"
 #include "functions\Attack\Attack Algorithms\algorithm_Barch.au3"
-#include "functions\Attack\Attack Algorithms\complete.au3"
 
 #include "functions\Config\applyConfig.au3"
 #include "functions\Config\readConfig.au3"

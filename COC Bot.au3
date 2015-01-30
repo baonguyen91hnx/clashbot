@@ -107,7 +107,7 @@ Func Attack() ;Selects which algorithm
 		SetLog("======Beginning Attack======")
 ;~ 		Switch $icmbAlgorithm
 ;~ 			Case 0 ;Barbarians + Archers
-		  AdvancedAttack()
+		  algorithm_AllTroops()
 ;~ 			Case 1 ;Use All Troops
 ;~ 				SetLog("Not Available yet, using Barch instead...", $COLOR_RED)
 ;~ 		  If _Sleep(2000) Then Return

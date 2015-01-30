@@ -11,7 +11,7 @@ Func VillageSearch($TakeSS=False) ;Control for searching a village that meets co
 				SetLog("============Searching For All Base============")
 		EndSwitch
 		SetLog("~Gold: " & $MinGold & "; Elixir: " & $MinElixir & "; Dark: " & $MinDark & "; Trophy: " & $MinTrophy, $COLOR_GREEN)
-
+		If $TakeSS = True Then SetLog("Will save all of the towns when searching", $COLOR_GREEN)
 		$SearchCount = 0
 		While 1
 			If _Sleep(1000) Then ExitLoop (2)
@@ -20,14 +20,10 @@ Func VillageSearch($TakeSS=False) ;Control for searching a village that meets co
 			If $Restart = True Then ExitLoop (2)
 
 			If $TakeSS = True Then
-			   SetLog("Taking snapshot of your loot", $COLOR_ORANGE)
 			   Local $Date = @MDAY & "." & @MON & "." & @YEAR
 			   Local $Time = @HOUR & "." & @MIN & "." & @SEC
 			   _CaptureRegion()
-			   SetLog("Saving snapshoot of the town in " & @ScriptDir & "\AllTowns\" & $Date & " at " & $Time & ".png", $COLOR_ORANGE)
 			   _GDIPlus_ImageSaveToFile($hBitmap, @ScriptDir & "\AllTowns\" & $Date & " at " & $Time & ".png")
-			Else
-			   SetLog("Skip saving snapshoot of the town", $COLOR_GREEN)
 			EndIf
 			If CompareResources() Then
 				If $iradAttackMode = 0 Then

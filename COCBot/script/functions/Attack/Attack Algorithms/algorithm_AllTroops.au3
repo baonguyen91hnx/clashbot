@@ -72,7 +72,7 @@ Func LauchTroop($troopKind, $nbSides, $waveNb, $maxWaveNb, $slotsPerEdge=0)
    Next
 
    if ($troop = -1) Or ($troopNb = 0) Then
-	  if $waveNb > 0 Then SetLog("Skipping wave of " & $name & " (" & $troopKind & ") : nothing to drop" )
+	  ;if $waveNb > 0 Then SetLog("Skipping wave of " & $name & " (" & $troopKind & ") : nothing to drop" )
 	  Return False; nothing to do => skip this wave
    EndIf
 
@@ -81,13 +81,12 @@ Func LauchTroop($troopKind, $nbSides, $waveNb, $maxWaveNb, $slotsPerEdge=0)
    if $waveNb = 3 Then $waveName = "third"
    if $maxWaveNb = 1 Then $waveName = "only"
    if $waveNb = 0 Then $waveName = "last"
-   SetLog("Dropping " & $waveName & " wave of " & $troopNb & " " & $name)
+   SetLog("Dropping " & $waveName & " wave of " & $troopNb & " " & $name, $COLOR_BLUE)
    DropOnEdges($troop, $nbSides, $troopNb, $slotsPerEdge)
    Return True
 EndFunc
 
-Func AdvancedAttack() ;Attack Algorithm for all existing troops
-
+Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 		Local $Barb = -1, $Arch = -1, $CC = -1
 		Global $King = -1, $Queen = -1
 	    For $i = 0 To 6
@@ -166,7 +165,7 @@ Func AdvancedAttack() ;Attack Algorithm for all existing troops
 		 dropCC($BottomRight[3][0], $BottomRight[3][1], $CC)
 
 		If _Sleep(100) Then Return
-		SetLog("Dropping left over troops")
+		SetLog("Dropping left over troops", $COLOR_BLUE)
 		PrepareAttack(True) ;Check remaining quantities
 		For $i = $eBarbarian To $eWallbreaker ; lauch all remaining troops
 		   LauchTroop($i, $nbSides, 0, 2, 2)
@@ -181,14 +180,14 @@ Func AdvancedAttack() ;Attack Algorithm for all existing troops
 
 		;Activate KQ's power
 		If $checkKPower Or $checkQPower  Then
-			SetLog("Waiting " & $delayActivateKQ / 1000 & " seconds before activating King/Queen")
+			SetLog("Waiting " & $delayActivateKQ / 1000 & " seconds before activating King/Queen", $COLOR_ORANGE)
 			_Sleep($delayActivateKQ)
 			If $checkKPower Then
-				SetLog("Activate King's power")
+				SetLog("Activate King's power", $COLOR_BLUE)
 				SelectDropTroupe($King)
 			EndIf
 			If $checkQPower Then
-				SetLog("Activate Queen's power")
+				SetLog("Activate Queen's power", $COLOR_BLUE)
 				SelectDropTroupe($Queen)
 			EndIf
 		EndIf
