@@ -26,7 +26,7 @@ Func ReturnHome($TakeSS = True, $GoldChangeCheck = True) ;Return main screen
 			Local $Date = @MDAY & "." & @MON & "." & @YEAR
 			Local $Time = @HOUR & "." & @MIN
 			_CaptureRegion()
-			_GDIPlus_ImageSaveToFile($hBitmap, @ScriptDir & "\Loots\" & $Date & " at " & $Time & ".jpg")
+			_GDIPlus_ImageSaveToFile($hBitmap, @ScriptDir & "\COCBot\Loots\" & $Date & " at " & $Time & ".jpg")
 		EndIf
 
 		If _Sleep(2000) Then Return

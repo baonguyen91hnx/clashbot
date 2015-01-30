@@ -8,9 +8,8 @@ Func GoldElixirChange() ;Checks 30 seconds if gold changes
 		$Elixir1 = getElixir(51, 66 + 29)
 		Local $iBegin = TimerInit()
 		While TimerDiff($iBegin) < 30000
-			If $RunState = False Then ExitLoop
-			Sleep(100)
-			If _ColorCheck(_GetPixelColor(75, 530), Hex(0xC00000, 6), 20) Then Return False
+			If _Sleep(2000) Then Return
+			If getGold(51, 66) = "" Then Return False
 		WEnd
 		$Gold2 = getGold(51, 66)
 		$Elixir2 = getElixir(51, 66 + 29)
