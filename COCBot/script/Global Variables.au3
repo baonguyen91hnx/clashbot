@@ -42,7 +42,7 @@ Global $hLogFileHandle
 Global $Restart = False
 Global $RunState = False
 Global $TakeLootSnapShot = True
-Global $TakeAllTownSnapShot = False
+Global $TakeAllTownSnapShot = True
 
 
 Global $cmbTroopComp ;For Event change on ComboBox Troop Compositions

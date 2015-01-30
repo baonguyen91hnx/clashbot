@@ -1,2 +1,7 @@
 *.ini
 *.log
+*.exe
+*.dll
+*.bmp
+*.png
+*.db
