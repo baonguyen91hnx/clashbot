@@ -14,16 +14,15 @@ If Not FileExists(@ScriptDir & "\License.txt") Then
 	InetClose($license)
 EndIf
 
-If $TakeLootSnapShot Then DirCreate(@ScriptDir & "\Loots\")
-If $TakeAllTownSnapShot Then DirCreate(@ScriptDir & "\AllTowns\")
-DirCreate(@ScriptDir & "\logs\")
-
-
 #include "COCBot\script\Global Variables.au3"
 #include "COCBot\script\GUI Design.au3"
 #include "COCBot\script\GUI Control.au3"
 #include "COCBot\script\Functions.au3"
 #include-once
+
+If $TakeLootSnapShot Then DirCreate(@ScriptDir & "\Loots\")
+If $TakeAllTownSnapShot Then DirCreate(@ScriptDir & "\AllTowns\")
+DirCreate(@ScriptDir & "\logs\")
 
 While 1
 	Switch TrayGetMsg()
