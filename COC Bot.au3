@@ -20,10 +20,6 @@ EndIf
 #include "COCBot\script\Functions.au3"
 #include-once
 
-If $TakeLootSnapShot Then DirCreate(@ScriptDir & "\Loots\")
-If $TakeAllTownSnapShot Then DirCreate(@ScriptDir & "\AllTowns\")
-DirCreate(@ScriptDir & "\logs\")
-
 While 1
 	Switch TrayGetMsg()
         Case $tiAbout

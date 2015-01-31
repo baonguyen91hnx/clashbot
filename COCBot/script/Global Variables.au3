@@ -37,6 +37,8 @@ Global $Title = "BlueStacks App Player" ; Name of the Window
 Global $HWnD = WinGetHandle($Title) ;Handle for Bluestacks window
 
 Global $config = @ScriptDir & "\COCBot\config.ini"
+Global $dirLogs = @ScriptDir & "\COCBot\logs\"
+Global $dirLoots = @ScriptDir & "\COCBot\Loots\"
 Global $sLogPath ; `Will create a new log file every time the start button is pressed
 Global $hLogFileHandle
 Global $Restart = False

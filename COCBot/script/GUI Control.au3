@@ -14,11 +14,6 @@ Func GUIControl($hWind, $iMsg, $wParam, $lParam)
 		Case 273
 			Switch $nID
 				Case $GUI_EVENT_CLOSE
-					If WinExists($Title) Then
-						EnableBS($HWnD, $SC_MINIMIZE)
-						EnableBS($HWnD, $SC_CLOSE)
-						EnableBS($HWnD, $SC_MOVE)
-					EndIf
 					_GDIPlus_Shutdown()
 					_GUICtrlRichEdit_Destroy($txtLog)
 					SaveConfig()
@@ -37,11 +32,6 @@ Func GUIControl($hWind, $iMsg, $wParam, $lParam)
 		Case 274
 			Switch $wParam
 				Case 0xf060
-					If WinExists($Title) Then
-						EnableBS($HWnD, $SC_MINIMIZE)
-						EnableBS($HWnD, $SC_CLOSE)
-						EnableBS($HWnD, $SC_MOVE)
-					EndIf
 					_GDIPlus_Shutdown()
 					_GUICtrlRichEdit_Destroy($txtLog)
 					SaveConfig()
@@ -61,9 +51,6 @@ Func btnStart()
 	_GUICtrlEdit_SetText($txtLog, "")
 
 	If WinExists($Title) Then
-		DisableBS($HWnD, $SC_MINIMIZE)
-		DisableBS($HWnD, $SC_CLOSE)
-		DisableBS($HWnD, $SC_MOVE)
 		If IsArray(ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")) Then
 			Local $BSsize = [ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")[2], ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")[3]]
 			If $BSsize[0] <> 860 Or $BSsize[1] <> 720 Then
@@ -100,9 +87,6 @@ EndFunc   ;==>btnStart
 Func btnStop()
 	If $RunState Then
 		$RunState = False
-		EnableBS($HWnD, $SC_MINIMIZE)
-		EnableBS($HWnD, $SC_CLOSE)
-		EnableBS($HWnD, $SC_MOVE)
 		GUICtrlSetState($btnLocateBarracks, $GUI_ENABLE)
 		GUICtrlSetState($btnSearchMode, $GUI_ENABLE)
 		GUICtrlSetState($cmbTroopComp, $GUI_ENABLE)

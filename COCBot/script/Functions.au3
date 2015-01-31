@@ -23,8 +23,6 @@
 #include "functions\Other\_Sleep.au3"
 #include "functions\Other\Click.au3"
 #include "functions\Other\CreateLogFile.au3"
-#include "functions\Other\DisableBS.au3"
-#include "functions\Other\EnableBS.au3"
 #include "functions\Other\FindPos.au3"
 #include "functions\Other\getBSPos.au3"
 #include "functions\Other\SetLog.au3"

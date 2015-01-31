@@ -8,8 +8,14 @@ Func DonateCC()
 	While $Donate
 		Click(1, 1) ;Click Away
 		If _ColorCheck(_GetPixelColor(331, 330), Hex(0xF0A03B, 6), 20) = False Then Click(19, 349) ;Clicks chat thing
-		If _Sleep(2000) = True Then Return
+		If _Sleep(200) Then Return
 		Click(189, 24) ; clicking clan tab
+
+		Local $Scroll = _PixelSearch(285, 100, 287, 700, Hex(0x97E405, 6), 20)
+		If IsArray($Scroll) Then
+			Click($Scroll[0], $Scroll[1])
+			If _Sleep(500) Then Return
+		EndIf
 
 		Local $offColors[3][3] = [[0x000000, 0, -2], [0x262926, 0, 1], [0xF8FCF0, 0, 11]]
 		Global $DonatePixel = _MultiPixelSearch(202, $y, 203, 670, 1, 1, Hex(0x262926, 6), $offColors, 20)
@@ -17,11 +23,13 @@ Func DonateCC()
 			If ($ichkDonateAllBarbarians = 0 And $ichkDonateAllArchers = 0 And $ichkDonateAllGiants = 0) And ($ichkDonateBarbarians = 1 Or $ichkDonateArchers = 1 Or $ichkDonateGiants = 1) Then
 				_CaptureRegion(0, 0, 435, $DonatePixel[1] + 50)
 				Local $String = getString($DonatePixel[1] - 17)
+
 				SetLog("Chat Text: " & $String, $COLOR_GREEN)
+
 				If $ichkDonateBarbarians = 1 Then
 					Local $Barbs = StringSplit($itxtDonateBarbarians, @CRLF)
 					For $i = 0 To UBound($Barbs) - 1
-						If $String = $Barbs[$i] Then
+						If CheckDonate( $Archers[$i], $String) Then
 							DonateBarbs()
 							ExitLoop
 						EndIf
@@ -31,7 +39,7 @@ Func DonateCC()
 				If $ichkDonateArchers = 1 Then
 					Local $Archers = StringSplit($itxtDonateArchers, @CRLF)
 					For $i = 0 To UBound($Archers) - 1
-						If $String = $Archers[$i] Then
+						If CheckDonate($Archers[$i], $String) Then
 							DonateArchers()
 							ExitLoop
 						EndIf
@@ -41,7 +49,7 @@ Func DonateCC()
 				If $ichkDonateGiants = 1 Then
 					Local $Giants = StringSplit($itxtDonateGiants, @CRLF)
 					For $i = 0 To UBound($Giants) - 1
-						If $String = $Giants[$i] Then
+						If CheckDonate($Giants[$i], $String) Then
 							DonateGiants()
 							ExitLoop
 						EndIf
@@ -70,6 +78,23 @@ Func DonateCC()
 		Click(331, 330) ;Clicks chat thing
 	EndIf
 EndFunc   ;==>DonateCC
+
+Func CheckDonate($string, $clanString) ;Checks if it exact
+	$Contains = StringMid($string, 1, 1) & StringMid($string, StringLen($string), 1)
+	If $Contains = "[]" Then
+		If $clanString = StringMid($string, 2, StringLen($string) - 2) Then
+			Return True
+		Else
+			Return False
+		EndIf
+	Else
+		If StringInStr($string, $clanString) Then
+			Return True
+		Else
+			Return False
+		EndIf
+	EndIf
+EndFunc
 
 Func DonateBarbs()
 	If $ichkDonateBarbarians = 1 Or $ichkDonateAllBarbarians = 1 Then
