@@ -29,7 +29,7 @@ Func DonateCC()
 				If $ichkDonateBarbarians = 1 Then
 					Local $Barbs = StringSplit($itxtDonateBarbarians, @CRLF)
 					For $i = 0 To UBound($Barbs) - 1
-						If CheckDonate( $Archers[$i], $String) Then
+						If CheckDonate($Barbs[$i], $String) Then
 							DonateBarbs()
 							ExitLoop
 						EndIf
