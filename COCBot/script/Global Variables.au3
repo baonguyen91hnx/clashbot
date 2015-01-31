@@ -20,6 +20,7 @@
 #include <GDIPlus.au3>
 #include <GuiRichEdit.au3>
 #include <GuiTab.au3>
+#include <Timers.au3>
 
 GLOBAL CONST $COLOR_ORANGE = 0xFFA500
 
@@ -53,6 +54,13 @@ Global $COLLECTATCOUNT = 8 ; Run Collect() after this amount of times before act
 ;---------------------------------------------------------------------------------------------------
 Global $BSpos[2] ; Inside BlueStacks positions relative to the screen
 ;---------------------------------------------------------------------------------------------------
+
+;---------------------------------------------------------------------------------------------------
+Global $MinTimeBetweenFights =10 * 60 * 1000 ; The minium number of ms the bot have to wait between two fights (for instance, to let the heroes enough time to come back)
+Global $TimeStampForDelayBtwFights = _Timer_Init() - $MinTimeBetweenFights
+;---------------------------------------------------------------------------------------------------
+
+
 ;Search Settings
 Global $searchGold, $searchElixir, $searchDark, $searchTrophy ;Resources of bases when searching
 Global $MinGold, $MinElixir, $MinDark, $MinTrophy ; Minimum Resources conditions
