@@ -4,7 +4,7 @@ Func isGoldFull()
 	_CaptureRegion()
 	;-----------------------------------------------------------------------------
 	If _ColorCheck(_GetPixelColor(658, 33), Hex(0x000000, 6), 6) Then ;Hex is black
-		If _ColorCheck(_GetPixelColor(660, 33), Hex(0xBC9C00, 6), 6) Then ;Hex if color of gold (orange)
+		If _ColorCheck(_GetPixelColor(660, 33), Hex(0xD4B100, 6), 6) Then ;Hex if color of gold (orange)
 			Return True
 		EndIf
 	EndIf
