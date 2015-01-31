@@ -88,7 +88,7 @@ Func CheckDonate($string, $clanString) ;Checks if it exact
 			Return False
 		EndIf
 	Else
-		If StringInStr($string, $clanString) Then
+		If StringInStr($clanString, $string) Then
 			Return True
 		Else
 			Return False
