@@ -42,7 +42,7 @@ Func checkObstacles() ;Checks if something is in the way for mainscreen
 	EndIf
 
 	If _ColorCheck(_GetPixelColor(71, 530), Hex(0xC00000, 6), 20) Then
-		ReturnHome($TakeLootSnapShot, False) ;If End battle is available
+		ReturnHome(False, False) ;If End battle is available
 		Return True
 	EndIf
 
