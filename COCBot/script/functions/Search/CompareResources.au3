@@ -11,24 +11,22 @@ Func CompareResources() ;Compares resources and returns true if conditions meet,
 	EndIf
 
 	Local $G = (Number($searchGold) >= Number($MinGold)), $E = (Number($searchElixir) >= Number($MinElixir)), $D = (Number($searchDark) >= Number($MinDark)), $T = (Number($searchTrophy) >= Number($MinTrophy))
-	Local $Boolean = False
 
-	If $G Or $E Then $Boolean = True
-
-	If $chkConditions[0] = 1 Then
-		If $G = False Or $E = False Then $Boolean = False
-		Return $Boolean
+	If $chkConditions[0] = False And $chkConditions[1] = False And $chkConditions[2] = False Then
+		If $G And $E Then Return True
 	EndIf
 
-	If $chkConditions[1] = 1 Then
-		If $D = False Then $Boolean = False
-		Return $Boolean
+	If $chkConditions[0] Then
+		If $G = False Or $E = False Then Return False
 	EndIf
 
-	If $chkConditions[2] = 1 Then
-		If $T = False Then $Boolean = False
-		Return $Boolean
+	If $chkConditions[1] Then
+		If $D = False Then Return False
 	EndIf
 
-	Return $Boolean
+	If $chkConditions[2] Then
+		If $T = False Then Return False
+	EndIf
+
+	Return True
 EndFunc   ;==>CompareResources

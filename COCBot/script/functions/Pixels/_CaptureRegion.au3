@@ -9,14 +9,14 @@ Func _CaptureRegion($iLeft = 0, $iTop = 0, $iRight = 860, $iBottom = 720, $Retur
 
 		Local $hDC_Capture = _WinAPI_GetWindowDC(ControlGetHandle($Title, "", "[CLASS:BlueStacksApp; INSTANCE:1]"))
 		Local $hMemDC = _WinAPI_CreateCompatibleDC($hDC_Capture)
-		Local $hHBitmap = _WinAPI_CreateCompatibleBitmap($hDC_Capture, $iW, $iH)
+		$hHBitmap = _WinAPI_CreateCompatibleBitmap($hDC_Capture, $iW, $iH)
 		Local $hObjectOld = _WinAPI_SelectObject($hMemDC, $hHBitmap)
 
 		DllCall("user32.dll", "int", "PrintWindow", "hwnd", $HWnD, "handle", $hMemDC, "int", 0)
 		_WinAPI_SelectObject($hMemDC, $hHBitmap)
 		_WinAPI_BitBlt($hMemDC, 0, 0, $iW, $iH, $hDC_Capture, $iLeft, $iTop, 0x00CC0020)
 
-		$hBitmap = _GDIPlus_BitmapCreateFromHBITMAP($hHBitmap)
+		Global $hBitmap = _GDIPlus_BitmapCreateFromHBITMAP($hHBitmap)
 
 		_WinAPI_DeleteDC($hMemDC)
 		_WinAPI_SelectObject($hMemDC, $hObjectOld)
@@ -24,7 +24,7 @@ Func _CaptureRegion($iLeft = 0, $iTop = 0, $iRight = 860, $iBottom = 720, $Retur
 	Else
 		getBSPos()
 		$hHBitmap = _ScreenCapture_Capture("", $iLeft + $BSpos[0], $iTop + $BSpos[1], $iRight + $BSpos[0], $iBottom + $BSpos[1])
-		$hBitmap = _GDIPlus_BitmapCreateFromHBITMAP($hHBitmap)
+		Global $hBitmap = _GDIPlus_BitmapCreateFromHBITMAP($hHBitmap)
 	EndIf
 
 	If $ReturnBMP Then Return $hBitmap
