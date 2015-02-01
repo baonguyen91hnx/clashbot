@@ -7,11 +7,10 @@ Func waitMainScreen() ;Waits for main screen to popup
 		_CaptureRegion()
 		If _ColorCheck(_GetPixelColor(284, 28), Hex(0x41B1CD, 6), 20) = False Then ;Checks for Main Screen
 			If _Sleep(2000) Then Return
+			If checkObstacles() Then $i = 0 ;See if there is anything in the way of mainscreen
 		Else
 			Return
 		EndIf
-
-		checkObstacles() ;See if there is anything in the way of mainscreen
 	Next
 
 	SetLog("Unable to load Clash Of Clans, Restarting...", $COLOR_RED)
