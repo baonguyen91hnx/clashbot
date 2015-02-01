@@ -8,5 +8,4 @@ Func ZoomOut() ;Zooms out
 		If _Sleep(500) Then Return
 		_CaptureRegion(0, 0, 860, 2)
 	WEnd
-	SetLog("Zoomed Out")
 EndFunc   ;==>ZoomOut
