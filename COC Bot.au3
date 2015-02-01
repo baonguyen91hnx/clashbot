@@ -61,43 +61,28 @@ EndFunc   ;==>runBot
 Func Idle() ;Sequence that runs until Full Army
 	Local $TimeIdle = 0 ;In Seconds
 		If $fullArmy = False Then
-		   Local $TimeToWait = Round( ($MinTimeBetweenFights - _Timer_Diff($TimeStampForDelayBtwFights)) / 1000, 2) ;In Seconds
-			If $TimeToWait <= 0 Then
-			   SetLog("~~~Waiting for full army~~~")
-			Else
-			   SetLog("~~~Waiting for full army~~~ and at least " & Floor(Floor($TimeToWait / 60) / 60) & " hours " & Floor(Mod(Floor($TimeToWait / 60), 60)) & " minutes " & Floor(Mod($TimeToWait, 60)) & " seconds")
-			EndIf
-			While $fullArmy = False  Or $TimeToWait > 0
-				_ReduceMemory()
+			SetLog("~~~Waiting for full army~~~")
+			While $fullArmy = False
 				Local $hTimer = TimerInit()
 				If _Sleep(1000) Then ExitLoop
 				checkMainScreen()
 				If _Sleep(1000) Then ExitLoop
 				ZoomOut()
-			    For $i = 1 To 60
-				  DonateCC()
-				  If _Sleep(1000) Then ExitLoop (2)
-				Next
+		  If _Sleep(30000) Then ExitLoop
 				If $iCollectCounter > $COLLECTATCOUNT Then ; This is prevent from collecting all the time which isn't needed anyway
 					Collect()
-				    If _Sleep(1000) Or $RunState = False Then ExitLoop
+			  If _Sleep(1000) Or $RunState = False Then ExitLoop
 					$iCollectCounter = 0
 				EndIf
 				$iCollectCounter = $iCollectCounter + 1
 				Train()
-				$TimeToWait = Round( ($MinTimeBetweenFights - _Timer_Diff($TimeStampForDelayBtwFights)) / 1000, 2) ;In Seconds
-				If $fullArmy And $TimeToWait <= 0 Then ExitLoop
-				If _Sleep(1000) Then ExitLoop
+		  If $fullArmy Then ExitLoop
+		  If _Sleep(1000) Then ExitLoop
 				DropTrophy()
-				If _Sleep(1000) Then ExitLoop
+		  If _Sleep(1000) Then ExitLoop
 				DonateCC()
 				$TimeIdle += Round(TimerDiff($hTimer) / 1000, 2) ;In Seconds
-				If ($MinTimeBetweenFights <= 0) Then
-				   SetLog("Time Idle: " & Floor(Floor($TimeIdle / 60) / 60) & " hours " & Floor(Mod(Floor($TimeIdle / 60), 60)) & " minutes " & Floor(Mod($TimeIdle, 60)) & " seconds")
-			    Else
-				   $TimeToWait = Round( ($MinTimeBetweenFights - _Timer_Diff($TimeStampForDelayBtwFights)) / 1000, 2) ;In Seconds
-				   SetLog("Still have to wait : " & Floor(Floor($TimeToWait / 60) / 60) & " hours " & Floor(Mod(Floor($TimeToWait / 60), 60)) & " minutes " & Floor(Mod($TimeToWait, 60)) & " seconds")
-				EndIf
+				SetLog("Time Idle: " & Floor(Floor($TimeIdle / 60) / 60) & " hours " & Floor(Mod(Floor($TimeIdle / 60), 60)) & " minutes " & Floor(Mod($TimeIdle, 60)) & " seconds", $COLOR_ORANGE)
 			WEnd
 		EndIf
 EndFunc   ;==>Idle
