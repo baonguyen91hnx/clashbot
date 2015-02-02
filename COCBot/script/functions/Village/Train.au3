@@ -10,7 +10,7 @@ Func GetTrainPos($troopKind)
 	  Return $TrainArcher
    Case $eGiant ; 475, 366: 0x3DD8E0
 	  Return $TrainGiant
-   Case $eGoblin ; 581, 366: 39D8E0
+   Case $eGoblin ; 581, 366: 0x39D8E0
 	  Return $TrainGoblin
    Case $eWallbreaker ; 688, 366, 0x3AD8E0
 	  Return $TrainWallbreaker
@@ -30,7 +30,6 @@ Func TrainIt($troopKind, $howMuch=1)
 		 Return True
 	  EndIf
    EndIf
-   Return False
 EndFunc
 
 Func Train()
