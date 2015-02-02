@@ -43,7 +43,11 @@ Func VillageSearch($TakeSS=False) ;Control for searching a village that meets co
 		WEnd
 		If GUICtrlRead($chkAlertSearch) = $GUI_CHECKED Then
 			TrayTip("Match Found!", "Gold: " & $searchGold & "; Elixir: " & $searchElixir & "; Dark: " & $searchDark & "; Trophy: " & $searchTrophy, "", 0)
-			SoundPlay(@WindowsDir & "\media\Festival\Windows Exclamation.wav", 1)
+			If FileExists(@WindowsDir & "\media\Windows Exclamation.wav") Then
+			   SoundPlay(@WindowsDir & "\media\Windows Exclamation.wav", 1)
+			Else
+			   SoundPlay(@WindowsDir & "\media\Festival\Windows Exclamation.wav", 1)
+			EndIf
 		EndIf
 		SetLog("===============Searching Complete===============")
 		readConfig()
