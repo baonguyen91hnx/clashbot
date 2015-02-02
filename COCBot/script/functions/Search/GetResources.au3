@@ -5,12 +5,14 @@
 Func GetResources() ;Reads resources
 	While 1
 		Local $i = 0
+		Local $x = 0
 		While getGold(51, 66) = "" ; Loops until gold is readable
 			If _Sleep(500) Then ExitLoop (2)
 			$i += 1
 			If $i >= 20 Then ; If gold cannot be read by 10 seconds
-				If checkNextButton() Then ;Checks for Out of Sync or Connection Error during search
+				If checkNextButton() And $x <= 20 Then ;Checks for Out of Sync or Connection Error during search, And restart bot after 3 Minutes when White Screen not gone..
 					Click(750, 500) ;Click Next
+					$x += 1
 				Else
 					SetLog("Cannot locate Next button, Restarting Bot", $COLOR_RED)
 					checkMainScreen()
