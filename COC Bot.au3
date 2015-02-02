@@ -33,6 +33,9 @@ WEnd
 
 Func runBot() ;Bot that runs everything in order
 	While 1
+	SaveConfig()
+	readConfig()
+	applyConfig()
 		$Restart = False
 		If _Sleep(1000) Then Return
 		checkMainScreen()

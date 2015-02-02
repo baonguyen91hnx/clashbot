@@ -61,7 +61,7 @@ Global $chkConditions[3] ;Conditions (meet gold...)
 Global $SearchCount = 0 ;Number of searches
 
 ;Troop types
-Global Enum $eBarbarian, $eArcher, $eGiant, $eGoblin, $eWallbreaker, $eKing, $eQueen, $eCastle
+Global Enum $eBarbarian, $eArcher, $eGiant, $eGoblin, $eWallbreaker, $eKing, $eQueen, $eCastle, $eLSpell
 
 ;Attack Settings
 Global $TopLeft[5][2] = [[110, 250], [170, 205], [234, 162], [296, 115], [368, 66]]
@@ -70,7 +70,7 @@ Global $BottomLeft[5][2] = [[79, 342], [142, 389], [210, 446], [276, 492], [339,
 Global $BottomRight[5][2] = [[523, 537], [595, 484], [654, 440], [715, 393], [779, 344]]
 Global $Edges[4] = [$BottomRight, $TopRight, $BottomLeft, $TopLeft ]
 
-Global $atkTroops[7][2] ;7 Slots of troops -  Name,Amount
+Global $atkTroops[9][2] ;9 Slots of troops -  Name, Amount
 Global $icmbAlgorithm ;Algorithm to use when attacking
 
 Global $fullArmy ;Check for full army or not
@@ -111,6 +111,18 @@ Global $itxtDonateGiants = ""
 
 ;Troop Settings
 Global $icmbTroopComp ;Troop Composition
+Global $icmbTroopCap ;Troop Capacity
+Global $BarbariansComp
+Global $ArchersComp
+Global $GiantsComp
+Global $GoblinsComp
+Global $WBComp
+Global $CurBarb
+Global $CurArch
+Global $CurGiant
+Global $CurGoblin
+Global $CurWB
+Global $ArmyComp
 
 Global $barrackPos[4][2] ;Positions of each barracks
 Global $barrackTroop[4] ;Barrack troop set

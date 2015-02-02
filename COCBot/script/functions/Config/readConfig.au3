@@ -42,7 +42,13 @@ Func readConfig() ;Reads config and sets it to the variables
 		$ichkDonateAllGiants = IniRead($config, "donate", "chkDonateAllGiants", "0")
 		$itxtDonateGiants = StringReplace(IniRead($config, "donate", "txtDonateGiants", "giants|giant|any"), "|", @CRLF)
 		;Troop Settings--------------------------------------------------------------------------
-		$icmbTroopComp = IniRead($config, "troop", "composition", 0)
+		$icmbTroopComp = IniRead($config, "troop", "composition", "0")
+		$icmbTroopCap = IniRead($config, "troop", "capacity", "0")
+		$BarbariansComp = IniRead($config, "troop", "barbarian", "0")
+		$ArchersComp = IniRead($config, "troop", "archer", "0")
+		$GiantsComp = IniRead($config, "troop", "giant", "0")
+		$GoblinsComp = IniRead($config, "troop", "goblin", "0")
+		$WBComp = IniRead($config, "troop", "WB", "0")
 
 		For $i = 0 To 3 ;Covers all 4 Barracks
 			$barrackPos[$i][0] = IniRead($config, "troop", "xBarrack" & $i + 1, "0")

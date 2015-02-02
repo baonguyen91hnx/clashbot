@@ -61,7 +61,7 @@ Func LauchTroop($troopKind, $nbSides, $waveNb, $maxWaveNb, $slotsPerEdge=0)
    Local $troop = -1
    Local $troopNb = 0
    Local $name = ""
-   For $i = 0 To 6 ; identify the position of this kind of troop
+   For $i = 0 To 8 ; identify the position of this kind of troop
 	  If $atkTroops[$i][0] = $troopKind Then
 		 $troop = $i
 		 $troopNb = Ceiling($atkTroops[$i][1]/$maxWaveNb)
@@ -87,17 +87,12 @@ Func LauchTroop($troopKind, $nbSides, $waveNb, $maxWaveNb, $slotsPerEdge=0)
 EndFunc
 
 Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
-		Local $Barb = -1, $Arch = -1, $CC = -1
-		Global $King = -1, $Queen = -1
-	    For $i = 0 To 6
+		Global $King = -1, $Queen = -1, $CC = -1, $Barb = -1, $Arch = -1
+	    For $i = 0 To 8
 			If $atkTroops[$i][0] = $eBarbarian Then
 				$Barb = $i
 			ElseIf $atkTroops[$i][0] = $eArcher Then
 				$Arch = $i
-			ElseIf $atkTroops[$i][0] = $eGoblin Then
-				$Gobs = $i
-			ElseIf $atkTroops[$i][0] = $eGiant Then
-				$Giant = $i
 			ElseIf $atkTroops[$i][0] = $eCastle Then
 				$CC = $i
 			ElseIf $atkTroops[$i][0] = $eKing Then

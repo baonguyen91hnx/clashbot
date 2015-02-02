@@ -14,7 +14,7 @@ Func DonateCC()
 		Local $Scroll = _PixelSearch(285, 100, 287, 700, Hex(0x97E405, 6), 20)
 		If IsArray($Scroll) Then
 			Click($Scroll[0], $Scroll[1])
-			If _Sleep(500) Then Return
+			If _Sleep(700) Then Return
 		EndIf
 
 		Local $offColors[3][3] = [[0x000000, 0, -2], [0x262926, 0, 1], [0xF8FCF0, 0, 11]]

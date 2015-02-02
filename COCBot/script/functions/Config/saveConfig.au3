@@ -116,7 +116,14 @@ Func saveConfig() ;Saves the controls settings to the config
 	IniWrite($config, "donate", "txtDonateGiants", StringReplace(GUICtrlRead($txtDonateGiants), @CRLF, "|"))
 	;Troop Settings--------------------------------------------------------------------------
 	IniWrite($config, "troop", "composition", _GUICtrlComboBox_GetCurSel($cmbTroopComp))
-
+	IniWrite($config, "troop", "capacity", GUICtrlRead($txtCapacity))
+	If _GUICtrlComboBox_GetCurSel($cmbTroopComp) = 9 Then
+	   IniWrite($config, "troop", "barbarian", GUICtrlRead($txtBarbarians))
+	   IniWrite($config, "troop", "archer", GUICtrlRead($txtArchers))
+	   IniWrite($config, "troop", "goblin", GUICtrlRead($txtGoblins))
+	EndIf
+	IniWrite($config, "troop", "giant", GUICtrlRead($txtNumGiants))
+	IniWrite($config, "troop", "WB", GUICtrlRead($txtNumWallbreakers))
 	IniWrite($config, "troop", "troop1", _GUICtrlComboBox_GetCurSel($cmbBarrack1))
 	IniWrite($config, "troop", "troop2", _GUICtrlComboBox_GetCurSel($cmbBarrack2))
 	IniWrite($config, "troop", "troop3", _GUICtrlComboBox_GetCurSel($cmbBarrack3))

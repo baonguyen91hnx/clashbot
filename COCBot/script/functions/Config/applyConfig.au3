@@ -119,6 +119,12 @@ Func applyConfig() ;Applies the data from config to the controls in GUI
 	chkRequest()
 	;Troop Settings--------------------------------------------------------------------------
 	_GUICtrlComboBox_SetCurSel($cmbTroopComp, $icmbTroopComp)
+	 GUICtrlSetData($txtCapacity, $icmbTroopCap)
+	 GUICtrlSetData($txtBarbarians, $BarbariansComp)
+	 GUICtrlSetData($txtArchers, $ArchersComp)
+	 GUICtrlSetData($txtNumGiants, $GiantsComp)
+	 GUICtrlSetData($txtGoblins, $GoblinsComp)
+	 GUICtrlSetData($txtNumWallbreakers, $GoblinsComp)
 	SetComboTroopComp()
 
 	_GUICtrlComboBox_SetCurSel($cmbBarrack1, $barrackTroop[0])
