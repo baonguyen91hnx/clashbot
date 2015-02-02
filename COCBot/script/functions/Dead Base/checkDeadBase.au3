@@ -92,7 +92,7 @@ Func IS_Area($i, $Tolerance) ;Search per area then search per file. If not succe
 	_CaptureRegion()
 	$ZC = 0
 	For $s = 0 To ($ZombieFileSets - 1) Step 1
-		For $p = 0 + $ZSExclude To 10 Step 1
+		For $p = 10 To 0 + $ZSExclude Step -1
 			If FileExists($E[$s][$p]) Then
 				$Area[$p][$i] = _ImageSearch($E[$s][$p], 0, $IS_x[$p][$i], $IS_y[$p][$i], $Tolerance)
 				If $Area[$p][$i] > 0 Then
