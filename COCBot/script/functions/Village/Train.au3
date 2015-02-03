@@ -66,11 +66,10 @@ Func Train()
 			Else
 				; More Troops Settings
 				If $ArmyComp >= $icmbTroopCap Then
-					SetLog("Troops Capacity is full, stop training...")
-					If _Sleep(500) Then ExitLoop
-					Click($TopLeftClient[0], $TopLeftClient[1], 2, 250); Click away twice with 250ms delay
-					ExitLoop
-				ElseIf $ArmyComp = 0 Then
+					SetLog("Troops Capacity is full, Fulling the barracks...")
+					$ArmyComp = 0
+			    EndIf
+				If $ArmyComp = 0 Then
 					$CurGiant = GUICtrlRead($txtNumGiants)*5
 					$CurWB = GUICtrlRead($txtNumWallbreakers)*2
 					$CurArch = ($icmbTroopCap-(GUICtrlRead($txtNumGiants)*5)-(GUICtrlRead($txtNumWallbreakers)*2))*GUICtrlRead($txtArchers)/100
@@ -80,7 +79,7 @@ Func Train()
 					$CurGoblin = ($icmbTroopCap-(GUICtrlRead($txtNumGiants)*5)-(GUICtrlRead($txtNumWallbreakers)*2))*GUICtrlRead($txtGoblins)/100
 					$CurGoblin = Round($CurGoblin)
 				EndIf
-				
+
 				If GUICtrlRead($txtNumGiants) <> "0" And ($CurGiant <> -1 Or $CurGiant > 0) Then
 					While _ColorCheck(_GetPixelColor(217, 297), Hex(0xF8AD20, 6), 20) And ($CurGiant <> -1 Or $CurGiant > 0)
 						If $CurGiant > 0 Then
