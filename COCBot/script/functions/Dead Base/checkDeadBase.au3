@@ -108,7 +108,6 @@ Func _ImageSearchArea($findImage, $resultPosition, $x1, $y1, $right, $bottom, By
 	Global $HBMP = $hHBitmap
 	If $ichkBackground = 0 Then
 	    $HBMP = 0
-		getBSpos()
 		$x1 += $BSPos[0]
 		$y1 += $BSPos[1]
 		$right += $BSPos[0]
@@ -155,7 +154,11 @@ Func _ImageSearchArea($findImage, $resultPosition, $x1, $y1, $right, $bottom, By
 			$x = $x + Int(Number($array[4]) / 2)
 			$y = $y + Int(Number($array[5]) / 2)
 		EndIf
-		Return 1
+	    If $Hide = False Then
+		   $x -= $x1
+		   $y -= $y1
+	    EndIf
+	  Return 1
 	EndIf
 EndFunc   ;==>_ImageSearchArea
 #EndRegion ### Check Dead Base Functions ###
