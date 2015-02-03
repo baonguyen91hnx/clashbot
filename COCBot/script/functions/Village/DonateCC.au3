@@ -26,17 +26,16 @@ Func DonateCC()
 						Local $Barbs = StringSplit($itxtDonateBarbarians, @CRLF)
 						For $i = 0 To UBound($Barbs) - 1
 							If CheckDonate($Barbs[$i], $String) Then
-								DonateBarbs()
+								If DonateBarbs() Then ExitLoop (2)
 								ExitLoop
-							EndIf
+						    EndIf
 						Next
 					EndIf
-
 					If $ichkDonateArchers = 1 Then
 						Local $Archers = StringSplit($itxtDonateArchers, @CRLF)
 						For $i = 0 To UBound($Archers) - 1
 							If CheckDonate($Archers[$i], $String) Then
-								DonateArchers()
+								If DonateArchers() Then ExitLoop (2)
 								ExitLoop
 							EndIf
 						Next
@@ -46,7 +45,7 @@ Func DonateCC()
 						Local $Giants = StringSplit($itxtDonateGiants, @CRLF)
 						For $i = 0 To UBound($Giants) - 1
 							If CheckDonate($Giants[$i], $String) Then
-								DonateGiants()
+								If DonateGiants() Then ExitLoop (2)
 								ExitLoop
 							EndIf
 						Next
@@ -110,6 +109,7 @@ Func DonateBarbs()
 			SetLog("Donating Barbarians", $COLOR_BLUE)
 			If _Sleep(500) = True Then Return
 			Click(237, $DonatePixel[1] - 5, 5, 50)
+			Return True
 		Else
 			DonateArchers()
 			Return
@@ -131,6 +131,7 @@ Func DonateArchers()
 			SetLog("Donating Archers", $COLOR_BLUE)
 			If _Sleep(500) = True Then Return
 			Click(315, $DonatePixel[1] - 5, 5, 50)
+			Return True
 		Else
 			DonateGiants()
 			Return
@@ -152,13 +153,16 @@ Func DonateGiants()
 			SetLog("Donating Giants", $COLOR_BLUE)
 			If _Sleep(500) = True Then Return
 			Click(480, $DonatePixel[1] - 5, 5, 50)
+			Return True
 		Else
 			SetLog("No troops available for donation, donating later...", $COLOR_ORANGE)
+			Return False
 		EndIf
 		If _Sleep(500) = True Then Return
 		Click(1, 1, 1, 2000)
 	Else
 		SetLog("No troops available for donation, donating later...", $COLOR_ORANGE)
 		Click(1, 1, 1, 2000)
+		Return False
 	EndIf
 EndFunc   ;==>DonateGiants
