@@ -131,15 +131,15 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 		 if LauchTroop($eBarbarian, $nbSides, 1, 2) Then
 			If _Sleep(1000) Then Return
 			   EndIf
-		 if LauchTroop($eWallbreaker, $nbSides, 1, 1, 1) Then
-			If _Sleep(500) Then Return
-			   EndIf
 		 if LauchTroop($eArcher, $nbSides, 1, 2) Then
 			If _Sleep(1000) Then Return
 			   EndIf
 		 If _Sleep(2000) Then Return
 		 If LauchTroop($eBarbarian, $nbSides, 2, 2) Then
 			If _Sleep(1000) Then Return
+			EndIf
+		 if LauchTroop($eWallbreaker, $nbSides, 1, 1, 1) Then
+			If _Sleep(500) Then Return
 			   EndIf
 		 If LauchTroop($eGoblin, $nbSides, 1, 2) Then
 			If _Sleep(500) Then Return
@@ -164,13 +164,13 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 		PrepareAttack(True) ;Check remaining quantities
 		For $i = $eBarbarian To $eWallbreaker ; lauch all remaining troops
 		   LauchTroop($i, $nbSides, 0, 2, 2)
-		   If _Sleep(50) Then Return
+		   If _Sleep(100) Then Return
 	    Next
 
 	    PrepareAttack(True) ;Check remaining quantities
 		For $i = $eBarbarian To $eWallbreaker ; lauch all remaining troops
 		   LauchTroop($i, $nbSides, 0, 2, 2)
-		   If _Sleep(10) Then Return
+		   If _Sleep(50) Then Return
 	    Next
 
 		;Activate KQ's power
