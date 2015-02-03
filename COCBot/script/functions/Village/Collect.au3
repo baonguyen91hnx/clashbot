@@ -10,9 +10,8 @@ Func Collect()
 	_Sleep(250)
 	Click(1, 1) ;Click Away
 	For $i = 0 To 16
-		If _Sleep(250) Or $RunState = False Then ExitLoop
+		If _Sleep(150) Or $RunState = False Then ExitLoop
 		Click($collectorPos[$i][0], $collectorPos[$i][1]) ;Click collector
-		If _Sleep(250) Or $RunState = False Then ExitLoop
 		Click(1, 1) ;Click Away
 	Next
 EndFunc   ;==>Collect

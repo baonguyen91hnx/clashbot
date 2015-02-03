@@ -5,7 +5,7 @@ Func LocateTrap()
 			WinActivate($HWnD)
 			$TrapPos[0] = FindPos()[0]
 			$TrapPos[1] = FindPos()[1]
-			SetLog("-Trap =  " & "(" & $TrapPos[0] & "," & $TrapPos[1] & ")")
+			SetLog("-Trap =  " & "(" & $TrapPos[0] & "," & $TrapPos[1] & ")", $COLOR_GREEN)
 		EndIf
 		ExitLoop
 	WEnd

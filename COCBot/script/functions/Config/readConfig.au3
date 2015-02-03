@@ -11,6 +11,13 @@ Func readConfig() ;Reads config and sets it to the variables
 		$chkConditions[0] = IniRead($config, "search", "conditionGoldElixir", "0")
 		$chkConditions[1] = IniRead($config, "search", "conditionDark", "0")
 		$chkConditions[2] = IniRead($config, "search", "conditionTrophy", "0")
+		$chkConditions[3] = IniRead($config, "search", "conditionGoldorElixir", "0")
+		$chkConditions[4] = IniRead($config, "search", "conditionTownHall", "0")
+		$chkConditions[5] = IniRead($config, "search", "conditionTownHallO", "0")
+		$icmbTH = IniRead($config, "search", "THLevel", "0")
+		
+		$TakeLootSnapShot = IniRead($config, "search", "TakeLootSnapShot", "0")
+		$TakeAllTownSnapShot = IniRead($config, "search", "TakeAllTownSnapShot", "0")
 		;Attack Settings-------------------------------------------------------------------------
 		$deploySettings = IniRead($config, "attack", "deploy", "0")
 		$icmbAlgorithm = IniRead($config, "attack", "algorithm", "0")
@@ -23,6 +30,7 @@ Func readConfig() ;Reads config and sets it to the variables
 		$QueenAttack[2] = IniRead($config, "attack", "queen-all", "0")
 
 		$checkUseClanCastle = IniRead($config, "attack", "use-cc", "0")
+		$chkATH = IniRead($config, "attack", "townhall", "0")
 		;Donate Settings-------------------------------------------------------------------------
 		$CCPos[0] = IniRead($config, "donate", "xCCPos", "0")
 		$CCPos[1] = IniRead($config, "donate", "yCCPos", "0")

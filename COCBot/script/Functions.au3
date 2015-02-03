@@ -13,7 +13,9 @@
 #include "functions\Config\saveConfig.au3"
 #include "functions\Config\ScreenCoordinates.au3"
 
-#include "functions\Dead Base\checkDeadBase.au3"
+#include "functions\Image Search\ImageSearch.au3"
+#include "functions\Image Search\checkDeadBase.au3"
+#include "functions\Image Search\checkTownhall.au3"
 
 #include "functions\Main Screen\checkMainScreen.au3"
 #include "functions\Main Screen\checkObstacles.au3"

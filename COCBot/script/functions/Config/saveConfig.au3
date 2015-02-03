@@ -11,6 +11,12 @@ Func saveConfig() ;Saves the controls settings to the config
 		IniWrite($config, "search", "conditionGoldElixir", 1)
 	Else
 		IniWrite($config, "search", "conditionGoldElixir", 0)
+	 EndIf
+
+	If GUICtrlRead($chkMeetGorE) = $GUI_CHECKED Then
+		IniWrite($config, "search", "conditionGoldorElixir", 1)
+	Else
+		IniWrite($config, "search", "conditionGoldorElixir", 0)
 	EndIf
 
 	If GUICtrlRead($chkMeetDE) = $GUI_CHECKED Then
@@ -23,7 +29,33 @@ Func saveConfig() ;Saves the controls settings to the config
 		IniWrite($config, "search", "conditionTrophy", 1)
 	Else
 		IniWrite($config, "search", "conditionTrophy", 0)
-	EndIf
+	 EndIf
+
+	If GUICtrlRead($chkMeetTH) = $GUI_CHECKED Then
+		IniWrite($config, "search", "conditionTownHall", 1)
+	Else
+		IniWrite($config, "search", "conditionTownHall", 0)
+	 EndIf
+
+	If GUICtrlRead($chkMeetTHO) = $GUI_CHECKED Then
+		IniWrite($config, "search", "conditionTownHallO", 1)
+	Else
+		IniWrite($config, "search", "conditionTownHallO", 0)
+	 EndIf
+	 
+	If GUICtrlRead($chkTakeLootSS) = $GUI_CHECKED Then
+		IniWrite($config, "search", "TakeLootSnapShot", 1)
+	Else
+		IniWrite($config, "search", "TakeLootSnapShot", 0)
+	 EndIf
+
+	If GUICtrlRead($chkTakeTownSS) = $GUI_CHECKED Then
+		IniWrite($config, "search", "TakeAllTownSnapShot", 1)
+	Else
+		IniWrite($config, "search", "TakeAllTownSnapShot", 0)
+	 EndIf
+
+   IniWrite($config, "search", "THLevel", _GUICtrlComboBox_GetCurSel($cmbTH))
 	;Attack Settings-------------------------------------------------------------------------
 	IniWrite($config, "attack", "deploy", _GUICtrlComboBox_GetCurSel($cmbDeploy))
 	IniWrite($config, "attack", "algorithm", _GUICtrlComboBox_GetCurSel($cmbAlgorithm))
@@ -62,6 +94,12 @@ Func saveConfig() ;Saves the controls settings to the config
 		IniWrite($config, "attack", "use-cc", 1)
 	Else
 		IniWrite($config, "attack", "use-cc", 0)
+	 EndIf
+
+	If GUICtrlRead($chkAttackTH) = $GUI_CHECKED Then
+		IniWrite($config, "attack", "townhall", 1)
+	Else
+		IniWrite($config, "attack", "townhall", 0)
 	EndIf
 	;Donate Settings-------------------------------------------------------------------------
 	If GUICtrlRead($chkRequest) = $GUI_CHECKED Then

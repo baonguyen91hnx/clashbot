@@ -7,23 +7,59 @@ Func applyConfig() ;Applies the data from config to the controls in GUI
 	GUICtrlSetData($txtMinDarkElixir, $MinDark)
 	GUICtrlSetData($txtMinTrophy, $MinTrophy)
 
+	For $i = 0 To 4
+	   If $icmbTH = $i Then $MaxTH = $THText[$i]
+    Next
+
 	If $chkConditions[0] = 1 Then
 		GUICtrlSetState($chkMeetGxE, $GUI_CHECKED)
-	ElseIf $chkConditions[0] = 0 Then
+	Else
 		GUICtrlSetState($chkMeetGxE, $GUI_UNCHECKED)
 	EndIf
 
 	If $chkConditions[1] = 1 Then
 		GUICtrlSetState($chkMeetDE, $GUI_CHECKED)
-	ElseIf $chkConditions[1] = 0 Then
+	Else
 		GUICtrlSetState($chkMeetDE, $GUI_UNCHECKED)
 	EndIf
 
 	If $chkConditions[2] = 1 Then
 		GUICtrlSetState($chkMeetTrophy, $GUI_CHECKED)
-	ElseIf $chkConditions[2] = 0 Then
+	Else
 		GUICtrlSetState($chkMeetTrophy, $GUI_UNCHECKED)
-	EndIf
+	 EndIf
+
+	If $chkConditions[3] = 1 Then
+		GUICtrlSetState($chkMeetGorE, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkMeetGorE, $GUI_UNCHECKED)
+	 EndIf
+
+   If $chkConditions[4] = 1 Then
+		GUICtrlSetState($chkMeetTH, $GUI_CHECKED)
+   Else
+		GUICtrlSetState($chkMeetTH, $GUI_UNCHECKED)
+	 EndIf
+
+   If $chkConditions[5] = 1 Then
+		GUICtrlSetState($chkMeetTHO, $GUI_CHECKED)
+   Else
+		GUICtrlSetState($chkMeetTHO, $GUI_UNCHECKED)
+	 EndIf
+
+   If $TakeLootSnapShot = 1 Then
+		GUICtrlSetState($chkTakeLootSS, $GUI_CHECKED)
+   Else
+		GUICtrlSetState($chkTakeLootSS, $GUI_UNCHECKED)
+	 EndIf
+
+   If $TakeAllTownSnapShot = 1 Then
+		GUICtrlSetState($chkTakeTownSS, $GUI_CHECKED)
+   Else
+		GUICtrlSetState($chkTakeTownSS, $GUI_UNCHECKED)
+	 EndIf
+
+   _GUICtrlComboBox_SetCurSel($cmbTH, $icmbTH)
 	;Attack Settings-------------------------------------------------------------------------
 	_GUICtrlComboBox_SetCurSel($cmbDeploy, $deploySettings)
 	_GUICtrlComboBox_SetCurSel($cmbAlgorithm, $icmbAlgorithm)
@@ -69,7 +105,13 @@ Func applyConfig() ;Applies the data from config to the controls in GUI
 		GUICtrlSetState($chkUseClanCastle, $GUI_CHECKED)
 	Else
 		GUICtrlSetState($chkUseClanCastle, $GUI_UNCHECKED)
-	EndIf
+	 EndIf
+
+	If $chkATH = 1 Then
+		GUICtrlSetState($chkAttackTH, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkAttackTH, $GUI_UNCHECKED)
+	 EndIf
 	;Donate Settings-------------------------------------------------------------------------
 	If $ichkRequest = 1 Then
 		GUICtrlSetState($chkRequest, $GUI_CHECKED)

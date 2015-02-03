@@ -28,6 +28,14 @@ Func GUIControl($hWind, $iMsg, $wParam, $lParam)
 					chkRequest()
 				Case $tabMain
 					tabMain()
+				Case $chkMeetGorE
+					If GUICtrlRead($chkMeetGorE) = $GUI_CHECKED Then
+						GUICtrlSetState($chkMeetGxE, $GUI_UNCHECKED)
+					EndIf
+				Case $chkMeetGxE
+					If GUICtrlRead($chkMeetGxE) = $GUI_CHECKED Then
+						GUICtrlSetState($chkMeetGorE, $GUI_UNCHECKED)
+					EndIf
 			EndSwitch
 		Case 274
 			Switch $wParam
@@ -74,6 +82,10 @@ Func btnStart()
 
 				GUICtrlSetState($btnStart, $GUI_HIDE)
 				GUICtrlSetState($btnStop, $GUI_SHOW)
+				If GUICtrlRead($txtCapacity) = 0 And $icmbTroopComp <> 8 Then
+					 MsgBox(0, "", "Don't Forget to Set Your Troops Capacity in Troop Settings!!")
+					 btnStop()
+				EndIf
 				runBot()
 			EndIf
 		Else
@@ -120,6 +132,16 @@ Func btnLocateClanClastle()
 	WEnd
 	$RunState = False
 EndFunc   ;==>btnLocateClanClastle
+
+Func btnLocateTrap()
+	$RunState = True
+	While 1
+		ZoomOut()
+		LocateTrap()
+		ExitLoop
+	WEnd
+	$RunState = False
+EndFunc   ;==>btnLocateTrap
 
 Func btnSearchMode()
 	While 1

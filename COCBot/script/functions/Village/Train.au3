@@ -2,7 +2,7 @@
 
 ; Train the troops (Fill the barracks)
 
-Func GetTrainPos($troopKind)
+#CS Func GetTrainPos($troopKind)
    Switch $troopKind
    Case $eBarbarian ; 261, 366: 0x39D8E0
 	  Return $TrainBarbarian
@@ -31,7 +31,7 @@ Func TrainIt($troopKind, $howMuch=1, $iSleep = 700)
 	  EndIf
    EndIf
 EndFunc
-
+ #CE
 Func Train()
 	If $barrackPos[0][0] = "" Then
 		LocateBarrack()
@@ -61,8 +61,38 @@ Func Train()
 
 			CheckFullArmy()
 			If _GUICtrlComboBox_GetCurSel($cmbTroopComp) = 8 Then
-				While TrainIt($barrackTroop[$i], 5)
-				WEnd
+				Switch $barrackTroop[$i]
+					Case 0
+						While _ColorCheck(_GetPixelColor(329, 297), Hex(0xDC3F70, 6), 20)
+							Click(220, 320, 5) ;Barbarian
+							If _Sleep(10) Then ExitLoop
+							_CaptureRegion()
+						WEnd
+					Case 1
+						While _ColorCheck(_GetPixelColor(217, 297), Hex(0xF8AD20, 6), 20)
+							Click(331, 320, 5) ;Archer
+							If _Sleep(10) Then ExitLoop
+							_CaptureRegion()
+						WEnd
+					Case 2
+						While _ColorCheck(_GetPixelColor(217, 297), Hex(0xF8AD20, 6), 20)
+							Click(432, 320, 5) ;Giant
+							If _Sleep(10) Then ExitLoop
+							_CaptureRegion()
+						WEnd
+					Case 3
+						While _ColorCheck(_GetPixelColor(217, 297), Hex(0xF8AD20, 6), 20)
+							Click(546, 320, 5) ;Goblin
+							If _Sleep(10) Then ExitLoop
+							_CaptureRegion()
+						WEnd
+					Case 4
+						While _ColorCheck(_GetPixelColor(217, 297), Hex(0xF8AD20, 6), 20)
+							Click(647, 320, 5) ;Wall breaker
+							If _Sleep(10) Then ExitLoop
+							_CaptureRegion()
+						WEnd
+				EndSwitch
 			Else
 				; More Troops Settings
 				If $ArmyComp >= $icmbTroopCap Then
@@ -86,7 +116,7 @@ Func Train()
 							$CurGiant -= 5
 							$ArmyComp += 5
 							Click(432, 320) ;Giant
-							If _Sleep(300) Then ExitLoop (2)
+							If _Sleep(300) Then ExitLoop
 							_CaptureRegion()
 						Else
 							$CurGiant = "-1"
@@ -98,7 +128,7 @@ Func Train()
 							$CurWB -= 2
 							$ArmyComp += 2
 							Click(647, 320) ;WB
-							If _Sleep(300) Then ExitLoop (2)
+							If _Sleep(300) Then ExitLoop
 							_CaptureRegion()
 						Else
 							$CurWB = "-1"
@@ -110,7 +140,7 @@ Func Train()
 							$CurGoblin -= 1
 							$ArmyComp += 1
 							Click(546, 320) ;Goblin
-							If _Sleep(300) Then ExitLoop (2)
+							If _Sleep(300) Then ExitLoop
 							_CaptureRegion()
 						Else
 							$CurGoblin = "-1"
@@ -122,7 +152,7 @@ Func Train()
 							$CurBarb -= 1
 							$ArmyComp += 1
 							Click(220, 320) ;Barbarian
-							If _Sleep(300) Then ExitLoop (2)
+							If _Sleep(300) Then ExitLoop
 							_CaptureRegion()
 						Else
 							$CurBarb = "-1"
@@ -134,7 +164,7 @@ Func Train()
 							$CurArch -= 1
 							$ArmyComp += 1
 							Click(331, 320) ;Archer
-							If _Sleep(300) Then ExitLoop (2)
+							If _Sleep(300) Then ExitLoop
 							_CaptureRegion()
 						Else
 							$CurArch = "-1"

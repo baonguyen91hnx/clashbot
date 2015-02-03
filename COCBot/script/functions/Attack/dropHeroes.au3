@@ -9,6 +9,7 @@ Func dropHeroes($x, $y, $KingSlot = -1, $QueenSlot = -1) ;Drops for king and que
 				If $KingSlot <> -1 And ($KingAttack[0] = 1 Or $KingAttack[2] = 1) Then
 					SetLog("Dropping King", $COLOR_BLUE)
 					Click(68 + (72 * $KingSlot), 595) ;Select King
+					If _Sleep(500) Then Return
 					Click($x, $y)
 					$checkKPower = True
 				EndIf
@@ -18,6 +19,7 @@ Func dropHeroes($x, $y, $KingSlot = -1, $QueenSlot = -1) ;Drops for king and que
 				If $QueenSlot <> -1 And ($QueenAttack[0] = 1 Or $QueenAttack[2] = 1) Then
 					SetLog("Dropping Queen", $COLOR_BLUE)
 					Click(68 + (72 * $QueenSlot), 595) ;Select Queen
+					If _Sleep(500) Then Return
 					Click($x, $y)
 					$checkQPower = True
 				EndIf
@@ -27,6 +29,7 @@ Func dropHeroes($x, $y, $KingSlot = -1, $QueenSlot = -1) ;Drops for king and que
 				If $KingSlot <> -1 And $KingAttack[2] = 1 Then
 					SetLog("Dropping King", $COLOR_BLUE)
 					Click(68 + (72 * $KingSlot), 595) ;Select King
+					If _Sleep(500) Then Return
 					Click($x, $y)
 					$checkKPower = True
 				EndIf
@@ -36,6 +39,7 @@ Func dropHeroes($x, $y, $KingSlot = -1, $QueenSlot = -1) ;Drops for king and que
 				If $QueenSlot <> -1 And $QueenAttack[2] = 1 Then
 					SetLog("Dropping Queen", $COLOR_BLUE)
 					Click(68 + (72 * $QueenSlot), 595) ;Select Queen
+					If _Sleep(500) Then Return
 					Click($x, $y)
 					$checkQPower = True
 				EndIf

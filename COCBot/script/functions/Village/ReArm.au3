@@ -19,12 +19,12 @@ Func ReArm()
 			If _ColorCheck(_GetPixelColor(350, 420), Hex(0xC83B10, 6), 20) Then
 				Click(515, 400)
 			Else
-				SetLog("All traps armed", $COLOR_BLUE)
+				SetLog("All traps armed", $COLOR_ORANGE)
 			EndIf
 			If _Sleep(500) Then ExitLoop
 			Click(1, 1)
 		Else
-			SetLog("Not found", $COLOR_ORANGE)
+			SetLog("Traps not found", $COLOR_RED)
 			If _Sleep(10000) Then Return
 		EndIf
 		ExitLoop

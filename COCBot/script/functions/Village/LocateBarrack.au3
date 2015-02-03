@@ -60,7 +60,7 @@ Func LocateBarrack()
 		WEnd
 	WEnd
 	SaveConfig()
-	SetLog("-Locating Complete-")
+	SetLog("-Locating Complete-", $COLOR_BLUE)
 	SetLog("-Barrack 1 = " & "(" & $barrackPos[0][0] & "," & $barrackPos[0][1] & ")", $COLOR_GREEN)
 	SetLog("-Barrack 2 = " & "(" & $barrackPos[1][0] & "," & $barrackPos[1][1] & ")", $COLOR_GREEN)
 	SetLog("-Barrack 3 = " & "(" & $barrackPos[2][0] & "," & $barrackPos[2][1] & ")", $COLOR_GREEN)

@@ -10,9 +10,6 @@
 $sBotVersion = "5.5"
 $sBotTitle = "COC Bot v" & $sBotVersion
 
-DirCreate(@ScriptDir & "\COCBot\logs\")
-DirCreate(@ScriptDir & "\COCBot\Loots\")
-
 If _Singleton($sBotTitle, 1) = 0 Then
 	MsgBox(0, "", "Bot is already running.")
 	Exit
@@ -28,6 +25,10 @@ EndIf
 #include "COCBot\script\GUI Control.au3"
 #include "COCBot\script\Functions.au3"
 #include-once
+
+DirCreate($dirLogs)
+DirCreate($dirLoots)
+DirCreate($dirAllTowns)
 
 While 1
 	Switch TrayGetMsg()

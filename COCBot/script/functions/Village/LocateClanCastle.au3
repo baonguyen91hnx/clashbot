@@ -6,7 +6,7 @@ Func LocateClanClastle()
 		If $MsgBox = 1 Then
 			$CCPos[0] = FindPos()[0]
 			$CCPos[1] = FindPos()[1]
-			SetLog("-Clan Castle =  " & "(" & $CCPos[0] & "," & $CCPos[1] & ")")
+			SetLog("-Clan Castle =  " & "(" & $CCPos[0] & "," & $CCPos[1] & ")", $COLOR_GREEN)
 		EndIf
 		ExitLoop
 	WEnd

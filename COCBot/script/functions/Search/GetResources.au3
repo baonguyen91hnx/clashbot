@@ -24,6 +24,7 @@ Func GetResources() ;Reads resources
 		WEnd
 		If _Sleep(300) Then ExitLoop (2)
 
+		$searchTH = checkTownhall()
 		$searchGold = getGold(51, 66)
 		$searchElixir = getElixir(51, 66 + 29)
 		$searchTrophy = getTrophy(51, 66 + 90)
@@ -35,8 +36,18 @@ Func GetResources() ;Reads resources
 			$searchTrophy = getTrophy(51, 66 + 60)
 		EndIf
 
+		If $THx > 227 And $THx < 627 And $THy > 151 And $THy < 419 And $searchTH <> "-" Then
+			$THLoc = "Inside"
+		Elseif $searchTH <> "-" Then
+			$THLoc = "Outside"
+		Else
+			$THLoc = $searchTH
+			$THx = 0
+			$THy = 0
+		EndIf
+			 
 		$SearchCount += 1 ; Counter for number of searches
-		SetLog("(" & $SearchCount & ") [G]: " & $searchGold & Tab($searchGold, 12) & "[E]: " & $searchElixir & Tab($searchElixir, 12) & "[D]: " & $searchDark & Tab($searchDark, 12) & "[T]: " & $searchTrophy)
+		SetLog("(" & $SearchCount & ") [G]: " & $searchGold & Tab($searchGold, 12) & "[E]: " & $searchElixir & Tab($searchElixir, 12) & "[D]: " & $searchDark & Tab($searchDark, 12) & "[T]: " & $searchTrophy & Tab($searchTrophy, 5) & "[TH]: " & $searchTH & ", " & $THLoc)
 		ExitLoop
 	WEnd
 EndFunc   ;==>GetResources

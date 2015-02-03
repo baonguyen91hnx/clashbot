@@ -39,6 +39,7 @@ Global $HWnD = WinGetHandle($Title) ;Handle for Bluestacks window
 Global $config = @ScriptDir & "\COCBot\config.ini"
 Global $dirLogs = @ScriptDir & "\COCBot\logs\"
 Global $dirLoots = @ScriptDir & "\COCBot\Loots\"
+Global $dirAllTowns = @ScriptDir & "\COCBot\AllTowns\"
 Global $sLogPath ; `Will create a new log file every time the start button is pressed
 Global $hLogFileHandle
 Global $Restart = False
@@ -54,10 +55,18 @@ Global $COLLECTATCOUNT = 8 ; Run Collect() after this amount of times before act
 Global $BSpos[2] ; Inside BlueStacks positions relative to the screen
 ;---------------------------------------------------------------------------------------------------
 ;Search Settings
-Global $searchGold, $searchElixir, $searchDark, $searchTrophy ;Resources of bases when searching
-Global $MinGold, $MinElixir, $MinDark, $MinTrophy ; Minimum Resources conditions
-Global $chkConditions[3] ;Conditions (meet gold...)
-
+Global $searchGold, $searchElixir, $searchDark, $searchTrophy, $searchTH ;Resources of bases when searching
+Global $MinGold, $MinElixir, $MinDark, $MinTrophy, $MaxTH ; Minimum Resources conditions
+Global $chkConditions[6] ;Conditions (meet gold...)
+Global $icmbTH
+Global $THLocation
+Global $THx = 0, $THy = 0
+Global $THText[5] ; Text of each Townhall level
+$THText[0] = "4-6"
+$THText[1] = "7"
+$THText[2] = "8"
+$THText[3] = "9"
+$THText[4] = "10"
 Global $SearchCount = 0 ;Number of searches
 
 ;Troop types
@@ -84,6 +93,9 @@ Global $checkQPower = False ; Check for Queen activate power
 Global $delayActivateKQ = 6000 ;Delay before activating KQ
 Global $checkUseClanCastle ; Use Clan Castle settings
 Global $iradAttackMode ;Attack mode, 0 1 2
+
+Global $THLoc
+Global $chkATH
 
 ;Boosts Settings
 Global $remainingBoosts = 0 ;  remaining boost to active during session

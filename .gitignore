@@ -1,4 +1,5 @@
 *.ini
 *.log
 *.jpg
+*.png
 *.db
