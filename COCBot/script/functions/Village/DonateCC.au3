@@ -5,18 +5,15 @@ Func DonateCC()
 	If $Donate = False Then Return
 	Local $y = 119
 	SetLog("Donating Troops", $COLOR_BLUE)
-	While $Donate
 		Click(1, 1) ;Click Away
 		If _ColorCheck(_GetPixelColor(331, 330), Hex(0xF0A03B, 6), 20) = False Then Click(19, 349) ;Clicks chat thing
 		If _Sleep(200) Then Return
 		Click(189, 24) ; clicking clan tab
+		If _Sleep(200) Then Return
 
-		Local $Scroll = _PixelSearch(285, 100, 287, 700, Hex(0x97E405, 6), 20)
-		If IsArray($Scroll) Then
-			Click($Scroll[0], $Scroll[1])
-			If _Sleep(700) Then Return
-		EndIf
-
+	While $Donate
+		Click(1, 1) ;Click Away
+		If _Sleep(200) Then Return
 		Local $offColors[3][3] = [[0x000000, 0, -2], [0x262926, 0, 1], [0xF8FCF0, 0, 11]]
 		Global $DonatePixel = _MultiPixelSearch(202, $y, 203, 670, 1, 1, Hex(0x262926, 6), $offColors, 20)
 		If IsArray($DonatePixel) Then
@@ -67,7 +64,14 @@ Func DonateCC()
 			EndIf
 			$y = $DonatePixel[1] + 10
 		Else
-			$Donate = False
+			Local $Scroll = _PixelSearch(285, 650, 287, 700, Hex(0x97E405, 6), 20)
+			If IsArray($Scroll) Then
+				Click($Scroll[0], $Scroll[1])
+				$y = 119
+				If _Sleep(700) Then Return
+			Else
+				$Donate = False
+			EndIf
 		EndIf
 	WEnd
 
