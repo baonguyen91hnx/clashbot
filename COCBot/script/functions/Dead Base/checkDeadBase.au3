@@ -3,20 +3,17 @@ Func checkDeadBase()
 EndFunc   ;==>checkDeadBase
 
 ;checkDeadBase Variables:-------------===========================
-Global $Title = "BlueStacks App Player"
-Global $HWnD = WinGetHandle(WinGetTitle($Title))
-
+GLOBAL $AdjustTolerance=0
+Global $Tolerance[5][11]=[[55,55,55,80,70,70,75,80,0,75,65],[55,55,55,80,80,70,75,80,0,75,65],[55,55,55,80,80,70,75,80,0,75,65],[55,55,55,80,80,60,75,75,0,75,60],[55,55,55,80,80,70,75,80,0,75,65]]
 Global $ZC = 0, $ZombieCount = 0;, $E
-Global $ZombieFileSets = 3 ;Variant Image to use organized as per Folder
-Global $Tolerance = 65
-Global $ZSExclude = 3 ;Exlude lowest collector level for ZombieSearch. LowestCollector: $ZSExclude=0 means Search Lv6 up. Recommended Th9 = 2-3 (Start Elixir Lv9)
-;SET C MINIMUM COLLECTOR LEVEL IS 7 SO SET MINIMUM $ZSExclude=1
+Global $ZombieFileSets = 4 ;Variant Image to use organized as per Folder
+Global $ZSExclude = 0 ;Set to 0 to include Elixir Lvl 6, 1 to include lvl 7 and so on..
 Global $Lx[4] = [0, 400, 0, 400]
 Global $Ly[4] = [0, 0, 265, 265]
 Global $Rx[4] = [460, 860, 400, 860]
 Global $Ry[4] = [325, 325, 590, 590]
 
-Global $Area[11][4], $IS_x[11][4], $IS_y[11][4], $E[5][11]
+Global $Area[5][11][4], $IS_x[11][4], $IS_y[11][4], $E[5][11]
 
 $E[0][0] = @ScriptDir & "\COCBot\script\functions\Dead Base\images\ELIX1\E6F9.bmp"
 $E[0][1] = @ScriptDir & "\COCBot\script\functions\Dead Base\images\ELIX1\E7F9.bmp"
@@ -75,34 +72,29 @@ $E[3][10] = @ScriptDir & "\COCBot\script\functions\Dead Base\images\ELIX4\E12F9.
 ;--------------------------------------------------------------------------------------------------------------
 
 Func ZombieSearch()
-	;GUICtrlSetData($Results, "Checking for Zombie. Tolerance: " & $Tolerance & @CRLF, -1)
+   _CaptureRegion()
 	$ZombieCount = 0
-	IS_Area(0, $Tolerance - 5)
-	$ZombieCount += $ZC
-	If $ZombieCount > 0 Then ;if $ZombieCount =1 : $Tolerance=50
-		;GUICtrlSetData($Results, "Zombie detected. $ZombieCount = " & $ZombieCount & @CRLF, -1)
+	 $ZC = 0
+	 For $s = 0 To ($ZombieFileSets - 1) Step 1
+		 For $p = 10 To 0 + $ZSExclude Step -1
+			 If FileExists($E[$s][$p]) Then
+			 $Area[$s][$p][0] = _ImageSearch($E[$s][$p], 1, $IS_x[$p][0], $IS_y[$p][0], $Tolerance[$s][$p]+$AdjustTolerance)
+				 If $Area[$s][$p][0] > 0 Then
+					 $ZC = 1
+					 ExitLoop (2)
+				 EndIf
+			 Else
+				 $Area[$s][$p][0]= 0
+			 EndIf
+		 Next
+	 Next
+	 $ZombieCount += $ZC
+	If $ZombieCount > 0 Then
 		Return True
 	Else
-		;GUICtrlSetData($Results, "Not Zombie. $ZombieCount = " & $ZombieCount & @CRLF, -1)
 		Return False
 	EndIf
 EndFunc   ;==>ZombieSearch
-
-Func IS_Area($i, $Tolerance) ;Search per area then search per file. If not succeed variant 1 proceed 2 else proceed 3.
-	_CaptureRegion()
-	$ZC = 0
-	For $s = 0 To ($ZombieFileSets - 1) Step 1
-		For $p = 10 To 0 + $ZSExclude Step -1
-			If FileExists($E[$s][$p]) Then
-				$Area[$p][$i] = _ImageSearch($E[$s][$p], 0, $IS_x[$p][$i], $IS_y[$p][$i], $Tolerance)
-				If $Area[$p][$i] > 0 Then
-					$ZC = 1
-					ExitLoop (2)
-				EndIf
-			EndIf
-		Next
-	Next
-EndFunc   ;==>IS_Area
 
 ;==============================================================================================================
 ;===Other Functions============================================================================================
@@ -121,7 +113,6 @@ Func _ImageSearchArea($findImage, $resultPosition, $x1, $y1, $right, $bottom, By
 		$y1 += $BSPos[1]
 		$right += $BSPos[0]
 		$bottom += $BSPos[1]
-	Else
 	EndIf
 	;MsgBox(0,"asd","" & $x1 & " " & $y1 & " " & $right & " " & $bottom)
 	#cs
