@@ -1,5 +1,11 @@
 #RequireAdmin
 ;#AutoIt3Wrapper_Icon="We need to specify absolute path to \COCBot\Icons\cocbot.ico so it compiles with proper icon"
+#pragma compile(Icon, "COCBot\Icons\cocbot.ico")
+#pragma compile(FileDescription, Clash of Clans Bot - A Free/Open Sourced Clash of Clans bot - https://the.bytecode.club)
+#pragma compile(ProductName, Clash of Clans Bot)
+#pragma compile(ProductVersion, 5.5)
+#pragma compile(FileVersion, 5.5.0.0)
+#pragma compile(LegalCopyright, © The Bytecode Club)
 
 $sBotVersion = "5.5"
 $sBotTitle = "COC Bot v" & $sBotVersion
