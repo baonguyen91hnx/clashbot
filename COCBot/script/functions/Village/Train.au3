@@ -85,7 +85,6 @@ Func Train()
 						If $CurGiant > 0 Then
 							$CurGiant -= 5
 							$ArmyComp += 5
-							SetLog("Training Giants, Troops Capacity: " & $ArmyComp & "/" & $icmbTroopCap, $COLOR_BLUE)
 							Click(432, 320) ;Giant
 							If _Sleep(300) Then ExitLoop (2)
 							_CaptureRegion()
@@ -98,7 +97,6 @@ Func Train()
 						If $CurWB > 0 Then
 							$CurWB -= 2
 							$ArmyComp += 2
-							SetLog("Training Wall Breakers, Troops Capacity: " & $ArmyComp & "/" & $icmbTroopCap, $COLOR_BLUE)
 							Click(647, 320) ;WB
 							If _Sleep(300) Then ExitLoop (2)
 							_CaptureRegion()
@@ -106,12 +104,11 @@ Func Train()
 							$CurWB = "-1"
 						EndIf
 					WEnd
-				ElseIf GUICtrlRead($txtGoblins) <> "0" And ($CurGoblin <> -1 Or $CurGoblin > 0) Then
+				 ElseIf GUICtrlRead($txtGoblins) <> "0" And ($CurGoblin <> -1 Or $CurGoblin > 0) Then
 					While _ColorCheck(_GetPixelColor(509, 305), Hex(0xE0E4D0, 6), 20) = False And _ColorCheck(_GetPixelColor(217, 297), Hex(0xF8AD20, 6), 20) And ($CurGoblin <> -1 Or $CurGoblin > 0)
 						If $CurGoblin > 0 Then
 							$CurGoblin -= 1
 							$ArmyComp += 1
-							SetLog("Training Goblins, Troops Capacity: " & $ArmyComp & "/" & $icmbTroopCap, $COLOR_BLUE)
 							Click(546, 320) ;Goblin
 							If _Sleep(300) Then ExitLoop (2)
 							_CaptureRegion()
@@ -119,12 +116,11 @@ Func Train()
 							$CurGoblin = "-1"
 						EndIf
 					WEnd
-				ElseIf GUICtrlRead($txtBarbarians) <> "0" And ($CurBarb <> -1 Or $CurBarb > 0) Then
+				 ElseIf GUICtrlRead($txtBarbarians) <> "0" And ($CurBarb <> -1 Or $CurBarb > 0) Then
 					While _ColorCheck(_GetPixelColor(329, 297), Hex(0xDC3F70, 6), 20) And ($CurBarb <> -1 Or $CurBarb > 0)
 						If $CurBarb > 0 Then
 							$CurBarb -= 1
 							$ArmyComp += 1
-							SetLog("Training Barbarians, Troops Capacity: " & $ArmyComp & "/" & $icmbTroopCap, $COLOR_BLUE)
 							Click(220, 320) ;Barbarian
 							If _Sleep(300) Then ExitLoop (2)
 							_CaptureRegion()
@@ -132,12 +128,11 @@ Func Train()
 							$CurBarb = "-1"
 						EndIf
 					WEnd
-				ElseIf GUICtrlRead($txtArchers) <> "0" And ($CurArch <> -1 Or $CurArch > 0) Then
+				 ElseIf GUICtrlRead($txtArchers) <> "0" And ($CurArch <> -1 Or $CurArch > 0) Then
 					While _ColorCheck(_GetPixelColor(217, 297), Hex(0xF8AD20, 6), 20) And ($CurArch <> -1 Or $CurArch > 0)
 						If $CurArch > 0 Then
 							$CurArch -= 1
 							$ArmyComp += 1
-							SetLog("Training Archers, Troops Capacity: " & $ArmyComp & "/" & $icmbTroopCap, $COLOR_BLUE)
 							Click(331, 320) ;Archer
 							If _Sleep(300) Then ExitLoop (2)
 							_CaptureRegion()
