@@ -10,8 +10,8 @@
 $sBotVersion = "5.5"
 $sBotTitle = "COC Bot v" & $sBotVersion
 
-DirCreate(@ScriptDir & "\Loots\")
-DirCreate(@ScriptDir & "\logs\")
+DirCreate(@ScriptDir & "\COCBot\logs\")
+DirCreate(@ScriptDir & "\COCBot\Loots\")
 
 If _Singleton($sBotTitle, 1) = 0 Then
 	MsgBox(0, "", "Bot is already running.")
