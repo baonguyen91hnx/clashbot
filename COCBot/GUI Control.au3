@@ -70,7 +70,7 @@ Func btnStart()
 			Else
 				WinActivate($Title)
 
-				SetLog("~~~~Welcome to " & @ScriptName & "!~~~~")
+				SetLog("~~~~Welcome to " & $sBotTitle & "!~~~~")
 				SetLog($Compiled & " running on " & @OSArch & " OS", $COLOR_GREEN)
 				SetLog("Bot is starting...", $COLOR_ORANGE)
 
@@ -88,7 +88,7 @@ Func btnStart()
 				If GUICtrlRead($txtCapacity) = 0 And $icmbTroopComp <> 8 Then
 					 MsgBox(0, "", "Don't Forget to Set Your Troops Capacity in Troop Settings!!")
 					 btnStop()
-				EndIf
+				  EndIf
 				runBot()
 			EndIf
 		Else

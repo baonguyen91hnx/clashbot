@@ -3,6 +3,8 @@
 
 Func checkMainScreen() ;Checks if in main screen
 	SetLog("Trying to locate Main Screen", $COLOR_BLUE)
+    _WinAPI_EmptyWorkingSet(WinGetProcess($Title)) ; Reduce BlueStacks Memory Usage
+
 	_CaptureRegion()
 	While _ColorCheck(_GetPixelColor(284, 28), Hex(0x41B1CD, 6), 20) = False
 		$HWnD = WinGetHandle($Title)

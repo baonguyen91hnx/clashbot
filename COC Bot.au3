@@ -1,5 +1,5 @@
 #RequireAdmin
-;#AutoIt3Wrapper_Icon="We need to specify absolute path to \COCBot\Icons\cocbot.ico so it compiles with proper icon"
+#AutoIt3Wrapper_UseX64=n
 #pragma compile(Icon, "Icons\cocbot.ico")
 #pragma compile(FileDescription, Clash of Clans Bot - A Free/Open Sourced Clash of Clans bot - https://the.bytecode.club)
 #pragma compile(ProductName, Clash of Clans Bot)
@@ -12,6 +12,11 @@ $sBotTitle = "COC Bot v" & $sBotVersion
 
 If _Singleton($sBotTitle, 1) = 0 Then
 	MsgBox(0, "", "Bot is already running.")
+	Exit
+ EndIf
+
+If @AutoItX64 = 1 Then
+	MsgBox(0, "", "Don't Run/Compile as (x64)! try to Run/Compile as (x86) to getting this bot work")
 	Exit
 EndIf
 
