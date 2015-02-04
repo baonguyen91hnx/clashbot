@@ -20,10 +20,10 @@ If Not FileExists(@ScriptDir & "\License.txt") Then
 	InetClose($license)
 EndIf
 
-#include "COCBot\script\Global Variables.au3"
-#include "COCBot\script\GUI Design.au3"
-#include "COCBot\script\GUI Control.au3"
-#include "COCBot\script\Functions.au3"
+#include "COCBot\Global Variables.au3"
+#include "COCBot\GUI Design.au3"
+#include "COCBot\GUI Control.au3"
+#include "COCBot\Functions.au3"
 #include-once
 
 DirCreate($dirLogs)
