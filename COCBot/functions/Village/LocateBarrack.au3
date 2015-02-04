@@ -55,7 +55,7 @@ Func LocateBarrack()
 				$barrackPos[3][0] = ""
 				$barrackPos[3][1] = ""
 			EndIf
-			If GUICtrlRead($chkRequest) = $GUI_CHECKED And $CCPos[0] = -1 Then LocateClanClastle()
+			If GUICtrlRead($chkRequest) = $GUI_CHECKED And $CCPos[0] = -1 Then LocateClanCastle()
 			ExitLoop (2)
 		WEnd
 	WEnd

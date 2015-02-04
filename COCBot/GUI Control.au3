@@ -130,15 +130,15 @@ Func btnLocateBarracks()
 	$RunState = False
 EndFunc   ;==>btnLocateBarracks
 
-Func btnLocateClanClastle()
+Func btnLocateClanCastle()
 	$RunState = True
 	While 1
 		ZoomOut()
-		LocateClanClastle()
+		LocateClanCastle()
 		ExitLoop
 	WEnd
 	$RunState = False
-EndFunc   ;==>btnLocateClanClastle
+EndFunc   ;==>btnLocateClanCastle
 
 Func btnLocateTrap()
 	$RunState = True

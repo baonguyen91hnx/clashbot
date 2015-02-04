@@ -1,6 +1,6 @@
 ;Locates Clan Castle manually (Temporary)
 
-Func LocateClanClastle()
+Func LocateClanCastle()
 	While 1
 		$MsgBox = MsgBox(1 + 262144, "Locate Clan Castle", "Click OK then click on your Clan Castle", 0, $frmBot)
 		If $MsgBox = 1 Then
@@ -10,4 +10,4 @@ Func LocateClanClastle()
 		EndIf
 		ExitLoop
 	WEnd
-EndFunc   ;==>LocateClanClastle
+EndFunc   ;==>LocateClanCastle

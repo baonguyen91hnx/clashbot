@@ -47,15 +47,20 @@ Func runBot() ;Bot that runs everything in order
 		readConfig()
 		applyConfig()
 		$Restart = False
+		$CommandStop = -1
 		If _Sleep(1000) Then Return
 		checkMainScreen()
 		If _Sleep(1000) Then Return
 		ZoomOut()
 		If _Sleep(1000) Then Return
+		If BotCommand() Then btnStop()
+		If _Sleep(1000) Then Return
 		ReArm()
 		If _Sleep(1000) Then Return
-		Train()
-		If _Sleep(1000) Then ExitLoop
+		If $CommandStop <> 0 Then
+			Train()
+			If _Sleep(1000) Then ExitLoop
+		EndIf
 		BoostBarracks()
 		If _Sleep(1000) Then ExitLoop
 		RequestCC()
@@ -66,38 +71,47 @@ Func runBot() ;Bot that runs everything in order
 		If _Sleep(1000) Then Return
 		Idle()
 		If _Sleep(1000) Then Return
-		AttackMain()
-		If _Sleep(1000) Then Return
+		If $CommandStop <> 0 And $CommandStop <> 3 Then
+			AttackMain()
+			If _Sleep(1000) Then Return
+		EndIf
 	WEnd
 EndFunc   ;==>runBot
 
 Func Idle() ;Sequence that runs until Full Army
 	Local $TimeIdle = 0 ;In Seconds
-		If $fullArmy = False Then
-			While $fullArmy = False
-			    SetLog("~~~Waiting for full army~~~")
-				Local $hTimer = TimerInit()
-				If _Sleep(30000) Then ExitLoop
-				checkMainScreen()
-				If _Sleep(1000) Then ExitLoop
-				ZoomOut()
-				If _Sleep(1000) Then ExitLoop
-				If $iCollectCounter > $COLLECTATCOUNT Then ; This is prevent from collecting all the time which isn't needed anyway
-					Collect()
-					If _Sleep(1000) Or $RunState = False Then ExitLoop
-					$iCollectCounter = 0
-				EndIf
-				$iCollectCounter = $iCollectCounter + 1
+		While $fullArmy = False
+			If $CommandStop = -1 Then SetLog("~~~Waiting for full army~~~")
+			Local $hTimer = TimerInit()
+			If _Sleep(30000) Then ExitLoop
+			checkMainScreen()
+			If _Sleep(1000) Then ExitLoop
+			ZoomOut()
+			If _Sleep(1000) Then ExitLoop
+			If $iCollectCounter > $COLLECTATCOUNT Then ; This is prevent from collecting all the time which isn't needed anyway
+				Collect()
+				If _Sleep(1000) Or $RunState = False Then ExitLoop
+				$iCollectCounter = 0
+			EndIf
+			$iCollectCounter = $iCollectCounter + 1
+			If $CommandStop <> 3 Then
 				Train()
-				If $fullArmy Then ExitLoop
 				If _Sleep(1000) Then ExitLoop
+			EndIf
+			If $CommandStop = 0 And $fullArmy Then
+				SetLog("Army Camp and Barracks is full, stop Training...", $COLOR_ORANGE)
+				$CommandStop = 3
+				$fullArmy = False
+			EndIf
+			If $CommandStop = -1 Then
+				If $fullArmy Then ExitLoop
 				DropTrophy()
 				If _Sleep(1000) Then ExitLoop
-				DonateCC()
-				$TimeIdle += Round(TimerDiff($hTimer) / 1000, 2) ;In Seconds
-				SetLog("Time Idle: " & Floor(Floor($TimeIdle / 60) / 60) & " hours " & Floor(Mod(Floor($TimeIdle / 60), 60)) & " minutes " & Floor(Mod($TimeIdle, 60)) & " seconds", $COLOR_ORANGE)
-			WEnd
-		EndIf
+			EndIf
+			DonateCC()
+			$TimeIdle += Round(TimerDiff($hTimer) / 1000, 2) ;In Seconds
+			SetLog("Time Idle: " & Floor(Floor($TimeIdle / 60) / 60) & " hours " & Floor(Mod(Floor($TimeIdle / 60), 60)) & " minutes " & Floor(Mod($TimeIdle, 60)) & " seconds", $COLOR_ORANGE)
+		WEnd
 EndFunc   ;==>Idle
 
 Func AttackMain() ;Main control for attack functions

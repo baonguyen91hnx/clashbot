@@ -182,6 +182,15 @@ Func saveConfig() ;Saves the controls settings to the config
 		IniWrite($config, "general", "Background", 0)
 	EndIf
 
+	If GUICtrlRead($chkBotStop) = $GUI_CHECKED Then
+		IniWrite($config, "general", "BotStop", 1)
+	Else
+		IniWrite($config, "general", "BotStop", 0)
+	EndIf
+	
+	IniWrite($config, "general", "Command", _GUICtrlComboBox_GetCurSel($cmbBotCommand))
+	IniWrite($config, "general", "Cond", _GUICtrlComboBox_GetCurSel($cmbBotCond))
+	
 	For $i = 0 To 16 ;Covers all Collectors
 		IniWrite($config, "general", "xCollector" & $i + 1, $collectorPos[$i][0])
 		IniWrite($config, "general", "yCollector" & $i + 1, $collectorPos[$i][1])
