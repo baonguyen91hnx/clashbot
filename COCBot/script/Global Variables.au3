@@ -36,10 +36,10 @@ Global $hHBitmap; Handle Image for pixel functions
 Global $Title = "BlueStacks App Player" ; Name of the Window
 Global $HWnD = WinGetHandle($Title) ;Handle for Bluestacks window
 
-Global $config = @ScriptDir & "\COCBot\config.ini"
-Global $dirLogs = @ScriptDir & "\COCBot\logs\"
-Global $dirLoots = @ScriptDir & "\COCBot\Loots\"
-Global $dirAllTowns = @ScriptDir & "\COCBot\AllTowns\"
+Global $config = @ScriptDir & "\config.ini"
+Global $dirLogs = @ScriptDir & "\logs\"
+Global $dirLoots = @ScriptDir & "\Loots\"
+Global $dirAllTowns = @ScriptDir & "\AllTowns\"
 Global $sLogPath ; `Will create a new log file every time the start button is pressed
 Global $hLogFileHandle
 Global $Restart = False
@@ -96,6 +96,11 @@ Global $iradAttackMode ;Attack mode, 0 1 2
 
 Global $THLoc
 Global $chkATH
+
+Global $King, $Queen, $CC, $Barb, $Arch
+Global $LeftTHx, $RightTHx, $BottomTHy, $TopTHy
+Global $AtkTroopTH
+Global $GetTHLoc
 
 ;Boosts Settings
 Global $remainingBoosts = 0 ;  remaining boost to active during session

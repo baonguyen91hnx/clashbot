@@ -2,4 +2,5 @@
 *.log
 *.jpg
 *.png
+*.exe
 *.db

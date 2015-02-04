@@ -5,6 +5,7 @@
 #include "functions\Attack\ReturnHome.au3"
 #include "functions\Attack\NameOfTroop.au3"
 
+#include "functions\Attack\Attack Algorithms\algorithmTH.au3"
 #include "functions\Attack\Attack Algorithms\algorithm_AllTroops.au3"
 #include "functions\Attack\Attack Algorithms\algorithm_Barch.au3"
 

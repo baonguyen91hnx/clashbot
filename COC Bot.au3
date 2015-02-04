@@ -1,6 +1,6 @@
 #RequireAdmin
 ;#AutoIt3Wrapper_Icon="We need to specify absolute path to \COCBot\Icons\cocbot.ico so it compiles with proper icon"
-#pragma compile(Icon, "COCBot\Icons\cocbot.ico")
+#pragma compile(Icon, "Icons\cocbot.ico")
 #pragma compile(FileDescription, Clash of Clans Bot - A Free/Open Sourced Clash of Clans bot - https://the.bytecode.club)
 #pragma compile(ProductName, Clash of Clans Bot)
 #pragma compile(ProductVersion, 5.5)
@@ -74,25 +74,25 @@ EndFunc   ;==>runBot
 Func Idle() ;Sequence that runs until Full Army
 	Local $TimeIdle = 0 ;In Seconds
 		If $fullArmy = False Then
-			SetLog("~~~Waiting for full army~~~")
 			While $fullArmy = False
+			    SetLog("~~~Waiting for full army~~~")
 				Local $hTimer = TimerInit()
-				If _Sleep(1000) Then ExitLoop
+				If _Sleep(30000) Then ExitLoop
 				checkMainScreen()
 				If _Sleep(1000) Then ExitLoop
 				ZoomOut()
-		  If _Sleep(30000) Then ExitLoop
+				If _Sleep(1000) Then ExitLoop
 				If $iCollectCounter > $COLLECTATCOUNT Then ; This is prevent from collecting all the time which isn't needed anyway
 					Collect()
-			  If _Sleep(1000) Or $RunState = False Then ExitLoop
+					If _Sleep(1000) Or $RunState = False Then ExitLoop
 					$iCollectCounter = 0
 				EndIf
 				$iCollectCounter = $iCollectCounter + 1
 				Train()
-		  If $fullArmy Then ExitLoop
-		  If _Sleep(1000) Then ExitLoop
+				If $fullArmy Then ExitLoop
+				If _Sleep(1000) Then ExitLoop
 				DropTrophy()
-		  If _Sleep(1000) Then ExitLoop
+				If _Sleep(1000) Then ExitLoop
 				DonateCC()
 				$TimeIdle += Round(TimerDiff($hTimer) / 1000, 2) ;In Seconds
 				SetLog("Time Idle: " & Floor(Floor($TimeIdle / 60) / 60) & " hours " & Floor(Mod(Floor($TimeIdle / 60), 60)) & " minutes " & Floor(Mod($TimeIdle, 60)) & " seconds", $COLOR_ORANGE)

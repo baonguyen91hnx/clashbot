@@ -1,6 +1,6 @@
 $frmBot = GUICreate($sBotTitle, 417, 392, 207, 158)
-GUISetIcon(@ScriptDir & "\COCBot\Icons\cocbot.ico")
-TraySetIcon(@ScriptDir & "\COCBot\Icons\cocbot.ico")
+GUISetIcon(@ScriptDir & "\Icons\cocbot.ico")
+TraySetIcon(@ScriptDir & "\Icons\cocbot.ico")
 $txtLog = _GUICtrlRichEdit_Create($frmBot, "", 16, 40, 385, 230, BitOR($ES_MULTILINE, $ES_READONLY, $WS_VSCROLL, 8912))
 $tabMain = GUICtrlCreateTab(8, 8, 401, 355)
 GUICtrlSetOnEvent(-1, "tabMain")
