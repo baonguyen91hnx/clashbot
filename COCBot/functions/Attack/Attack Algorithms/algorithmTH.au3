@@ -86,10 +86,10 @@ Func algorithmTH() ;Attack Algorithm TH
 						  If $GetTHLoc = 2 Then $numBarbPerSpot = Ceiling($numBarbPerSpot / 2)
 						  If $GetTHLoc = 3 Then $numBarbPerSpot = Ceiling($numBarbPerSpot / 3)
 						  If $GetTHLoc = 4 Then $numBarbPerSpot = Ceiling($numBarbPerSpot / 4)
-						  Click(($THx-$LeftTHx), ($THy+$LeftTHx-30), $numBarbPerSpot, 1) ; BottomLeft
-						  Click(($THx+$RightTHx), ($THy+$RightTHx-10), $numBarbPerSpot, 1) ; BottomRight
-						  Click(($THx+$TopTHy-10), ($THy-$TopTHy), $numBarbPerSpot, 1) ; TopRight
-						  Click(($THx-($BottomTHy+10)), ($THy-$BottomTHy), $numBarbPerSpot, 1) ; TopLeft
+						  Click(($THx-$LeftTHx), ($THy+$LeftTHx-30), $numBarbPerSpot, 100) ; BottomLeft
+						  Click(($THx+$RightTHx), ($THy+$RightTHx-10), $numBarbPerSpot, 100) ; BottomRight
+						  Click(($THx+$TopTHy-10), ($THy-$TopTHy), $numBarbPerSpot, 100) ; TopRight
+						  Click(($THx-($BottomTHy+10)), ($THy-$BottomTHy), $numBarbPerSpot, 100) ; TopLeft
 					  EndIf
 				  EndIf
 		  If _Sleep(1000) Then ExitLoop
@@ -163,10 +163,10 @@ Func algorithmTH() ;Attack Algorithm TH
 					  If $GetTHLoc = 2 Then $numArchPerSpot = Ceiling($numArchPerSpot / 2)
 					  If $GetTHLoc = 3 Then $numArchPerSpot = Ceiling($numArchPerSpot / 3)
 					  If $GetTHLoc = 4 Then $numArchPerSpot = Ceiling($numArchPerSpot / 4)
-					  Click(($THx-$LeftTHx), ($THy+$LeftTHx-30), $numArchPerSpot, 1) ; BottomLeft
-					  Click(($THx+$RightTHx), ($THy+$RightTHx-10), $numArchPerSpot, 1) ; BottomRight
-					  Click(($THx+$TopTHy-10), ($THy-$TopTHy), $numArchPerSpot, 1) ; TopRight
-					  Click(($THx-($BottomTHy+10)), ($THy-$BottomTHy), $numArchPerSpot, 1) ; TopLeft
+					  Click(($THx-$LeftTHx), ($THy+$LeftTHx-30), $numArchPerSpot, 100) ; BottomLeft
+					  Click(($THx+$RightTHx), ($THy+$RightTHx-10), $numArchPerSpot, 100) ; BottomRight
+					  Click(($THx+$TopTHy-10), ($THy-$TopTHy), $numArchPerSpot, 100) ; TopRight
+					  Click(($THx-($BottomTHy+10)), ($THy-$BottomTHy), $numArchPerSpot, 100) ; TopLeft
 				  EndIf
 			  EndIf
 		  EndIf
