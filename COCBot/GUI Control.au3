@@ -59,6 +59,8 @@ Func btnStart()
 	_GUICtrlEdit_SetText($txtLog, "")
 
 	If WinExists($Title) Then
+		DisableBS($HWnD, $SC_MINIMIZE)
+		DisableBS($HWnD, $SC_CLOSE)
 		If IsArray(ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")) Then
 			Local $BSsize = [ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")[2], ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")[3]]
 			If $BSsize[0] <> 860 Or $BSsize[1] <> 720 Then
@@ -79,7 +81,8 @@ Func btnStart()
 				GUICtrlSetState($cmbTroopComp, $GUI_DISABLE)
 				GUICtrlSetState($chkBackground, $GUI_DISABLE)
 				GUICtrlSetState($btnLocateCollectors, $GUI_DISABLE)
-
+				GUICtrlSetState($btnLocateClanCastle, $GUI_DISABLE)
+				GUICtrlSetState($btnLocateTrap, $GUI_DISABLE)
 				GUICtrlSetState($btnStart, $GUI_HIDE)
 				GUICtrlSetState($btnStop, $GUI_SHOW)
 				If GUICtrlRead($txtCapacity) = 0 And $icmbTroopComp <> 8 Then
@@ -99,10 +102,14 @@ EndFunc   ;==>btnStart
 Func btnStop()
 	If $RunState Then
 		$RunState = False
+		EnableBS($HWnD, $SC_MINIMIZE)
+		EnableBS($HWnD, $SC_CLOSE)
 		GUICtrlSetState($btnLocateBarracks, $GUI_ENABLE)
 		GUICtrlSetState($btnSearchMode, $GUI_ENABLE)
 		GUICtrlSetState($cmbTroopComp, $GUI_ENABLE)
 		GUICtrlSetState($btnLocateCollectors, $GUI_ENABLE)
+		GUICtrlSetState($btnLocateClanCastle, $GUI_ENABLE)
+		GUICtrlSetState($btnLocateTrap, $GUI_ENABLE)
 		GUICtrlSetState($chkBackground, $GUI_ENABLE)
 	    GUICtrlSetState($cmbBoostBarracks, $GUI_ENABLE)
 		GUICtrlSetState($btnStart, $GUI_SHOW)
@@ -418,6 +425,20 @@ Func tabMain()
 		ControlHide("", "", $txtLog)
 	EndIf
 EndFunc ;==>tabMain
+
+Func DisableBS($HWnD, $iButton)
+	ConsoleWrite('+ Window Handle: ' & $HWnD & @CRLF)
+	$hSysMenu = _GUICtrlMenu_GetSystemMenu($HWnD, 0)
+	_GUICtrlMenu_RemoveMenu($hSysMenu, $iButton, False)
+	_GUICtrlMenu_DrawMenuBar($HWnD)
+EndFunc   ;==>DisableBS
+
+Func EnableBS($HWnD, $iButton)
+	ConsoleWrite('+ Window Handle: ' & $HWnD & @CRLF)
+	$hSysMenu = _GUICtrlMenu_GetSystemMenu($HWnD, 1)
+	_GUICtrlMenu_RemoveMenu($hSysMenu, $iButton, False)
+	_GUICtrlMenu_DrawMenuBar($HWnD)
+EndFunc   ;==>EnableBS
 
 ;---------------------------------------------------
 If FileExists($config) Then
