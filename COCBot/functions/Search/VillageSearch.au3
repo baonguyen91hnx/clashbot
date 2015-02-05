@@ -9,11 +9,11 @@ Func VillageSearch($TakeSS = 0) ;Control for searching a village that meets cond
 	While 1
 		Switch $iradAttackMode
 			Case 0
-				SetLog("============Searching For Dead Base============")
+				SetLog("============Searching For Dead Base============", $COLOR_BLUE)
 			Case 1
-				SetLog("============Searching For Weak Base============")
+				SetLog("============Searching For Weak Base============", $COLOR_BLUE)
 			Case 2
-				SetLog("============Searching For All Base============")
+				SetLog("============Searching For All Base============", $COLOR_BLUE)
 		EndSwitch
 		SetLog("~Gold: " & $MinGold & "; Elixir: " & $MinElixir & "; Dark: " & $MinDark & "; Trophy: " & $MinTrophy & "; Townhall: " & $MaxTH, $COLOR_GREEN)
 		If $TakeSS = 1 Then SetLog("Will save all of the towns when searching", $COLOR_GREEN)
