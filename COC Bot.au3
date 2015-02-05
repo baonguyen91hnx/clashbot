@@ -87,7 +87,7 @@ EndFunc   ;==>runBot
 Func Idle() ;Sequence that runs until Full Army
 	Local $TimeIdle = 0 ;In Seconds
 		While $fullArmy = False
-			If $CommandStop = -1 Then SetLog("~~~Waiting for full army~~~")
+			If $CommandStop = -1 Then SetLog("~~~Waiting for full army~~~", $COLOR_PURPLE)
 			Local $hTimer = TimerInit()
 			If _Sleep(30000) Then ExitLoop
 			checkMainScreen()

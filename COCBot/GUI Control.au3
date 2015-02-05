@@ -70,7 +70,7 @@ Func btnStart()
 			Else
 				WinActivate($Title)
 
-				SetLog("~~~~Welcome to " & $sBotTitle & "!~~~~")
+				SetLog("~~~~Welcome to " & $sBotTitle & "!~~~~", $COLOR_PURPLE)
 				SetLog($Compiled & " running on " & @OSArch & " OS", $COLOR_GREEN)
 				SetLog("Bot is starting...", $COLOR_ORANGE)
 

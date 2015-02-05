@@ -45,9 +45,9 @@ Func GetResources() ;Reads resources
 			$THx = 0
 			$THy = 0
 		EndIf
-			 
+
 		$SearchCount += 1 ; Counter for number of searches
-		SetLog("(" & $SearchCount & ") [G]: " & $searchGold & Tab($searchGold, 12) & "[E]: " & $searchElixir & Tab($searchElixir, 12) & "[D]: " & $searchDark & Tab($searchDark, 12) & "[T]: " & $searchTrophy & Tab($searchTrophy, 5) & "[TH]: " & $searchTH & ", " & $THLoc)
+		SetLog("(" & $SearchCount & ") [G]: " & $searchGold & Tab($searchGold, 12) & "[E]: " & $searchElixir & Tab($searchElixir, 12) & "[D]: " & $searchDark & Tab($searchDark, 12) & "[T]: " & $searchTrophy & Tab($searchTrophy, 5) & "[TH]: " & $searchTH & ", " & $THLoc, $COLOR_BLUE)
 		ExitLoop
 	WEnd
 EndFunc   ;==>GetResources

@@ -1,6 +1,11 @@
 ;Searches for a village that until meets conditions
 
 Func VillageSearch($TakeSS = 0) ;Control for searching a village that meets conditions
+   If _Sleep(1000) Then Return
+   _CaptureRegion() ; Check Break Shield button again
+   If _ColorCheck(_GetPixelColor(513, 416), Hex(0x5DAC10, 6), 50) Then
+	  Click(513, 416);Click Okay To Break Shield
+   EndIf
 	While 1
 		Switch $iradAttackMode
 			Case 0
@@ -27,14 +32,14 @@ Func VillageSearch($TakeSS = 0) ;Control for searching a village that meets cond
 			EndIf
 			If CompareResources() Or ($THLoc = "Outside" And GUICtrlRead($chkMeetTHO) <> $GUI_CHECKED And GUICtrlRead($chkAttackTH) = $GUI_CHECKED) Then
 				If $THLoc = "Outside" And GUICtrlRead($chkMeetTHO) <> $GUI_CHECKED And GUICtrlRead($chkAttackTH) = $GUI_CHECKED Then
-					SetLog("~~~~~~~Outside Townhall Found!~~~~~~~")
+					SetLog("~~~~~~~Outside Townhall Found!~~~~~~~", $COLOR_PURPLE)
 					ExitLoop
 				ElseIf $iradAttackMode = 0 Then
 					If checkDeadBase() Then
-						SetLog("~~~~~~~Dead Base Found!~~~~~~~")
+						SetLog("~~~~~~~Dead Base Found!~~~~~~~", $COLOR_GREEN)
 						ExitLoop
 					Else
-						SetLog("~~~~~~~Not dead base, skipping~~~~~~~")
+						SetLog("~~~~~~~Not dead base, skipping~~~~~~~", $COLOR_ORANGE)
 						Click(750, 500) ;Click Next
 					EndIf
 				Else
