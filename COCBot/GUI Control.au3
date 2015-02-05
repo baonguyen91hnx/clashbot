@@ -179,13 +179,13 @@ EndFunc   ;==>btnSearchMode
 
 Func btnHide()
 	If $Hide = False Then
-		GUICtrlSetData($btnHide, "Show")
+		GUICtrlSetData($btnHide, "Show BS")
 		$botPos[0] = WinGetPos($Title)[0]
 		$botPos[1] = WinGetPos($Title)[1]
 		WinMove($Title, "", -32000, -32000)
 		$Hide = True
 	Else
-		GUICtrlSetData($btnHide, "Hide")
+		GUICtrlSetData($btnHide, "Hide BS")
 
 		If $botPos[0] = -32000 Then
 			WinMove($Title, "", 0, 0)
