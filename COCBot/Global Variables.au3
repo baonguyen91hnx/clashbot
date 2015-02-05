@@ -77,7 +77,7 @@ Global $TopLeft[5][2] = [[110, 250], [170, 205], [234, 162], [296, 115], [368, 6
 Global $TopRight[5][2] = [[480, 63], [540, 104], [589, 146], [655, 190], [717, 240]]
 Global $BottomLeft[5][2] = [[79, 342], [142, 389], [210, 446], [276, 492], [339, 539]]
 Global $BottomRight[5][2] = [[523, 537], [595, 484], [654, 440], [715, 393], [779, 344]]
-Global $Edges[4] = [$BottomRight, $TopRight, $BottomLeft, $TopLeft ]
+Global $Edges[4] = [$BottomRight, $TopLeft, $BottomLeft, $TopRight]
 
 Global $atkTroops[9][2] ;9 Slots of troops -  Name, Amount
 Global $icmbAlgorithm ;Algorithm to use when attacking

@@ -57,7 +57,7 @@ Func VillageSearch($TakeSS = 0) ;Control for searching a village that meets cond
 			   SoundPlay(@WindowsDir & "\media\Festival\Windows Exclamation.wav", 1)
 			EndIf
 		EndIf
-		SetLog("===============Searching Complete===============")
+		SetLog("===============Searching Complete===============", $COLOR_BLUE)
 		readConfig()
 		ExitLoop
 	WEnd

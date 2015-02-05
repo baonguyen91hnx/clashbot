@@ -12,7 +12,7 @@ EndFunc
 
 
 ; improved function, that avoids to only drop on 5 discret drop points :
-Func DropOnEdge($troop, $edge, $number, $slotsPerEdge = 0)
+Func DropOnEdge($troop, $edge, $number, $slotsPerEdge = 0, $edge2 = -1)
    if $number = 0 Then Return
    SelectDropTroupe($troop) ;Select Troop
    If _Sleep(100) Then Return
@@ -31,6 +31,12 @@ Func DropOnEdge($troop, $edge, $number, $slotsPerEdge = 0)
 		Local $maxX = $edge[4][0]
 		Local $minY = $edge[0][1]
 		Local $maxY = $edge[4][1]
+	    If $edge2 <> -1 Then
+			Local $minX2 = $edge2[0][0]
+			Local $maxX2 = $edge2[4][0]
+			Local $minY2 = $edge2[0][1]
+			Local $maxY2 = $edge2[4][1]
+	    EndIf
 		Local $nbTroopsLeft = $number
   	    For $i = 0 To $slotsPerEdge - 1
 			Local $nbtroopPerSlot = Round($nbTroopsLeft/($slotsPerEdge - $i)) ; progressively adapt the number of drops to fill at the best
@@ -38,7 +44,15 @@ Func DropOnEdge($troop, $edge, $number, $slotsPerEdge = 0)
 			Local $posY = $minY + (($maxY - $minY) * $i) / ($slotsPerEdge - 1)
 			Click($posX, $posY, $nbtroopPerSlot)
 			If _Sleep(50) Then Return
-			$nbTroopsLeft -= $nbtroopPerSlot
+			If $edge2 <> -1 Then
+			   Local $posX2 = $maxX2 - (($maxX2 - $minX2) * $i) / ($slotsPerEdge - 1)
+			   Local $posY2 = $maxY2 - (($maxY2 - $minY2) * $i) / ($slotsPerEdge - 1)
+			   Click($posX2, $posY2, $nbtroopPerSlot)
+			   $nbTroopsLeft -= $nbtroopPerSlot
+			   If _Sleep(50) Then Return
+			Else
+			   $nbTroopsLeft -= $nbtroopPerSlot
+			EndIf
 		 Next
 	  EndIf
 EndFunc
@@ -47,12 +61,20 @@ Func DropOnEdges($troop, $nbSides, $number, $slotsPerEdge=0)
     If $nbSides = 0 Or $number = 1 Then
 	   OldDropTroop($troop, $Edges[0], $number);
 	   Return
-	   EndIf
+    EndIf
 	If $nbSides < 1 Then Return
     Local $nbTroopsLeft = $number
+	If $nbSides = 4 Then
+	  For $i = 0 to $nbSides-3
+		 Local $nbTroopsPerEdge = Round(($nbTroopsLeft/($nbSides-$i)))
+		 DropOnEdge($troop, $Edges[$i], $nbTroopsPerEdge, $slotsPerEdge, $Edges[$i+2])
+		 $nbTroopsLeft -= $nbTroopsPerEdge
+	  Next
+	  Return
+	EndIf
   	For $i = 0 to $nbSides-1
 	   Local $nbTroopsPerEdge = Round($nbTroopsLeft/($nbSides-$i))
-	   DropOnEdge($troop, $Edges[$i], $nbTroopsPerEdge, $slotsPerEdge);
+	   DropOnEdge($troop, $Edges[$i], $nbTroopsPerEdge, $slotsPerEdge)
 	   $nbTroopsLeft -= $nbTroopsPerEdge
     Next
 EndFunc
@@ -130,31 +152,31 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 		 ; ========= Feel free to experiment something else ===============================
 		 ; ================================================================================
 		 algorithmTH()
-		 if LauchTroop($eGiant, $nbSides, 1, 1, 1) Then
+		 If LauchTroop($eGiant, $nbSides, 1, 1, 1) Then
 			If _Sleep(1000) Then Return
-			   EndIf
-		 if LauchTroop($eBarbarian, $nbSides, 1, 2) Then
+		 EndIf
+		 If LauchTroop($eBarbarian, $nbSides, 1, 2) Then
 			If _Sleep(1000) Then Return
-			   EndIf
-		 if LauchTroop($eArcher, $nbSides, 1, 2) Then
+		 EndIf
+		 If LauchTroop($eArcher, $nbSides, 1, 2) Then
 			If _Sleep(1000) Then Return
-			   EndIf
-		 If _Sleep(2000) Then Return
+		 EndIf
 		 If LauchTroop($eBarbarian, $nbSides, 2, 2) Then
 			If _Sleep(1000) Then Return
-			EndIf
+		 EndIf
+		 If _Sleep(1000) Then Return
 		 if LauchTroop($eWallbreaker, $nbSides, 1, 1, 1) Then
 			If _Sleep(500) Then Return
-			   EndIf
+		 EndIf
 		 If LauchTroop($eGoblin, $nbSides, 1, 2) Then
 			If _Sleep(500) Then Return
-			   EndIf
+		 EndIf
 		 If LauchTroop($eArcher, $nbSides, 2, 2) Then
 			If _Sleep(500) Then Return
-			   EndIf
+		 EndIf
 		 If LauchTroop($eGoblin, $nbSides, 2, 2) Then
 			If _Sleep(500) Then Return
-			   EndIf
+		 EndIf
 		 ; ================================================================================
 
 

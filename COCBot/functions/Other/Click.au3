@@ -10,6 +10,6 @@ Func Click($x, $y, $times = 1, $speed = 0)
  EndFunc   ;==>Click
 
  ; ClickP : takes an array[2] (or array[4]) as a parameter [x,y]
-Func ClickP($point, $howMuch=1)
-   Click($point[0], $point[1], $howMuch)
+Func ClickP($point, $howMuch=1, $speed = 0)
+   Click($point[0], $point[1], $howMuch, $speed)
 EndFunc

@@ -36,7 +36,10 @@ Func DonateCC()
 						Local $Barbs = StringSplit($itxtDonateBarbarians, @CRLF)
 						For $i = 0 To UBound($Barbs) - 1
 							If CheckDonate($Barbs[$i], $String) Then
-								If DonateBarbs() Then ExitLoop (2)
+								If DonateBarbs() Then
+									$y = $DonatePixel[1] + 10
+									ExitLoop (2)
+								EndIf
 								ExitLoop
 						    EndIf
 						Next
@@ -45,7 +48,10 @@ Func DonateCC()
 						Local $Archers = StringSplit($itxtDonateArchers, @CRLF)
 						For $i = 0 To UBound($Archers) - 1
 							If CheckDonate($Archers[$i], $String) Then
-								If DonateArchers() Then ExitLoop (2)
+								If DonateArchers() Then
+									$y = $DonatePixel[1] + 10
+									ExitLoop (2)
+								EndIf
 								ExitLoop
 							EndIf
 						Next
@@ -55,7 +61,10 @@ Func DonateCC()
 						Local $Giants = StringSplit($itxtDonateGiants, @CRLF)
 						For $i = 0 To UBound($Giants) - 1
 							If CheckDonate($Giants[$i], $String) Then
-								If DonateGiants() Then ExitLoop (2)
+								If DonateGiants() Then
+									$y = $DonatePixel[1] + 10
+									ExitLoop (2)
+								EndIf
 								ExitLoop
 							EndIf
 						Next
@@ -63,11 +72,21 @@ Func DonateCC()
 				Else
 					Select
 						Case $ichkDonateAllBarbarians = 1
-							DonateBarbs()
+							If DonateBarbs() Then
+								$y = $DonatePixel[1] + 10
+								ExitLoop
+							EndIf
 						Case $ichkDonateAllArchers = 1
-							DonateArchers()
+							If DonateArchers() Then
+								$y = $DonatePixel[1] + 10
+								ExitLoop
+							EndIf
 						Case $ichkDonateAllGiants = 1
 							DonateGiants()
+							If DonateArchers() Then
+								$y = $DonatePixel[1] + 10
+								ExitLoop
+							EndIf
 					EndSelect
 				EndIf
 				$y = $DonatePixel[1] + 10
@@ -115,7 +134,7 @@ Func DonateBarbs()
 	If $ichkDonateBarbarians = 1 Or $ichkDonateAllBarbarians = 1 Then
 		Click($DonatePixel[0], $DonatePixel[1] + 11)
 		If _Sleep(1000) = True Then Return
-		_CaptureRegion(0, 0, 435, $DonatePixel[1] + 50)
+		_CaptureRegion(0, 0, 517, $DonatePixel[1] + 50)
 		If _ColorCheck(_GetPixelColor(237, $DonatePixel[1] - 5), Hex(0x507C00, 6), 10) Or _ColorCheck(_GetPixelColor(237, $DonatePixel[1] - 10), Hex(0x507C00, 6), 10) Then
 			SetLog("Donating Barbarians", $COLOR_BLUE)
 			If _Sleep(500) = True Then Return
@@ -137,7 +156,7 @@ Func DonateArchers()
 	If $ichkDonateArchers = 1 Or $ichkDonateAllArchers = 1 Then
 		Click($DonatePixel[0], $DonatePixel[1] + 11)
 		If _Sleep(1000) = True Then Return
-		_CaptureRegion(0, 0, 435, $DonatePixel[1] + 50)
+		_CaptureRegion(0, 0, 517, $DonatePixel[1] + 50)
 		If _ColorCheck(_GetPixelColor(315, $DonatePixel[1] - 5), Hex(0x507C00, 6), 10) Or _ColorCheck(_GetPixelColor(315, $DonatePixel[1] - 10), Hex(0x507C00, 6), 10) Then
 			SetLog("Donating Archers", $COLOR_BLUE)
 			If _Sleep(500) = True Then Return
@@ -159,7 +178,7 @@ Func DonateGiants()
 	If $ichkDonateGiants = 1 Or $ichkDonateAllGiants = 1 Then
 		Click($DonatePixel[0], $DonatePixel[1] + 11)
 		If _Sleep(1000) = True Then Return
-		_CaptureRegion(0, 0, 435, $DonatePixel[1] + 50)
+		_CaptureRegion(0, 0, 517, $DonatePixel[1] + 50)
 		If _ColorCheck(_GetPixelColor(480, $DonatePixel[1] - 5), Hex(0x507C00, 6), 10) Or _ColorCheck(_GetPixelColor(480, $DonatePixel[1] - 10), Hex(0x507C00, 6), 10) Then
 			SetLog("Donating Giants", $COLOR_BLUE)
 			If _Sleep(500) = True Then Return
@@ -167,13 +186,12 @@ Func DonateGiants()
 			Return True
 		Else
 			SetLog("No troops available for donation, donating later...", $COLOR_ORANGE)
-			Return False
 		EndIf
 		If _Sleep(500) = True Then Return
 		Click(1, 1, 1, 2000)
 	Else
 		SetLog("No troops available for donation, donating later...", $COLOR_ORANGE)
+		If _Sleep(500) = True Then Return
 		Click(1, 1, 1, 2000)
-		Return False
 	EndIf
 EndFunc   ;==>DonateGiants

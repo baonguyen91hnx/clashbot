@@ -12,7 +12,7 @@ Func GoldElixirChange() ;Checks 60 seconds if gold changes
 		WEnd
 		$Gold2 = getGold(51, 66)
 		$Elixir2 = getElixir(51, 66 + 29)
-		If $Gold1 = $Gold2 Or $Elixir1 = $Elixir2 Or $Gold2 = "" Or $Elixir2 = "" Then
+		If ($Gold1 = $Gold2 And $Elixir1 = $Elixir2) Or ($Gold2 = "" And $Elixir2 = "") Then
 			Return False
 		Else
 			SetLog("Gold & Elixir change detected, waiting...", $COLOR_GREEN)

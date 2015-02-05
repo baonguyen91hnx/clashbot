@@ -5,7 +5,7 @@ Func checkObstacles() ;Checks if something is in the way for mainscreen
 	$Message = _PixelSearch(457, 300, 458, 330, Hex(0x33B5E5, 6), 10) ;Check for out of sync or inactivity
 	If IsArray($Message) Then
 		Click(416, 399);Check for out of sync or inactivity
-		If _Sleep(7000) Then Return
+		If _Sleep(6000) Then Return
 		Return True
 	EndIf
 
