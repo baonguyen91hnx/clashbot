@@ -151,37 +151,37 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 		 if ($nbSides = 0) Then Return
 		 If _Sleep(1000) Then Return
 
-		 ; ================================================================================
-		 ; ========= Here is coded the main attack strategy ===============================
-		 ; ========= Feel free to experiment something else ===============================
-		 ; ================================================================================
-		 algorithmTH()
-		 If LauchTroop($eGiant, $nbSides, 1, 1, 1) Then
-			If _Sleep(1000) Then Return
-		 EndIf
-		 If LauchTroop($eBarbarian, $nbSides, 1, 2) Then
-			If _Sleep(1000) Then Return
-		 EndIf
-		 If LauchTroop($eArcher, $nbSides, 1, 2) Then
-			If _Sleep(1000) Then Return
-		 EndIf
-		 If _Sleep(2000) Then Return
-		 If LauchTroop($eBarbarian, $nbSides, 2, 2) Then
-			If _Sleep(1000) Then Return
-		 EndIf
-		 if LauchTroop($eWallbreaker, $nbSides, 1, 1, 1) Then
-			If _Sleep(500) Then Return
-		 EndIf
-		 If LauchTroop($eGoblin, $nbSides, 1, 2) Then
-			If _Sleep(500) Then Return
-		 EndIf
-		 If LauchTroop($eArcher, $nbSides, 2, 2) Then
-			If _Sleep(500) Then Return
-		 EndIf
-		 If LauchTroop($eGoblin, $nbSides, 2, 2) Then
-			If _Sleep(500) Then Return
-		 EndIf
-		 ; ================================================================================
+         ; ================================================================================?
+         ; ========= Here is coded the main attack strategy ===============================
+         ; ========= Feel free to experiment something else ===============================
+         ; ================================================================================?
+         algorithmTH()
+         if LauchTroop($eGiant, $nbSides, 1, 1, 1) Then
+            If _Sleep(200) Then Return
+               EndIf
+         if LauchTroop($eBarbarian, $nbSides, 1, 2) Then
+            If _Sleep(200) Then Return
+               EndIf
+         if LauchTroop($eArcher, $nbSides, 1, 2) Then
+            If _Sleep(100) Then Return
+               EndIf
+         If _Sleep(200) Then Return
+         If LauchTroop($eBarbarian, $nbSides, 2, 2) Then
+            If _Sleep(100) Then Return
+            EndIf
+         if LauchTroop($eWallbreaker, $nbSides, 1, 1, 1) Then
+            If _Sleep(50) Then Return
+               EndIf
+         If LauchTroop($eGoblin, $nbSides, 1, 2) Then
+            If _Sleep(50) Then Return
+               EndIf
+         If LauchTroop($eArcher, $nbSides, 2, 2) Then
+            If _Sleep(50) Then Return
+               EndIf
+         If LauchTroop($eGoblin, $nbSides, 2, 2) Then
+            If _Sleep(50) Then Return
+               EndIf
+         ; ================================================================================?
 
 
 		 dropHeroes($BottomRight[3][0], $BottomRight[3][1], $King, $Queen)
