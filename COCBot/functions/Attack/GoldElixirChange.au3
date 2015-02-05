@@ -7,7 +7,7 @@ Func GoldElixirChange() ;Checks 60 seconds if gold changes
 		$Gold1 = getGold(51, 66)
 		$Elixir1 = getElixir(51, 66 + 29)
 		Local $iBegin = TimerInit()
-		While TimerDiff($iBegin) < 60000
+		While TimerDiff($iBegin) < 40000
 			If _Sleep(2000) Then Return
 		WEnd
 		$Gold2 = getGold(51, 66)
