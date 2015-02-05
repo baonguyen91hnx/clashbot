@@ -43,12 +43,12 @@ Func DropOnEdge($troop, $edge, $number, $slotsPerEdge = 0, $edge2 = -1)
 	  		Local $posX = $minX + (($maxX - $minX) * $i) / ($slotsPerEdge - 1)
 			Local $posY = $minY + (($maxY - $minY) * $i) / ($slotsPerEdge - 1)
 			Click($posX, $posY, $nbtroopPerSlot)
-			If _Sleep(100) Then Return
+			If _Sleep(50) Then Return
 			If $edge2 <> -1 Then
 			   Local $posX2 = $maxX2 - (($maxX2 - $minX2) * $i) / ($slotsPerEdge - 1)
 			   Local $posY2 = $maxY2 - (($maxY2 - $minY2) * $i) / ($slotsPerEdge - 1)
 			   Click($posX2, $posY2, $nbtroopPerSlot)
-			   If _Sleep(100) Then Return
+			   If _Sleep(50) Then Return
 			   $nbTroopsLeft -= $nbtroopPerSlot
 			Else
 			   $nbTroopsLeft -= $nbtroopPerSlot
