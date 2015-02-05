@@ -105,7 +105,7 @@ Func Idle() ;Sequence that runs until Full Army
 				If _Sleep(1000) Then ExitLoop
 			EndIf
 			If $CommandStop = 0 And $fullArmy Then
-				SetLog("Army Camp and Barracks is full, stop Training...", $COLOR_ORANGE)
+				SetLog("Army Camp and Barracks is full, stop waiting for full camps...", $COLOR_ORANGE)
 				$CommandStop = 3
 				$fullArmy = False
 			EndIf
@@ -127,6 +127,7 @@ Func AttackMain() ;Main control for attack functions
 	 If _Sleep(1000) Or $Restart = True Then Return
 		PrepareAttack()
 	 If _Sleep(1000) Then Return
+		$ArmyComp = 0
 		Attack()
 	 If _Sleep(1000) Then Return
 		ReturnHome($TakeLootSnapShot)

@@ -3,9 +3,9 @@
 
 Func PrepareAttack($remainding = false) ;Assigns troops
   If $remainding Then
-	  SetLog("Checking remainding unlaunched troops")
+	  SetLog("Checking remainding unlaunched troops", $COLOR_ORANGE)
    Else
-	  SetLog("Preparing to attack")
+	  SetLog("Preparing to attack", $COLOR_BLUE)
    EndIf
   _CaptureRegion()
   For $i = 0 To 8
@@ -44,6 +44,6 @@ Func PrepareAttack($remainding = false) ;Assigns troops
 		 $atkTroops[$i][1] = ReadTroopQuantity($i)
 	  EndIf
 	  $atkTroops[$i][0] = $troopKind
-	  If $troopKind <> -1 Then SetLog("-" & NameOfTroop($atkTroops[$i][0]) & " " & $atkTroops[$i][1])
+	  If $troopKind <> -1 Then SetLog("-" & NameOfTroop($atkTroops[$i][0]) & " " & $atkTroops[$i][1], $COLOR_GREEN)
   Next
 EndFunc   ;==>PrepareAttack

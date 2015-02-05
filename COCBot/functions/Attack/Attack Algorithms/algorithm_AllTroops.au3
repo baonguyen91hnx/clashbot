@@ -43,13 +43,13 @@ Func DropOnEdge($troop, $edge, $number, $slotsPerEdge = 0, $edge2 = -1)
 	  		Local $posX = $minX + (($maxX - $minX) * $i) / ($slotsPerEdge - 1)
 			Local $posY = $minY + (($maxY - $minY) * $i) / ($slotsPerEdge - 1)
 			Click($posX, $posY, $nbtroopPerSlot)
-			If _Sleep(50) Then Return
+			If _Sleep(100) Then Return
 			If $edge2 <> -1 Then
 			   Local $posX2 = $maxX2 - (($maxX2 - $minX2) * $i) / ($slotsPerEdge - 1)
 			   Local $posY2 = $maxY2 - (($maxY2 - $minY2) * $i) / ($slotsPerEdge - 1)
 			   Click($posX2, $posY2, $nbtroopPerSlot)
+			   If _Sleep(100) Then Return
 			   $nbTroopsLeft -= $nbtroopPerSlot
-			   If _Sleep(50) Then Return
 			Else
 			   $nbTroopsLeft -= $nbtroopPerSlot
 			EndIf
@@ -74,7 +74,11 @@ Func DropOnEdges($troop, $nbSides, $number, $slotsPerEdge=0)
 	EndIf
   	For $i = 0 to $nbSides-1
 	   Local $nbTroopsPerEdge = Round($nbTroopsLeft/($nbSides-$i))
-	   DropOnEdge($troop, $Edges[$i], $nbTroopsPerEdge, $slotsPerEdge)
+	   If $nbSides = 1 Or ($nbSides = 3 And $i = 2) Then
+		 DropOnEdge($troop, $Edges[$i], $nbTroopsPerEdge, $slotsPerEdge)
+	   Elseif $nbSides = 2 Or ($nbSides = 3 And $i <> 1) Then
+		 DropOnEdge($troop, $Edges[$i], $nbTroopsPerEdge, $slotsPerEdge, $Edges[$i+1])
+	   EndIf
 	   $nbTroopsLeft -= $nbTroopsPerEdge
     Next
 EndFunc
@@ -161,10 +165,10 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 		 If LauchTroop($eArcher, $nbSides, 1, 2) Then
 			If _Sleep(1000) Then Return
 		 EndIf
+		 If _Sleep(2000) Then Return
 		 If LauchTroop($eBarbarian, $nbSides, 2, 2) Then
 			If _Sleep(1000) Then Return
 		 EndIf
-		 If _Sleep(1000) Then Return
 		 if LauchTroop($eWallbreaker, $nbSides, 1, 1, 1) Then
 			If _Sleep(500) Then Return
 		 EndIf
@@ -214,5 +218,5 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 			EndIf
 		EndIf
 
-		SetLog("~Finished Attacking, waiting to finish")
+		SetLog("~Finished Attacking, waiting to finish", $COLOR_GREEN)
  EndFunc   ;==>algorithm_AllTroops
