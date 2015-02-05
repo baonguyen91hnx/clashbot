@@ -150,6 +150,12 @@ Global $frmBotPosX ; Position X of the GUI
 Global $frmBotPosY ; Position Y of the GUI
 Global $Hide = False ; If hidden or not
 
+Global $ichkBotStop
+Global $icmbBotCommand
+Global $icmbBotCond
+Global $CommandStop = -1
+Global $MeetCondStop = False
+
 Global $itxtMaxTrophy ; Max trophy before drop trophy
 Global $ichkBackground ; Background mode enabled disabled
 Global $collectorPos[17][2] ;Positions of each collectors

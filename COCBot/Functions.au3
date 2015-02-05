@@ -69,4 +69,4 @@
 #include "functions\Village\ReArm.au3"
 #include "functions\Village\RequestCC.au3"
 #include "functions\Village\Train.au3"
-
+#include "functions\Village\BotCommand.au3"

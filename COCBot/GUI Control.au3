@@ -70,7 +70,7 @@ Func btnStart()
 			Else
 				WinActivate($Title)
 
-				SetLog("~~~~Welcome to " & @ScriptName & "!~~~~")
+				SetLog("~~~~Welcome to " & $sBotTitle & "!~~~~")
 				SetLog($Compiled & " running on " & @OSArch & " OS", $COLOR_GREEN)
 				SetLog("Bot is starting...", $COLOR_ORANGE)
 
@@ -88,7 +88,7 @@ Func btnStart()
 				If GUICtrlRead($txtCapacity) = 0 And $icmbTroopComp <> 8 Then
 					 MsgBox(0, "", "Don't Forget to Set Your Troops Capacity in Troop Settings!!")
 					 btnStop()
-				EndIf
+				  EndIf
 				runBot()
 			EndIf
 		Else
@@ -130,15 +130,15 @@ Func btnLocateBarracks()
 	$RunState = False
 EndFunc   ;==>btnLocateBarracks
 
-Func btnLocateClanClastle()
+Func btnLocateClanCastle()
 	$RunState = True
 	While 1
 		ZoomOut()
-		LocateClanClastle()
+		LocateClanCastle()
 		ExitLoop
 	WEnd
 	$RunState = False
-EndFunc   ;==>btnLocateClanClastle
+EndFunc   ;==>btnLocateClanCastle
 
 Func btnLocateTrap()
 	$RunState = True
@@ -179,13 +179,13 @@ EndFunc   ;==>btnSearchMode
 
 Func btnHide()
 	If $Hide = False Then
-		GUICtrlSetData($btnHide, "Show")
+		GUICtrlSetData($btnHide, "Show BS")
 		$botPos[0] = WinGetPos($Title)[0]
 		$botPos[1] = WinGetPos($Title)[1]
 		WinMove($Title, "", -32000, -32000)
 		$Hide = True
 	Else
-		GUICtrlSetData($btnHide, "Hide")
+		GUICtrlSetData($btnHide, "Hide BS")
 
 		If $botPos[0] = -32000 Then
 			WinMove($Title, "", 0, 0)

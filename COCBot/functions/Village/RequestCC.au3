@@ -1,7 +1,7 @@
 Func RequestCC()
 	If GUICtrlRead($chkRequest) = $GUI_CHECKED Then
 		If $CCPos[0] = -1 Then
-			LocateClanClastle()
+			LocateClanCastle()
 			SaveConfig()
 			If _Sleep(1000) Then Return
 		EndIf

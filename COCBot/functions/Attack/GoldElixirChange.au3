@@ -1,14 +1,15 @@
-;Checks if the gold/elixir changes values within 30 seconds, Returns True if changed
-;If gold/elixir = "" it will return True, meaning battle is over.
+;Checks if the gold/elixir changes values within 60 seconds, Returns True if changed
+;If gold/elixir = "" it will return False, meaning battle is over.
 
-Func GoldElixirChange() ;Checks 30 seconds if gold changes
+Func GoldElixirChange() ;Checks 60 seconds if gold changes
 	Local $Gold1, $Gold2
 	While 1
 		$Gold1 = getGold(51, 66)
 		$Elixir1 = getElixir(51, 66 + 29)
 		Local $iBegin = TimerInit()
-		While TimerDiff($iBegin) < 30000
+		While TimerDiff($iBegin) < 60000
 			If _Sleep(2000) Then Return
+			If getGold(51, 66) = "" Then Return False
 		WEnd
 		$Gold2 = getGold(51, 66)
 		$Elixir2 = getElixir(51, 66 + 29)

@@ -15,12 +15,6 @@ If _Singleton($sBotTitle, 1) = 0 Then
 	Exit
  EndIf
 
-If @AutoItX64 = 1 Then
-	MsgBox(0, "", "Don't Run/Compile Script (x64)! try to Run/Compile Script (x86) to getting this bot work." & @CRLF & _
-				  "If this message still appear, try to re-install your AutoIt with newer version.")
-	Exit
-EndIf
-
 If Not FileExists(@ScriptDir & "\License.txt") Then
 	$license = InetGet("http://www.gnu.org/licenses/gpl-3.0.txt", @ScriptDir & "\License.txt")
 	InetClose($license)
