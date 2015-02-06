@@ -191,6 +191,7 @@ Func btnHide()
 			WinMove($Title, "", 0, 0)
 		Else
 			WinMove($Title, "", $botPos[0], $botPos[1])
+			WinActivate($Title)
 		EndIf
 		$Hide = False
 	EndIf
