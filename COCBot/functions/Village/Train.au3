@@ -57,7 +57,7 @@ Func Train()
 			If _Sleep(500) Then ExitLoop
 		Else
 			Click($TrainPos[0], $TrainPos[1]) ;Click Train Troops button
-			If _Sleep(700) Then ExitLoop
+			If _Sleep(800) Then ExitLoop
 
 			CheckFullArmy()
 			If _GUICtrlComboBox_GetCurSel($cmbTroopComp) = 8 Then
@@ -96,9 +96,8 @@ Func Train()
 			Else
 				; More Troops Settings
 				If $ArmyComp >= $icmbTroopCap Then
-					SetLog("Troops Capacity is full, waiting for full camps...", $COLOR_ORANGE)
 					$ArmyComp = 0
-			    EndIf
+				EndIf
 				If $ArmyComp = 0 Then
 					$CurGiant = GUICtrlRead($txtNumGiants)
 					$CurWB = GUICtrlRead($txtNumWallbreakers)
@@ -111,68 +110,70 @@ Func Train()
 				EndIf
 
 				If GUICtrlRead($txtNumGiants) <> "0" And $CurGiant > 0 Then
-					 _CaptureRegion()
-					If _ColorCheck(_GetPixelColor(475, 366), Hex(0x3DD8E0, 6), 20) Then
-						TrainIt($eGiant, $CurGiant)
+					_CaptureRegion()
+					For $x = 0 To 1
+						If _ColorCheck(_GetPixelColor(475, 366), Hex(0x3DD8E0, 6), 20) Then
+							TrainIt($eGiant, Round($CurGiant/2))
+							_CaptureRegion()
+						Else
+							ExitLoop
+						EndIf
+					Next
+					$CurGiant -= Number(getOther(171 + 107 * 2, 278, "Trophy"))
+					$ArmyComp += Number(getOther(171 + 107 * 2, 278, "Trophy"))*5
+				ElseIf GUICtrlRead($txtNumWallbreakers) <> "0" And $CurWB > 0 Then
+					For $x = 0 To 1
 						_CaptureRegion()
-						$CurGiant -= Number(getOther(171 + 107 * 2, 278, "Trophy"))
-						$ArmyComp += Number(getOther(171 + 107 * 2, 278, "Trophy"))*5
-				    EndIf
-				EndIf
-
-				If GUICtrlRead($txtNumWallbreakers) <> "0" And $CurWB > 0 Then
-				  _CaptureRegion()
-					If _ColorCheck(_GetPixelColor(688, 366), Hex(0x3AD8E0, 6), 20) Then
-						TrainIt($eWallbreaker, $CurWB)
-					    _CaptureRegion()
-						$CurWB -= Number(getOther(171 + 107 * 4, 278, "Trophy"))
-						$ArmyComp += Number(getOther(171 + 107 * 4, 278, "Trophy"))*2
-					EndIf
-				EndIf
-				If GUICtrlRead($txtGoblins) <> "0" And $CurGoblin > 0 Then
+						If _ColorCheck(_GetPixelColor(688, 366), Hex(0x3AD8E0, 6), 20) Then
+							TrainIt($eWallbreaker, Round($CurWB/2))
+							_CaptureRegion()
+						Else
+							ExitLoop
+						EndIf
+					Next
+					$CurWB -= Number(getOther(171 + 107 * 4, 278, "Trophy"))
+					$ArmyComp += Number(getOther(171 + 107 * 4, 278, "Trophy"))*2
+				ElseIf GUICtrlRead($txtGoblins) <> "0" And $CurGoblin > 0 Then
 					For $x = 0 To 1
 						_CaptureRegion()
 						If _ColorCheck(_GetPixelColor(261, 366), Hex(0x39D8E0, 6), 20) Then
 							TrainIt($eGoblin, Round($CurGoblin/2))
 							_CaptureRegion()
 						Else
-						   ExitLoop
+							ExitLoop
 						EndIf
 					Next
 					$CurGoblin -= Number(getOther(171 + 107 * 3, 278, "Trophy"))
 					$ArmyComp += Number(getOther(171 + 107 * 3, 278, "Trophy"))
-				EndIf
-				If GUICtrlRead($txtBarbarians) <> "0" And $CurBarb > 0 Then
+				ElseIf GUICtrlRead($txtBarbarians) <> "0" And $CurBarb > 0 Then
 					For $x = 0 To 1
 						_CaptureRegion()
 						If _ColorCheck(_GetPixelColor(369, 366), Hex(0x39D8E0, 6), 20) Then
 							TrainIt($eBarbarian, Round($CurBarb/2))
 							_CaptureRegion()
 						Else
-						   ExitLoop
+							ExitLoop
 						EndIf
 					Next
 					$CurBarb -= Number(getOther(171 + 107 * 0, 278, "Trophy"))
 					$ArmyComp += Number(getOther(171 + 107 * 0, 278, "Trophy"))
-				EndIf
-				If GUICtrlRead($txtArchers) <> "0" And $CurArch > 0 Then
+				ElseIf GUICtrlRead($txtArchers) <> "0" And $CurArch > 0 Then
 					For $x = 0 To 1
 						_CaptureRegion()
 						If _ColorCheck(_GetPixelColor(261, 366), Hex(0x39D8E0, 6), 20) Then
 							TrainIt($eArcher, Round($CurArch/2))
 							_CaptureRegion()
 						Else
-						   ExitLoop
+							ExitLoop
 						EndIf
 					Next
 					$CurArch -= Number(getOther(171 + 107 * 1, 278, "Trophy"))
 					$ArmyComp += Number(getOther(171 + 107 * 1, 278, "Trophy"))
-				EndIf
-			EndIf
+				 EndIf
+			  EndIf
 		EndIf
 		If _Sleep(500) Then ExitLoop
 		Click($TopLeftClient[0], $TopLeftClient[1], 2, 250); Click away twice with 250ms delay
-	Next
-
+	 Next
 	SetLog("Training Troops Complete", $COLOR_BLUE)
  EndFunc   ;==>Train

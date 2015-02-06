@@ -71,7 +71,7 @@ Func algorithmTH() ;Attack Algorithm TH
 						  While $atkTroops[$Barb][1] <> 0
 							  Click(($THx-($BottomTHy+10)), ($THy-$BottomTHy), 1, 1) ; TopLeft
 							  $AtkTroopTH = Number(getNormal(40 + (72 * $Barb), 565))
-							  SetLog("Getting Attack Townhall location...")
+							  SetLog("Getting Attack Townhall location...", $COLOR_BLUE)
 							  $BottomTHy += 10
 							  $i += 1
 							  If $AtkTroopTH <> $atkTroops[$Barb][1] Or $i >= 5 Then
