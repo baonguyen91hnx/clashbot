@@ -99,6 +99,7 @@ Func Train()
 					$ArmyComp = 0
 				EndIf
 				If $ArmyComp = 0 Then
+				    Local $CurGiant1 = 0, $CurWB1 = 0, $CurArch1 = 0, $CurBarb1 = 0, $CurGoblin1 = 0
 					$CurGiant = GUICtrlRead($txtNumGiants)
 					$CurWB = GUICtrlRead($txtNumWallbreakers)
 					$CurArch = ($icmbTroopCap-(GUICtrlRead($txtNumGiants)*5)-(GUICtrlRead($txtNumWallbreakers)*2))*GUICtrlRead($txtArchers)/100
@@ -110,30 +111,19 @@ Func Train()
 				EndIf
 
 				If GUICtrlRead($txtNumGiants) <> "0" And $CurGiant > 0 Then
+				    $CurGiant1 = Number(getOther(171 + 107 * 2, 278, "Trophy"))
 					_CaptureRegion()
-					For $x = 0 To 1
-						If _ColorCheck(_GetPixelColor(475, 366), Hex(0x3DD8E0, 6), 20) Then
-							TrainIt($eGiant, Round($CurGiant/2))
-							_CaptureRegion()
-						Else
-							ExitLoop
-						EndIf
-					Next
-					$CurGiant -= Number(getOther(171 + 107 * 2, 278, "Trophy"))
-					$ArmyComp += Number(getOther(171 + 107 * 2, 278, "Trophy"))*5
-				ElseIf GUICtrlRead($txtNumWallbreakers) <> "0" And $CurWB > 0 Then
-					For $x = 0 To 1
-						_CaptureRegion()
-						If _ColorCheck(_GetPixelColor(688, 366), Hex(0x3AD8E0, 6), 20) Then
-							TrainIt($eWallbreaker, Round($CurWB/2))
-							_CaptureRegion()
-						Else
-							ExitLoop
-						EndIf
-					Next
-					$CurWB -= Number(getOther(171 + 107 * 4, 278, "Trophy"))
-					$ArmyComp += Number(getOther(171 + 107 * 4, 278, "Trophy"))*2
-				ElseIf GUICtrlRead($txtGoblins) <> "0" And $CurGoblin > 0 Then
+					If _ColorCheck(_GetPixelColor(475, 366), Hex(0x3DD8E0, 6), 20) Then TrainIt($eGiant, $CurGiant)
+					$CurGiant -= Number(getOther(171 + 107 * 2, 278, "Trophy"))-$CurGiant1
+					$ArmyComp += (Number(getOther(171 + 107 * 2, 278, "Trophy"))-$CurGiant1)*5
+				 ElseIf GUICtrlRead($txtNumWallbreakers) <> "0" And $CurWB > 0 Then
+					$CurWB1 -= Number(getOther(171 + 107 * 4, 278, "Trophy"))
+					_CaptureRegion()
+				    If _ColorCheck(_GetPixelColor(688, 366), Hex(0x3AD8E0, 6), 20) Then TrainIt($eWallbreaker, $CurWB)
+					$CurWB -= Number(getOther(171 + 107 * 4, 278, "Trophy"))-$CurWB1
+					$ArmyComp += (Number(getOther(171 + 107 * 4, 278, "Trophy"))-$CurWB1)*2
+				 ElseIf GUICtrlRead($txtGoblins) <> "0" And $CurGoblin > 0 Then
+					$CurGoblin1 -= Number(getOther(171 + 107 * 3, 278, "Trophy"))
 					For $x = 0 To 1
 						_CaptureRegion()
 						If _ColorCheck(_GetPixelColor(261, 366), Hex(0x39D8E0, 6), 20) Then
@@ -143,9 +133,10 @@ Func Train()
 							ExitLoop
 						EndIf
 					Next
-					$CurGoblin -= Number(getOther(171 + 107 * 3, 278, "Trophy"))
-					$ArmyComp += Number(getOther(171 + 107 * 3, 278, "Trophy"))
-				ElseIf GUICtrlRead($txtBarbarians) <> "0" And $CurBarb > 0 Then
+					$CurGoblin -= Number(getOther(171 + 107 * 3, 278, "Trophy"))-$CurGoblin1
+					$ArmyComp += Number(getOther(171 + 107 * 3, 278, "Trophy"))-$CurGoblin1
+				 ElseIf GUICtrlRead($txtBarbarians) <> "0" And $CurBarb > 0 Then
+					$CurBarb1 -= Number(getOther(171 + 107 * 0, 278, "Trophy"))
 					For $x = 0 To 1
 						_CaptureRegion()
 						If _ColorCheck(_GetPixelColor(369, 366), Hex(0x39D8E0, 6), 20) Then
@@ -155,9 +146,10 @@ Func Train()
 							ExitLoop
 						EndIf
 					Next
-					$CurBarb -= Number(getOther(171 + 107 * 0, 278, "Trophy"))
-					$ArmyComp += Number(getOther(171 + 107 * 0, 278, "Trophy"))
-				ElseIf GUICtrlRead($txtArchers) <> "0" And $CurArch > 0 Then
+					$CurBarb -= Number(getOther(171 + 107 * 0, 278, "Trophy"))-$CurBarb1
+					$ArmyComp += Number(getOther(171 + 107 * 0, 278, "Trophy"))-$CurBarb1
+				 ElseIf GUICtrlRead($txtArchers) <> "0" And $CurArch > 0 Then
+					$CurArch1 -= Number(getOther(171 + 107 * 1, 278, "Trophy"))
 					For $x = 0 To 1
 						_CaptureRegion()
 						If _ColorCheck(_GetPixelColor(261, 366), Hex(0x39D8E0, 6), 20) Then
@@ -167,8 +159,8 @@ Func Train()
 							ExitLoop
 						EndIf
 					Next
-					$CurArch -= Number(getOther(171 + 107 * 1, 278, "Trophy"))
-					$ArmyComp += Number(getOther(171 + 107 * 1, 278, "Trophy"))
+					$CurArch -= Number(getOther(171 + 107 * 1, 278, "Trophy"))-$CurArch1
+					$ArmyComp += Number(getOther(171 + 107 * 1, 278, "Trophy"))-$CurArch1
 				 EndIf
 			  EndIf
 		EndIf

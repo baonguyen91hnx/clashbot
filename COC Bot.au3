@@ -3,11 +3,11 @@
 #pragma compile(Icon, "Icons\cocbot.ico")
 #pragma compile(FileDescription, Clash of Clans Bot - A Free/Open Sourced Clash of Clans bot - https://the.bytecode.club)
 #pragma compile(ProductName, Clash of Clans Bot)
-#pragma compile(ProductVersion, 5.5)
-#pragma compile(FileVersion, 5.5.0.0)
+#pragma compile(ProductVersion, 5.5.1)
+#pragma compile(FileVersion, 5.5.1.0)
 #pragma compile(LegalCopyright, © The Bytecode Club)
 
-$sBotVersion = "5.5"
+$sBotVersion = "5.5.1"
 $sBotTitle = "COC Bot v" & $sBotVersion
 
 If _Singleton($sBotTitle, 1) = 0 Then
