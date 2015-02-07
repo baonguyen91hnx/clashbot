@@ -95,15 +95,17 @@ Func Train()
 				EndSwitch
 			Else
 				; More Troops Settings
-				If $ArmyComp >= $icmbTroopCap And $fullArmy Then
-					$ArmyComp = 0
-					If _Sleep(500) Then ExitLoop
+				If $fullArmy Then
+					If _Sleep(1000) Then ExitLoop
 					_CaptureRegion()
 					While _ColorCheck(_GetPixelColor(496, 197), Hex(0xD00000, 6), 20)
 						Click(496, 197, 20)
 						If _Sleep(1000) Then ExitLoop
 						_CaptureRegion()
 					WEnd
+					If $ArmyComp >= $icmbTroopCap Then
+						$ArmyComp = 0
+					EndIf
 				EndIf
 				If $ArmyComp = 0 Then
 					$CurGiant = GUICtrlRead($txtNumGiants)

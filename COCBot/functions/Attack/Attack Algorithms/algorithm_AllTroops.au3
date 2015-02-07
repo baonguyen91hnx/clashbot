@@ -195,9 +195,9 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 		   PrepareAttack(True) ;Check remaining quantities
 		   For $i = $eBarbarian To $eWallbreaker ; lauch all remaining troops
 			  If $i = $eBarbarian Or $i = $eArcher Or $i = $eGoblin Then
-				 LauchTroop($i, $nbSides, 0, 2)
+				 LauchTroop($i, $nbSides, 0, 1)
 			  Else
-				 LauchTroop($i, $nbSides, 0, 2, 2)
+				 LauchTroop($i, $nbSides, 0, 1, 2)
 			  EndIf
 			  If _Sleep(100) Then Return
 		   Next
