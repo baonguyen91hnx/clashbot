@@ -46,7 +46,7 @@ Global $Restart = False
 Global $RunState = False
 Global $TakeLootSnapShot = True
 Global $TakeAllTownSnapShot = False
-
+Global $ReqText
 
 Global $cmbTroopComp ;For Event change on ComboBox Troop Compositions
 Global $iCollectCounter = 0 ; Collect counter, when reaches $COLLECTATCOUNT, it will collect

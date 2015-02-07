@@ -16,7 +16,7 @@ Func RequestCC()
 				If _Sleep(1000) Then ExitLoop
 				_CaptureRegion()
 				If _ColorCheck(_GetPixelColor(340, 245), Hex(0xCC4010, 6), 20) Then
-					If GUICtrlRead($txtRequest) <> "" Then
+					If $ReqText <> GUICtrlRead($txtRequest) And GUICtrlRead($txtRequest) <> "" Then
 						Click(430, 140) ;Select text for request
 						If _Sleep(1000) Then ExitLoop
 						$TextRequest = GUICtrlRead($txtRequest)
@@ -34,5 +34,8 @@ Func RequestCC()
 			EndIf
 			ExitLoop
 		WEnd
+	 EndIf
+	If $ReqText <> GUICtrlRead($txtRequest) Then
+	   $ReqText = GUICtrlRead($txtRequest)
 	EndIf
 EndFunc   ;==>RequestCC

@@ -77,7 +77,7 @@ Func DropOnEdges($troop, $nbSides, $number, $slotsPerEdge=0)
 		 DropOnEdge($troop, $Edges[$i], $nbTroopsPerEdge, $slotsPerEdge)
 	   Elseif ($nbSides = 2 And $i = 0) Or ($nbSides = 3 And $i <> 1) Then
 	     Local $nbTroopsPerEdge = Round($nbTroopsLeft/($nbSides-$i*2))
-		 DropOnEdge($troop, $Edges[$i], $nbTroopsPerEdge, $slotsPerEdge, $Edges[$i+1])
+		 DropOnEdge($troop, $Edges[$i+1], $nbTroopsPerEdge, $slotsPerEdge, $Edges[$i+3])
 	   EndIf
 	   $nbTroopsLeft -= $nbTroopsPerEdge
     Next
@@ -194,7 +194,7 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 		For $x = 0 To 1
 		   PrepareAttack(True) ;Check remaining quantities
 		   For $i = $eBarbarian To $eWallbreaker ; lauch all remaining troops
-			  If $i = $eBarbarian Or $i = $eArcher Or $i = $eGoblin Then
+			  If $i = $eBarbarian Or $i = $eArcher Then
 				 LauchTroop($i, $nbSides, 0, 1)
 			  Else
 				 LauchTroop($i, $nbSides, 0, 1, 2)

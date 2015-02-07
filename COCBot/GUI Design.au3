@@ -180,7 +180,7 @@ GUICtrlSetOnEvent(-1, "btnLocateClanCastle")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 
-;Donate Tab
+;Troops Tab
 $pageTroopSettings = GUICtrlCreateTabItem("Troops")
 $Barracks = GUICtrlCreateGroup("Troops", 20, 40, 185, 215)
 $lblBarbarians = GUICtrlCreateLabel("Barbarians :", 30, 68, 60, 17)
@@ -234,6 +234,15 @@ GUICtrlSetOnEvent(-1, "btnLocateBarracks")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 GUICtrlCreateTabItem("")
 
+;Other Tab
+$pageOtherSettings = GUICtrlCreateTabItem("Other Settings")
+$Walls = GUICtrlCreateGroup("Walls", 20, 40, 180, 82)
+$chkWalls = GUICtrlCreateCheckbox("Auto Walls Upgrade", 46, 60, 115, 17)
+$lblWalls = GUICtrlCreateLabel("Current Wall Level:", 40, 89, 97, 17)
+$cmbWalls = GUICtrlCreateCombo("", 140, 85, 40, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+GUICtrlSetData(-1, "4|5|6|7|8|9|10", "4")
+GUICtrlCreateGroup("", -99, -99, 1, 1)
+GUICtrlCreateTabItem("")
 
 ;Bottom status bar
 $statLog = _GUICtrlStatusBar_Create($frmBot)
