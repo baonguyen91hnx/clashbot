@@ -34,7 +34,7 @@ Func algorithmTH() ;Attack Algorithm TH
 								 SetLog("Getting Attack Townhall location...", $COLOR_BLUE)
 								 $LeftTHx += 10
 								 $i += 1
-								 If $AtkTroopTH <> $atkTroops[$Barb][1] Or $i >= 5 Then
+								 If $AtkTroopTH <> $atkTroops[$Barb][1] Or $i >= 10 Then
 									 $GetTHLoc += 1
 									 ExitLoop
 								 EndIf
@@ -47,7 +47,7 @@ Func algorithmTH() ;Attack Algorithm TH
 								 SetLog("Getting Attack Townhall location...", $COLOR_BLUE)
 								 $RightTHx += 10
 								 $i += 1
-								 If $AtkTroopTH <> $atkTroops[$Barb][1] Or $i >= 5 Then
+								 If $AtkTroopTH <> $atkTroops[$Barb][1] Or $i >= 10 Then
 									 $GetTHLoc += 1
 									 ExitLoop
 								 EndIf
@@ -61,7 +61,7 @@ Func algorithmTH() ;Attack Algorithm TH
 							  SetLog("Getting Attack Townhall location...", $COLOR_BLUE)
 							  $TopTHy += 10
 							  $i += 1
-							  If $AtkTroopTH <> $atkTroops[$Barb][1] Or $i >= 5 Then
+							  If $AtkTroopTH <> $atkTroops[$Barb][1] Or $i >= 10 Then
 								  $GetTHLoc += 1
 								  ExitLoop
 							  EndIf
@@ -74,7 +74,7 @@ Func algorithmTH() ;Attack Algorithm TH
 							  SetLog("Getting Attack Townhall location...", $COLOR_BLUE)
 							  $BottomTHy += 10
 							  $i += 1
-							  If $AtkTroopTH <> $atkTroops[$Barb][1] Or $i >= 5 Then
+							  If $AtkTroopTH <> $atkTroops[$Barb][1] Or $i >= 10 Then
 								  $GetTHLoc += 1
 								  ExitLoop
 							  EndIf
@@ -111,7 +111,7 @@ Func algorithmTH() ;Attack Algorithm TH
 							 SetLog("Getting Attack Townhall location...", $COLOR_BLUE)
 							 $LeftTHx += 10
 							 $i += 1
-							 If $AtkTroopTH <> $atkTroops[$Arch][1] Or $i >= 5 Then
+							 If $AtkTroopTH <> $atkTroops[$Arch][1] Or $i >= 10 Then
 								 $GetTHLoc += 1
 								 ExitLoop
 							 EndIf
@@ -124,7 +124,7 @@ Func algorithmTH() ;Attack Algorithm TH
 							 SetLog("Getting Attack Townhall location...", $COLOR_BLUE)
 							 $RightTHx += 10
 							 $i += 1
-							 If $AtkTroopTH <> $atkTroops[$Arch][1] Or $i >= 5 Then
+							 If $AtkTroopTH <> $atkTroops[$Arch][1] Or $i >= 10 Then
 								 $GetTHLoc += 1
 								 ExitLoop
 							 EndIf
@@ -138,7 +138,7 @@ Func algorithmTH() ;Attack Algorithm TH
 						  SetLog("Getting Attack Townhall location...", $COLOR_BLUE)
 						  $TopTHy += 10
 						  $i += 1
-						  If $AtkTroopTH <> $atkTroops[$Arch][1] Or $i >= 5 Then
+						  If $AtkTroopTH <> $atkTroops[$Arch][1] Or $i >= 10 Then
 							  $GetTHLoc += 1
 							  ExitLoop
 						  EndIf
@@ -151,7 +151,7 @@ Func algorithmTH() ;Attack Algorithm TH
 						  SetLog("Getting Attack Townhall location...", $COLOR_BLUE)
 						  $BottomTHy += 10
 						  $i += 1
-						  If $AtkTroopTH <> $atkTroops[$Arch][1] Or $i >= 5 Then
+						  If $AtkTroopTH <> $atkTroops[$Arch][1] Or $i >= 10 Then
 							  $GetTHLoc += 1
 							  ExitLoop
 						  EndIf

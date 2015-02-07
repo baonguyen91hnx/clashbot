@@ -19,7 +19,7 @@ Func VillageSearch($TakeSS = 0) ;Control for searching a village that meets cond
 		If $TakeSS = 1 Then SetLog("Will save all of the towns when searching", $COLOR_GREEN)
 		$SearchCount = 0
 		While 1
-			If _Sleep(1000) Then ExitLoop (2)
+			If _Sleep(3000) Then ExitLoop (2)
 			GetResources() ;Reads Resource Values
 
 			If $Restart = True Then ExitLoop (2)

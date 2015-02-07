@@ -5,7 +5,7 @@ Func CheckFullArmy()
 	$Pixel = _ColorCheck(_GetPixelColor(327, 520), Hex(0xD03838, 6), 20)
 	If $Pixel Then
 		$fullArmy = True
-	Else
+	ElseIf _GUICtrlComboBox_GetCurSel($cmbTroopComp) = 8 Then
 		$fullArmy = False
 	EndIf
 EndFunc   ;==>CheckFullArmy
