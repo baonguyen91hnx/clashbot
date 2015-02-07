@@ -16,12 +16,12 @@ Func _ImageSearchArea($findImage, $resultPosition, $x1, $y1, $right, $bottom, By
 	If IsString($findImage) Then
 		If $Tolerance > 0 Then $findImage = "*" & $Tolerance & " " & $findImage
 		If $HBMP = 0 Then
-			$result = DllCall("COCBot.dll", "str", "ImageSearch", "int", $x1, "int", $y1, "int", $right, "int", $bottom, "str", $findImage)
+			$result = DllCall(@ScriptDir & "\COCBot.dll", "str", "ImageSearch", "int", $x1, "int", $y1, "int", $right, "int", $bottom, "str", $findImage)
 		Else
-			$result = DllCall("COCBot.dll", "str", "ImageSearchEx", "int", $x1, "int", $y1, "int", $right, "int", $bottom, "str", $findImage, "ptr", $HBMP)
+			$result = DllCall(@ScriptDir & "\COCBot.dll", "str", "ImageSearchEx", "int", $x1, "int", $y1, "int", $right, "int", $bottom, "str", $findImage, "ptr", $HBMP)
 		EndIf
 	Else
-		$result = DllCall("COCBot.dll", "str", "ImageSearchExt", "int", $x1, "int", $y1, "int", $right, "int", $bottom, "int", $Tolerance, "ptr", $findImage, "ptr", $HBMP)
+		$result = DllCall(@ScriptDir & "\COCBot.dll", "str", "ImageSearchExt", "int", $x1, "int", $y1, "int", $right, "int", $bottom, "int", $Tolerance, "ptr", $findImage, "ptr", $HBMP)
 	EndIf
 
 	; If error exit

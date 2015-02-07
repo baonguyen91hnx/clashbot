@@ -3,11 +3,11 @@
 #pragma compile(Icon, "Icons\cocbot.ico")
 #pragma compile(FileDescription, Clash of Clans Bot - A Free/Open Sourced Clash of Clans bot - https://the.bytecode.club)
 #pragma compile(ProductName, Clash of Clans Bot)
-#pragma compile(ProductVersion, 5.5)
-#pragma compile(FileVersion, 5.5.0.0)
+#pragma compile(ProductVersion, 5.5.1)
+#pragma compile(FileVersion, 5.5.1.0)
 #pragma compile(LegalCopyright, © The Bytecode Club)
 
-$sBotVersion = "5.5"
+$sBotVersion = "5.5.1"
 $sBotTitle = "COC Bot v" & $sBotVersion
 
 If _Singleton($sBotTitle, 1) = 0 Then
@@ -87,7 +87,7 @@ EndFunc   ;==>runBot
 Func Idle() ;Sequence that runs until Full Army
 	Local $TimeIdle = 0 ;In Seconds
 		While $fullArmy = False
-			If $CommandStop = -1 Then SetLog("~~~Waiting for full army~~~")
+			If $CommandStop = -1 Then SetLog("~~~Waiting for full army~~~", $COLOR_PURPLE)
 			Local $hTimer = TimerInit()
 			If _Sleep(30000) Then ExitLoop
 			checkMainScreen()
@@ -127,6 +127,7 @@ Func AttackMain() ;Main control for attack functions
 	 If _Sleep(1000) Or $Restart = True Then Return
 		PrepareAttack()
 	 If _Sleep(1000) Then Return
+		$ArmyComp = 0
 		Attack()
 	 If _Sleep(1000) Then Return
 		ReturnHome($TakeLootSnapShot)

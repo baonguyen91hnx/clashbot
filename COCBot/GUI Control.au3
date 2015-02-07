@@ -70,7 +70,7 @@ Func btnStart()
 			Else
 				WinActivate($Title)
 
-				SetLog("~~~~Welcome to " & $sBotTitle & "!~~~~")
+				SetLog("~~~~Welcome to " & $sBotTitle & "!~~~~", $COLOR_PURPLE)
 				SetLog($Compiled & " running on " & @OSArch & " OS", $COLOR_GREEN)
 				SetLog("Bot is starting...", $COLOR_ORANGE)
 
@@ -191,6 +191,7 @@ Func btnHide()
 			WinMove($Title, "", 0, 0)
 		Else
 			WinMove($Title, "", $botPos[0], $botPos[1])
+			WinActivate($Title)
 		EndIf
 		$Hide = False
 	EndIf

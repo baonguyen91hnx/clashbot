@@ -43,15 +43,16 @@ Func DropOnEdge($troop, $edge, $number, $slotsPerEdge = 0, $edge2 = -1)
 	  		Local $posX = $minX + (($maxX - $minX) * $i) / ($slotsPerEdge - 1)
 			Local $posY = $minY + (($maxY - $minY) * $i) / ($slotsPerEdge - 1)
 			Click($posX, $posY, $nbtroopPerSlot)
+			If _Sleep(50) Then Return
 			If $edge2 <> -1 Then
 			   Local $posX2 = $maxX2 - (($maxX2 - $minX2) * $i) / ($slotsPerEdge - 1)
 			   Local $posY2 = $maxY2 - (($maxY2 - $minY2) * $i) / ($slotsPerEdge - 1)
 			   Click($posX2, $posY2, $nbtroopPerSlot)
+			   If _Sleep(50) Then Return
 			   $nbTroopsLeft -= $nbtroopPerSlot
 			Else
 			   $nbTroopsLeft -= $nbtroopPerSlot
 			EndIf
-			If _Sleep(50) Then Return
 		 Next
 	  EndIf
 EndFunc
@@ -65,18 +66,17 @@ Func DropOnEdges($troop, $nbSides, $number, $slotsPerEdge=0)
     Local $nbTroopsLeft = $number
 	If $nbSides = 4 Then
 	  For $i = 0 to $nbSides-3
-		 Local $nbTroopsPerEdge = Round($nbTroopsLeft/($nbSides-$i*2))
+		 Local $nbTroopsPerEdge = Round(($nbTroopsLeft/($nbSides-$i)))
 		 DropOnEdge($troop, $Edges[$i], $nbTroopsPerEdge, $slotsPerEdge, $Edges[$i+2])
 		 $nbTroopsLeft -= $nbTroopsPerEdge
 	  Next
 	  Return
 	EndIf
   	For $i = 0 to $nbSides-1
+	   Local $nbTroopsPerEdge = Round($nbTroopsLeft/($nbSides-$i))
 	   If $nbSides = 1 Or ($nbSides = 3 And $i = 2) Then
-	     Local $nbTroopsPerEdge = Round($nbTroopsLeft/($nbSides-$i))
 		 DropOnEdge($troop, $Edges[$i], $nbTroopsPerEdge, $slotsPerEdge)
-	   Elseif ($nbSides = 2 And $i = 0) Or ($nbSides = 3 And $i <> 1) Then
-	     Local $nbTroopsPerEdge = Round($nbTroopsLeft/($nbSides-$i*2))
+	   Elseif $nbSides = 2 Or ($nbSides = 3 And $i <> 1) Then
 		 DropOnEdge($troop, $Edges[$i], $nbTroopsPerEdge, $slotsPerEdge, $Edges[$i+1])
 	   EndIf
 	   $nbTroopsLeft -= $nbTroopsPerEdge
@@ -151,36 +151,37 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 		 if ($nbSides = 0) Then Return
 		 If _Sleep(1000) Then Return
 
-         ; ================================================================================?
-         ; ========= Here is coded the main attack strategy ===============================
-         ; ========= Feel free to experiment something else ===============================
-         ; ================================================================================?
-         algorithmTH()
-         if LauchTroop($eGiant, $nbSides, 1, 1, 1) Then
-            If _Sleep(400) Then Return
-               EndIf
-         if LauchTroop($eBarbarian, $nbSides, 1, 2) Then
-            If _Sleep(400) Then Return
-               EndIf
-         if LauchTroop($eArcher, $nbSides, 1, 2) Then
-            If _Sleep(100) Then Return
-               EndIf
-         If LauchTroop($eBarbarian, $nbSides, 2, 2) Then
-            If _Sleep(200) Then Return
-            EndIf
-         if LauchTroop($eWallbreaker, $nbSides, 1, 1, 1) Then
-            If _Sleep(50) Then Return
-               EndIf
-         If LauchTroop($eGoblin, $nbSides, 1, 2) Then
-            If _Sleep(50) Then Return
-               EndIf
-         If LauchTroop($eArcher, $nbSides, 2, 2) Then
-            If _Sleep(50) Then Return
-               EndIf
-         If LauchTroop($eGoblin, $nbSides, 2, 2) Then
-            If _Sleep(50) Then Return
-               EndIf
-         ; ================================================================================?
+		 ; ================================================================================
+		 ; ========= Here is coded the main attack strategy ===============================
+		 ; ========= Feel free to experiment something else ===============================
+		 ; ================================================================================
+		 algorithmTH()
+		 If LauchTroop($eGiant, $nbSides, 1, 1, 1) Then
+			If _Sleep(1000) Then Return
+		 EndIf
+		 If LauchTroop($eBarbarian, $nbSides, 1, 2) Then
+			If _Sleep(1000) Then Return
+		 EndIf
+		 If LauchTroop($eArcher, $nbSides, 1, 2) Then
+			If _Sleep(1000) Then Return
+		 EndIf
+		 If _Sleep(2000) Then Return
+		 If LauchTroop($eBarbarian, $nbSides, 2, 2) Then
+			If _Sleep(1000) Then Return
+		 EndIf
+		 if LauchTroop($eWallbreaker, $nbSides, 1, 1, 1) Then
+			If _Sleep(500) Then Return
+		 EndIf
+		 If LauchTroop($eGoblin, $nbSides, 1, 2) Then
+			If _Sleep(500) Then Return
+		 EndIf
+		 If LauchTroop($eArcher, $nbSides, 2, 2) Then
+			If _Sleep(500) Then Return
+		 EndIf
+		 If LauchTroop($eGoblin, $nbSides, 2, 2) Then
+			If _Sleep(500) Then Return
+		 EndIf
+		 ; ================================================================================
 
 
 		 dropHeroes($BottomRight[3][0], $BottomRight[3][1], $King, $Queen)
@@ -192,16 +193,16 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 		If _Sleep(100) Then Return
 		SetLog("Dropping left over troops", $COLOR_BLUE)
 		PrepareAttack(True) ;Check remaining quantities
-		For $x = 0 To 1
-		   For $i = $eBarbarian To $eWallbreaker ; lauch all remaining troops
-			  If $i = $eBarbarian Or $i = $eArcher Or $i = $eGoblin Then
-				 LauchTroop($i, $nbSides, 0, 2)
-			  Else
-				 LauchTroop($i, $nbSides, 0, 2, 2)
-			  EndIf
-			  If _Sleep(100) Then Return
-		   Next
-		Next
+		For $i = $eBarbarian To $eWallbreaker ; lauch all remaining troops
+		   LauchTroop($i, $nbSides, 0, 2, 2)
+		   If _Sleep(100) Then Return
+	    Next
+
+	    PrepareAttack(True) ;Check remaining quantities
+		For $i = $eBarbarian To $eWallbreaker ; lauch all remaining troops
+		   LauchTroop($i, $nbSides, 0, 2, 2)
+		   If _Sleep(100) Then Return
+	    Next
 
 		;Activate KQ's power
 		If $checkKPower Or $checkQPower Then

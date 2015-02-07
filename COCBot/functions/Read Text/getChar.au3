@@ -316,7 +316,7 @@ Func getChar(ByRef $x, $y)
 	$x -= 3
 
 	;search for 'L'
-	$width = 3
+	$width = 4
 	Local $c1 = Hex(0xFDFDFD, 6), $c2 = Hex(0x828482, 6), $c3 = Hex(0x646764, 6)
 	For $i = 1 To 3
 		Local $pixel1[3] = [$x + 2, $y + 7, $c1], $pixel2[3] = [$x + 4, $y + 7, $c2], $pixel3[3] = [$x + 1, $y + 0, $c3]
@@ -735,14 +735,33 @@ Func getChar(ByRef $x, $y)
 	Next
 	$x -= 3
 
+	;search for ','
+	$width = 3
+	Local $c1 = Hex(0xE8E8E8, 6), $c2 = Hex(0xFEFEFE, 6), $c3 = Hex(0xA5A7A5, 6)
+	For $i = 1 To 3
+		Local $pixel1[3] = [$x + 1, $y + 7, $c1], $pixel2[3] = [$x + 1, $y + 8, $c2], $pixel3[3] = [$x + 1, $y + 9, $c3]
+		If boolPixelSearch($pixel1, $pixel2, $pixel3, 1) Then
+			$x += $width
+			Return ","
+		Else
+			$x += 1
+		EndIf
+	Next
+	$x -= 3
+
 	;search for '{space}'
 	$width = 2
 	Local $c1 = Hex(0x404440, 6), $c2 = Hex(0x404440, 6), $c3 = Hex(0x404440, 6)
-	Local $pixel1[3] = [$x + 1, $y + 3, $c1], $pixel2[3] = [$x + 1, $y + 7, $c2], $pixel3[3] = [$x + 2, $y + 5, $c3]
-	If boolPixelSearch($pixel1, $pixel2, $pixel3, 1) Then
-		$x += $width
-		Return " "
-	EndIf
-	
+	For $i = 1 To 3
+	    Local $pixel1[3] = [$x + 1, $y + 3, $c1], $pixel2[3] = [$x + 1, $y + 7, $c2], $pixel3[3] = [$x + 2, $y + 5, $c3]
+	    If boolPixelSearch($pixel1, $pixel2, $pixel3, 1) Then
+		   $x += $width
+		   Return " "
+	    Else
+		   $x += 1
+	    EndIf
+    Next
+	$x -= 3
+
 	Return "¦"
 EndFunc   ;==>getChar
