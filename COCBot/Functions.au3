@@ -7,17 +7,21 @@
 #include "functions\Attack\Attack Algorithms\algorithmTH.au3"
 #include "functions\Attack\Attack Algorithms\algorithm_AllTroops.au3"
 #include "functions\Attack\Attack Algorithms\algorithm_Barch.au3"
+
 #include "functions\Config\applyConfig.au3"
 #include "functions\Config\readConfig.au3"
 #include "functions\Config\saveConfig.au3"
 #include "functions\Config\ScreenCoordinates.au3"
+
 #include "functions\Image Search\ImageSearch.au3"
 #include "functions\Image Search\checkDeadBase.au3"
 #include "functions\Image Search\checkTownhall.au3"
+
 #include "functions\Main Screen\checkMainScreen.au3"
 #include "functions\Main Screen\checkObstacles.au3"
 #include "functions\Main Screen\waitMainScreen.au3"
 #include "functions\Main Screen\ZoomOut.au3"
+
 #include "functions\Other\_Sleep.au3"
 #include "functions\Other\Click.au3"
 #include "functions\Other\CreateLogFile.au3"
@@ -26,12 +30,14 @@
 #include "functions\Other\SetLog.au3"
 #include "functions\Other\Tab.au3"
 #include "functions\Other\Time.au3"
+
 #include "functions\Pixels\_CaptureRegion.au3"
 #include "functions\Pixels\_ColorCheck.au3"
 #include "functions\Pixels\_GetPixelColor.au3"
 #include "functions\Pixels\_PixelSearch.au3"
 #include "functions\Pixels\_MultiPixelSearch.au3"
 #include "functions\Pixels\boolPixelSearch.au3"
+
 #include "functions\Read Text\getChar.au3"
 #include "functions\Read Text\getDarkElixir.au3"
 #include "functions\Read Text\getDigit.au3"
@@ -41,11 +47,13 @@
 #include "functions\Read Text\getOther.au3"
 #include "functions\Read Text\getTrophy.au3"
 #include "functions\Read Text\getString.au3"
+
 #include "functions\Search\checkNextButton.au3"
 #include "functions\Search\CompareResources.au3"
 #include "functions\Search\GetResources.au3"
 #include "functions\Search\PrepareSearch.au3"
 #include "functions\Search\VillageSearch.au3"
+
 #include "functions\Village\BoostBarracks.au3"
 #include "functions\Village\CheckFullArmy.au3"
 #include "functions\Village\Collect.au3"

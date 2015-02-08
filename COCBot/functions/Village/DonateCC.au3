@@ -6,11 +6,13 @@ Func DonateCC()
 	Local $y = 119
 	SetLog("Donating Troops", $COLOR_BLUE)
 
- 	_CaptureRegion()
+#CS
+  	_CaptureRegion()
    	If _ColorCheck(_GetPixelColor(34, 321), Hex(0xE00300, 6), 20) = False And $CommandStop <> 3 Then
   	   SetLog("No new chats, skip donating", $COLOR_ORANGE)
   	   Return
   	EndIf
+#CE
 
 	 Click(1, 1) ;Click Away
 	 If _ColorCheck(_GetPixelColor(331, 330), Hex(0xF0A03B, 6), 20) = False Then Click(19, 349) ;Clicks chat thing
@@ -101,7 +103,7 @@ Func DonateCC()
 			Click($Scroll[0], $Scroll[1])
 			$y = 119
 			If _Sleep(700) Then ExitLoop
-	    Else
+	    ElseIf Not IsArray($DonatePixel) Then
 			$Donate = False
 		EndIf
 	WEnd

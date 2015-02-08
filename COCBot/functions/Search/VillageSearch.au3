@@ -38,14 +38,16 @@ Func VillageSearch($TakeSS = 0) ;Control for searching a village that meets cond
 					If checkDeadBase() Then
 						SetLog("~~~~~~~Dead Base Found!~~~~~~~", $COLOR_GREEN)
 						ExitLoop
-					Else
+					 Else
+						If _Sleep(1000) Then ExitLoop (2)
 						SetLog("~~~~~~~Not dead base, skipping~~~~~~~", $COLOR_ORANGE)
 						Click(750, 500) ;Click Next
 					EndIf
 				Else
 					ExitLoop
 				EndIf
-			Else
+			 Else
+				If _Sleep(1000) Then ExitLoop (2)
 				Click(750, 500) ;Click Next
 			EndIf
 		WEnd

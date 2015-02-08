@@ -86,9 +86,13 @@ Func btnStart()
 				GUICtrlSetState($btnStart, $GUI_HIDE)
 				GUICtrlSetState($btnStop, $GUI_SHOW)
 				If GUICtrlRead($txtCapacity) = 0 And $icmbTroopComp <> 8 Then
-					 MsgBox(0, "", "Don't Forget to Set Your Troops Capacity in Troop Settings!!")
+					 MsgBox(0, "", "Don't Forget to Set Your Troops Capacity in Troops Tab!!")
 					 btnStop()
 				  EndIf
+				  _CaptureRegion()
+				  For $i = 4 To 10
+				  SetLog(_ImageSearch("D:\BOTCOC\COC-Bot\images\Walls\" & $i & ".bmp", 1, $THx, $THy, 50) & $THx & $THy)
+				  Next
 				runBot()
 			EndIf
 		Else

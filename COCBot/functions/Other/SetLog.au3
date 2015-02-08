@@ -1,4 +1,4 @@
-Func SetLog($String, $Color = 0x000000) ;Sets the text for the log
+Func SetLog($String, $Color = $COLOR_BLUE) ;Sets the text for the log
 	_GUICtrlRichEdit_AppendTextColor($txtLog, Time(), 0x000000)
 	_GUICtrlRichEdit_AppendTextColor($txtLog, $String & @CRLF, _ColorConvert($Color))
 	_GUICtrlStatusBar_SetText($statLog, "Status : " & $String)

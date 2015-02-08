@@ -51,6 +51,7 @@ Global $ReqText
 Global $cmbTroopComp ;For Event change on ComboBox Troop Compositions
 Global $iCollectCounter = 0 ; Collect counter, when reaches $COLLECTATCOUNT, it will collect
 Global $COLLECTATCOUNT = 8 ; Run Collect() after this amount of times before actually collect
+
 ;---------------------------------------------------------------------------------------------------
 Global $BSpos[2] ; Inside BlueStacks positions relative to the screen
 ;---------------------------------------------------------------------------------------------------
@@ -108,6 +109,7 @@ Global $boostsEnabled = 1 ; is this function enabled
 
 ; Traps Settings
 Global $TrapPos[2] = [-1, -1] ;Position of trap
+
 ;Donate Settings
 Global $CCPos[2] = [-1, -1] ;Position of clan castle
 
