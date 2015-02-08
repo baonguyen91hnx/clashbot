@@ -93,7 +93,7 @@ Func DonateCC()
 				ExitLoop
 			EndIf
 		    If _Sleep(500) Then Return
-		    Click(1, 1, 1, 2000)
+		    Click(1, 1, 1, 5000)
 			$y = $DonatePixel[1] + 10
 		WEnd
 		$DonatePixel = _MultiPixelSearch(202, $y, 203, 670, 1, 1, Hex(0x262926, 6), $offColors, 20)
@@ -153,7 +153,7 @@ Func DonateBarbs()
 			Return
 		EndIf
 		If _Sleep(500) Then Return
-		Click(1, 1, 1, 2000)
+		Click(1, 1, 1, 5000)
 	Else
 		DonateArchers()
 		Return
@@ -179,7 +179,7 @@ Func DonateArchers()
 			Return
 		EndIf
 		If _Sleep(500) Then Return
-		Click(1, 1, 1, 2000)
+		Click(1, 1, 1, 5000)
 	Else
 		DonateGiants()
 		Return
@@ -201,10 +201,10 @@ Func DonateGiants()
 			SetLog("No troops available for donation, donating later...", $COLOR_ORANGE)
 		EndIf
 		If _Sleep(500) Then Return
-		Click(1, 1, 1, 2000)
+		Click(1, 1, 1, 5000)
 	Else
 		SetLog("No troops available for donation, donating later...", $COLOR_ORANGE)
 		If _Sleep(500) Then Return
-		Click(1, 1, 1, 2000)
+		Click(1, 1, 1, 5000)
 	EndIf
 EndFunc   ;==>DonateGiants
