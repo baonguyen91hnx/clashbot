@@ -2,9 +2,9 @@
 ;Returns True when there is something blocking
 
 Func checkObstacles() ;Checks if something is in the way for mainscreen
-
+    Local $x, $y
 	_CaptureRegion()
-   If _ImageSearch($break, 0, 0, 0, 80) Then
+   If _ImageSearch($break, 0, $x, $y, 80) Then
 	    SetLog("Village must take a break, wait 2 Minutes...", $COLOR_ORANGE)
 		If _Sleep(60000*2) Then Return ; 2 Minutes
 		Click(416, 399);Check for out of sync or inactivity
