@@ -2,7 +2,7 @@ Func UpgradeWall()
    If $ichkWalls = 1 Then
 	  While checkWall()
 		 Click(1, 1) ; Click Away
-		 If _Sleep(1000) Then ExitLoop
+		 If _Sleep(600) Then ExitLoop
 		 Click($WallX, $WallY)
 		 If _Sleep(600) Then ExitLoop
 		 Click(432, 597) ; Select Row
@@ -27,8 +27,10 @@ Func UpgradeWall()
 		 _CaptureRegion()
 		 If _ColorCheck(_GetPixelColor(472, 482), Hex(0xFFFFFF, 6), 20) Then
 			Click(472, 482) ; Click Okay
+			If _Sleep(1000) Then ExitLoop
 		 Else
 			Click(506, 396) ; Click Okay
+			If _Sleep(1000) Then ExitLoop
 		 EndIf
 	  WEnd
 	  Click(1, 1) ; Click Away
