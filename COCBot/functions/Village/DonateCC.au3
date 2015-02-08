@@ -30,7 +30,7 @@ Func DonateCC()
 					If $String = "" Then
 						$String = getString($DonatePixel[1] - 17)
 					Else
-						$String = $String & @CRLF & getString($DonatePixel[1] - 17)
+						$String = $String & getString($DonatePixel[1] - 17)
 					EndIf
 
 					SetLog("Chat Text: " & $String, $COLOR_GREEN)
@@ -97,11 +97,11 @@ Func DonateCC()
 		$DonatePixel = _MultiPixelSearch(202, $y, 203, 670, 1, 1, Hex(0x262926, 6), $offColors, 20)
 		Local $Scroll = _PixelSearch(285, 650, 287, 700, Hex(0x97E405, 6), 20)
 		$Donate = True
-		If IsArray($Scroll) Then
+		If IsArray($Scroll) And Not IsArray($DonatePixel) Then
 			Click($Scroll[0], $Scroll[1])
 			$y = 119
 			If _Sleep(700) Then ExitLoop
-	    ElseIf Not IsArray($DonatePixel) Then
+	    Else
 			$Donate = False
 		EndIf
 	WEnd
