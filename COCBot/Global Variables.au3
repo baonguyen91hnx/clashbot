@@ -166,3 +166,5 @@ Global $MeetCondStop = False
 Global $itxtMaxTrophy ; Max trophy before drop trophy
 Global $ichkBackground ; Background mode enabled disabled
 Global $collectorPos[17][2] ;Positions of each collectors
+
+Global $break = @ScriptDir & "\images\break.bmp"
