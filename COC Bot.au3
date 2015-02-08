@@ -76,6 +76,8 @@ Func runBot() ;Bot that runs everything in order
 		If _Sleep(1000) Then Return
 		Collect()
 		If _Sleep(1000) Then Return
+		UpgradeWall()
+		If _Sleep(1000) Then Return
 		Idle()
 		If _Sleep(1000) Then Return
 		If $CommandStop <> 0 And $CommandStop <> 3 Then

@@ -14,7 +14,7 @@ Local $collx, $colly
 	Click(1, 1) ;Click Away
 	For $i = 0 To 16
 		If _Sleep(150) Or $RunState = False Then ExitLoop
-	    _CaptureRegion(0,0,800)
+	    _CaptureRegion(0,0,800,613)
 	    If _ImageSearch(@ScriptDir & "\images\collect.bmp", 1, $collx, $colly, 30) Then
 			Click($collx, $colly) ;Click collector
 	    Else

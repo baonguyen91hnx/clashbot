@@ -55,6 +55,7 @@ Global $COLLECTATCOUNT = 8 ; Run Collect() after this amount of times before act
 ;---------------------------------------------------------------------------------------------------
 Global $BSpos[2] ; Inside BlueStacks positions relative to the screen
 ;---------------------------------------------------------------------------------------------------
+
 ;Search Settings
 Global $searchGold, $searchElixir, $searchDark, $searchTrophy, $searchTH ;Resources of bases when searching
 Global $MinGold, $MinElixir, $MinDark, $MinTrophy, $MaxTH ; Minimum Resources conditions
@@ -145,6 +146,10 @@ Global $ArmyComp
 
 Global $barrackPos[4][2] ;Positions of each barracks
 Global $barrackTroop[4] ;Barrack troop set
+
+;Other Settings
+Global $ichkWalls
+Global $icmbWalls
 
 ;General Settings
 Global $botPos[2] ; Position of bot used for Hide function

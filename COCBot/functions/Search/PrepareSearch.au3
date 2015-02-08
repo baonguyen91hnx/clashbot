@@ -2,6 +2,7 @@
 
 Func PrepareSearch() ;Click attack button and find match button, will break shield
 	While 1
+	    SetLog("Searching...")
 		Click(60, 614);Click Attack Button
 		If _Sleep(1000) Then ExitLoop
 		Click(217, 510);Click Find a Match Button
