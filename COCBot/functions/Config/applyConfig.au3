@@ -159,6 +159,7 @@ Func applyConfig() ;Applies the data from config to the controls in GUI
 
 	GUICtrlSetData($txtRequest, $itxtRequest)
 	chkRequest()
+
 	;Troop Settings--------------------------------------------------------------------------
 	_GUICtrlComboBox_SetCurSel($cmbTroopComp, $icmbTroopComp)
 	 GUICtrlSetData($txtCapacity, $icmbTroopCap)
@@ -173,6 +174,15 @@ Func applyConfig() ;Applies the data from config to the controls in GUI
 	_GUICtrlComboBox_SetCurSel($cmbBarrack2, $barrackTroop[1])
 	_GUICtrlComboBox_SetCurSel($cmbBarrack3, $barrackTroop[2])
 	_GUICtrlComboBox_SetCurSel($cmbBarrack4, $barrackTroop[3])
+
+	;Other Settings--------------------------------------------------------------------------
+	If $ichkWalls = 1 Then
+		GUICtrlSetState($chkWalls, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkWalls, $GUI_UNCHECKED)
+	EndIf
+	_GUICtrlComboBox_SetCurSel($cmbWalls, $icmbWalls)
+
 	;General Settings--------------------------------------------------------------------------
 	If $frmBotPosX <> -32000 Then WinMove($sBotTitle, "", $frmBotPosX, $frmBotPosY)
 	GUICtrlSetData($txtMaxTrophy, $itxtMaxTrophy)
@@ -183,7 +193,7 @@ Func applyConfig() ;Applies the data from config to the controls in GUI
 		GUICtrlSetState($chkBackground, $GUI_UNCHECKED)
 	EndIf
 	chkBackground() ;Applies it to hidden button
-	
+
 	If $ichkBotStop = 1 Then
 		GUICtrlSetState($chkBotStop, $GUI_CHECKED)
 	Else

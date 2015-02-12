@@ -86,7 +86,7 @@ Func btnStart()
 				GUICtrlSetState($btnStart, $GUI_HIDE)
 				GUICtrlSetState($btnStop, $GUI_SHOW)
 				If GUICtrlRead($txtCapacity) = 0 And $icmbTroopComp <> 8 Then
-					 MsgBox(0, "", "Don't Forget to Set Your Troops Capacity in Troop Settings!!")
+					 MsgBox(0, "", "Don't Forget to Set Your Troops Capacity in Troops Tab!!")
 					 btnStop()
 				  EndIf
 				runBot()

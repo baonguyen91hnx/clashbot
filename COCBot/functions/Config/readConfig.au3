@@ -15,7 +15,7 @@ Func readConfig() ;Reads config and sets it to the variables
 		$chkConditions[4] = IniRead($config, "search", "conditionTownHall", "0")
 		$chkConditions[5] = IniRead($config, "search", "conditionTownHallO", "0")
 		$icmbTH = IniRead($config, "search", "THLevel", "0")
-		
+
 		$TakeLootSnapShot = IniRead($config, "search", "TakeLootSnapShot", "0")
 		$TakeAllTownSnapShot = IniRead($config, "search", "TakeAllTownSnapShot", "0")
 		;Attack Settings-------------------------------------------------------------------------
@@ -49,6 +49,7 @@ Func readConfig() ;Reads config and sets it to the variables
 		$ichkDonateGiants = IniRead($config, "donate", "chkDonateGiants", "0")
 		$ichkDonateAllGiants = IniRead($config, "donate", "chkDonateAllGiants", "0")
 		$itxtDonateGiants = StringReplace(IniRead($config, "donate", "txtDonateGiants", "giants|giant|any"), "|", @CRLF)
+
 		;Troop Settings--------------------------------------------------------------------------
 		$icmbTroopComp = IniRead($config, "troop", "composition", "0")
 		$icmbTroopCap = IniRead($config, "troop", "capacity", "0")
@@ -62,10 +63,15 @@ Func readConfig() ;Reads config and sets it to the variables
 			$barrackPos[$i][0] = IniRead($config, "troop", "xBarrack" & $i + 1, "0")
 			$barrackPos[$i][1] = IniRead($config, "troop", "yBarrack" & $i + 1, "0")
 			$barrackTroop[$i] = IniRead($config, "troop", "troop" & $i + 1, "0")
-		Next
+		 Next
+
+		;Other Settings--------------------------------------------------------------------------
+	    $ichkWalls = IniRead($config, "other", "auto-wall", "0")
+	    $icmbWalls = IniRead($config, "other", "walllvl", "0")
 	Else
 		Return False
 	EndIf
+
 	;General Settings--------------------------------------------------------------------------
 	$frmBotPosX = IniRead($config, "general", "frmBotPosX", "207")
 	$frmBotPosY = IniRead($config, "general", "frmBotPosY", "158")
@@ -74,7 +80,7 @@ Func readConfig() ;Reads config and sets it to the variables
 	$ichkBotStop = IniRead($config, "general", "BotStop", "0")
 	$icmbBotCommand = IniRead($config, "general", "Command", "0")
 	$icmbBotCond = IniRead($config, "general", "Cond", "0")
-	
+
 	For $i = 0 To 16 ;Covers all Collectors
 		$collectorPos[$i][0] = IniRead($config, "general", "xCollector" & $i + 1, "0")
 		$collectorPos[$i][1] = IniRead($config, "general", "yCollector" & $i + 1, "0")

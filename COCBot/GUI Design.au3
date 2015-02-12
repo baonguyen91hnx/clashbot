@@ -25,14 +25,14 @@ $pageGeneral = GUICtrlCreateTabItem("General")
 $Controls = GUICtrlCreateGroup("Controls", 15, 270, 385, 41)
 $chkBotStop = GUICtrlCreateCheckbox("", 37, 289, 16, 16)
 $cmbBotCommand = GUICtrlCreateCombo("", 60, 285, 110, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
-GUICtrlSetData(-1, "Halt Attack Mode|Shutdown PC|Sleep PC", "Halt Attack")
-$lblPC = GUICtrlCreateLabel("IF :", 178, 289, 55, 17)
-$cmbBotCond = GUICtrlCreateCombo("", 195, 285, 153, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+GUICtrlSetData(-1, "Halt Attack Mode|Shutdown PC|Sleep PC", "Halt Attack Mode")
+$lblPC = GUICtrlCreateLabel("IF :", 178, 289, 25, 17)
+$cmbBotCond = GUICtrlCreateCombo("", 198, 285, 163, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 GUICtrlSetData(-1, "G and E Full and Max.Trophy|(G and E) Full or Max.Trophy|(G or E) Full and Max.Trophy|G or E Full or Max.Trophy|Gold and Elixir Full|Gold or Elixir Full|Gold Full and Max.Trophy|Elixir Full and Max.Trophy|Gold Full or Max.Trophy|Elixir Full or Max.Trophy|Gold Full|Elixir Full|Reach Max. Trophy", "Gold and Elixir Full")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 $otherSettings = GUICtrlCreateGroup("Other Settings", 15, 315, 385, 41)
-$lblBoostBarracks = GUICtrlCreateLabel("Boosts left :", 37, 332, 66, 17)
-$cmbBoostBarracks = GUICtrlCreateCombo("", 95, 328, 35, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+$lblBoostBarracks = GUICtrlCreateLabel("Barracks Boosts left :", 37, 332, 100, 17)
+$cmbBoostBarracks = GUICtrlCreateCombo("", 150, 328, 35, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 GUICtrlSetData(-1, "0|1|2|3|4|5", "0")
 $lblMaxTrophy = GUICtrlCreateLabel("Max Trophy :", 230, 332, 66, 17)
 $txtMaxTrophy = GUICtrlCreateInput("3000", 298, 328, 71, 21, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
@@ -42,7 +42,7 @@ GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 
 ;Search Tab
-$pageSearchSetting = GUICtrlCreateTabItem("Search Settings")
+$pageSearchSetting = GUICtrlCreateTabItem("Search")
 $Searchonly = GUICtrlCreateGroup("Search Only", 15, 315, 385, 41)
 $btnSearchMode = GUICtrlCreateButton("Search Mode", 24, 327, 368, 25)
 GUICtrlSetOnEvent(-1, "btnSearchMode")
@@ -85,7 +85,7 @@ GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 
 ;Attack Tab
-$pageAttackSettings = GUICtrlCreateTabItem("Attack Settings")
+$pageAttackSettings = GUICtrlCreateTabItem("Attack")
 $WeakBaseSettings = GUICtrlCreateGroup("Weak Base Settings", 15, 35, 130, 230)
 $lblMortar = GUICtrlCreateLabel("Max Mortar Lvl:", 20, 58, 77, 17)
 $cmbMortar = GUICtrlCreateCombo("", 100, 55, 35, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
@@ -144,7 +144,7 @@ GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 
 ;Donate Tab
-$pageDonateSettings = GUICtrlCreateTabItem("Donate Settings")
+$pageDonateSettings = GUICtrlCreateTabItem("Donate")
 $Donation = GUICtrlCreateGroup("", 15, 30, 385, 325)
 $Barbarians = GUICtrlCreateGroup("Barbarians", 20, 70, 120, 235)
 $chkDonateAllBarbarians = GUICtrlCreateCheckbox("Donate to All", 30, 95, 97, 17)
@@ -180,8 +180,8 @@ GUICtrlSetOnEvent(-1, "btnLocateClanCastle")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 
-;Donate Tab
-$pageTroopSettings = GUICtrlCreateTabItem("Troop Settings")
+;Troops Tab
+$pageTroopSettings = GUICtrlCreateTabItem("Troops")
 $Barracks = GUICtrlCreateGroup("Troops", 20, 40, 185, 215)
 $lblBarbarians = GUICtrlCreateLabel("Barbarians :", 30, 68, 60, 17)
 $lblArchers = GUICtrlCreateLabel("Archers :", 30, 93, 46, 17)
@@ -234,6 +234,15 @@ GUICtrlSetOnEvent(-1, "btnLocateBarracks")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 GUICtrlCreateTabItem("")
 
+;Other Tab
+$pageOtherSettings = GUICtrlCreateTabItem("Other Settings")
+$Walls = GUICtrlCreateGroup("Walls", 20, 40, 180, 82)
+$chkWalls = GUICtrlCreateCheckbox("Auto Walls Upgrade", 46, 60, 115, 17)
+$lblWalls = GUICtrlCreateLabel("Current Wall Level:", 40, 89, 97, 17)
+$cmbWalls = GUICtrlCreateCombo("", 140, 85, 40, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+GUICtrlSetData(-1, "4|5|6|7|8|9|10", "4")
+GUICtrlCreateGroup("", -99, -99, 1, 1)
+GUICtrlCreateTabItem("")
 
 ;Bottom status bar
 $statLog = _GUICtrlStatusBar_Create($frmBot)

@@ -25,7 +25,6 @@ Func ReArm()
 			Click(1, 1)
 		Else
 			SetLog("Traps not found", $COLOR_RED)
-			If _Sleep(10000) Then Return
 		EndIf
 		ExitLoop
 	WEnd

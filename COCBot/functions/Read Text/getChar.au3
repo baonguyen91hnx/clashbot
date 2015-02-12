@@ -763,5 +763,5 @@ Func getChar(ByRef $x, $y)
     Next
 	$x -= 3
 
-	Return "¦"
+	Return "|"
 EndFunc   ;==>getChar

@@ -46,14 +46,16 @@ Global $Restart = False
 Global $RunState = False
 Global $TakeLootSnapShot = True
 Global $TakeAllTownSnapShot = False
-
+Global $ReqText
 
 Global $cmbTroopComp ;For Event change on ComboBox Troop Compositions
 Global $iCollectCounter = 0 ; Collect counter, when reaches $COLLECTATCOUNT, it will collect
 Global $COLLECTATCOUNT = 8 ; Run Collect() after this amount of times before actually collect
+
 ;---------------------------------------------------------------------------------------------------
 Global $BSpos[2] ; Inside BlueStacks positions relative to the screen
 ;---------------------------------------------------------------------------------------------------
+
 ;Search Settings
 Global $searchGold, $searchElixir, $searchDark, $searchTrophy, $searchTH ;Resources of bases when searching
 Global $MinGold, $MinElixir, $MinDark, $MinTrophy, $MaxTH ; Minimum Resources conditions
@@ -108,6 +110,7 @@ Global $boostsEnabled = 1 ; is this function enabled
 
 ; Traps Settings
 Global $TrapPos[2] = [-1, -1] ;Position of trap
+
 ;Donate Settings
 Global $CCPos[2] = [-1, -1] ;Position of clan castle
 
@@ -144,6 +147,10 @@ Global $ArmyComp
 Global $barrackPos[4][2] ;Positions of each barracks
 Global $barrackTroop[4] ;Barrack troop set
 
+;Other Settings
+Global $ichkWalls
+Global $icmbWalls
+
 ;General Settings
 Global $botPos[2] ; Position of bot used for Hide function
 Global $frmBotPosX ; Position X of the GUI
@@ -159,3 +166,5 @@ Global $MeetCondStop = False
 Global $itxtMaxTrophy ; Max trophy before drop trophy
 Global $ichkBackground ; Background mode enabled disabled
 Global $collectorPos[17][2] ;Positions of each collectors
+
+Global $break = @ScriptDir & "\images\break.bmp"

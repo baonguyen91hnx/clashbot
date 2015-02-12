@@ -8,6 +8,7 @@ $atkTH[4] = @ScriptDir & "\images\TH\townhall10.bmp"
 Global $Tolerance1 = 80
 
 Func checkTownhall()
+    If _Sleep(500) Then Return
 	_CaptureRegion()
    For $i = 0 To 4
 	$THLocation = _ImageSearch($atkTH[$i], 1, $THx, $THy, $Tolerance1) ; Getting TH Location

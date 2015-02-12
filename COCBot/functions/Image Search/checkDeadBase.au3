@@ -72,7 +72,7 @@ $E[3][10] = @ScriptDir & "\images\ELIX4\E12F9.bmp"
 ;--------------------------------------------------------------------------------------------------------------
 
 Func ZombieSearch()
-   _CaptureRegion()
+   _CaptureRegion(0,0,800,613)
 	$ZombieCount = 0
 	 $ZC = 0
 	 For $s = 0 To ($ZombieFileSets - 1) Step 1
