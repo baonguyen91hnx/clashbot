@@ -22,7 +22,7 @@ Func VillageSearch($TakeSS = 0) ;Control for searching a village that meets cond
 	    _BlockInputEx(3, "", "", $HWnD)
 		While 1
 			_WinAPI_EmptyWorkingSet(WinGetProcess($Title)) ; Reduce BlueStacks Memory Usage
-			If _Sleep(3000) Then ExitLoop (2)
+			If _Sleep(6000) Then ExitLoop (2)
 			GetResources() ;Reads Resource Values
 
 			If $Restart = True Then ExitLoop (2)
