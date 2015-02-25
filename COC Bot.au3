@@ -7,7 +7,7 @@
 #pragma compile(FileVersion, 1.0)
 #pragma compile(LegalCopyright, © https://the.bytecode.club/)
 
-$sBotVersion = "5.6"
+$sBotVersion = "5.6.2"
 $sBotTitle = "TBC Clashbot " & $sBotVersion
 
 If _Singleton($sBotTitle, 1) = 0 Then

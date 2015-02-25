@@ -3,6 +3,11 @@ Opt("MouseClickDelay", 10)
 Opt("MouseClickDownDelay", 10)
 Opt("TrayMenuMode", 3)
 
+Global Const $64Bit = StringInStr(@OSArch, "64") > 0
+Global Const $DEFAULT_HEIGHT = 720
+Global Const $DEFAULT_WIDTH = 860
+Global Const $REGISTRY_KEY_DIRECTORY = "HKEY_LOCAL_MACHINE\SOFTWARE\BlueStacks\Guests\Android\FrameBuffer\0"
+
 _GDIPlus_Startup()
 
 Func GUIControl($hWind, $iMsg, $wParam, $lParam)
@@ -50,24 +55,44 @@ Func SetTime()
 	If _GUICtrlTab_GetCurSel($tabMain) = 6 Then GUICtrlSetData($lblresultruntime, StringFormat("%02i:%02i:%02i", $hour, $min, $sec))
 EndFunc   ;==>SetTime
 
-Func btnStart()
-	CreateLogFile()
+Func Open()
+   If $64Bit Then ;If 64-Bit
+		 ShellExecute("C:\Program Files (x86)\BlueStacks\HD-StartLauncher.exe")
+		 Sleep(290)
+		 Check()
+	  Else ;If 32-Bit
+		 ShellExecute("C:\Program Files\BlueStacks\HD-StartLauncher.exe")
+		 Sleep(290)
+		 Check()
+   EndIf
+EndFunc
 
-	SaveConfig()
-	readConfig()
-	applyConfig()
+Func Check()
+   If IsArray(ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")) Then
+	  Initiate()
+   Else
+	  Sleep(500)
+	  Check()
+   EndIf
+EndFunc
 
-	_GUICtrlEdit_SetText($txtLog, "")
-
-	If WinExists($Title) Then
-		DisableBS($HWnD, $SC_MINIMIZE)
-		DisableBS($HWnD, $SC_CLOSE)
-		If IsArray(ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")) Then
+Func Initiate()
+   If IsArray(ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")) Then
 			Local $BSsize = [ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")[2], ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")[3]]
-			If $BSsize[0] <> 860 Or $BSsize[1] <> 720 Then
-				SetLog("BlueStacks resolution is not set to 860x720!", $COLOR_RED)
-				SetLog("Download the '860x720.reg' file and run it, restart BlueStacks", $COLOR_ORANGE)
-				SetLog("Download the '860x720.reg' here: http://www66.zippyshare.com/d/SX7ZdAuA/198756/860x720.reg", $COLOR_ORANGE)
+			Local $fullScreenRegistryData = RegRead($REGISTRY_KEY_DIRECTORY, "FullScreen")
+			Local $guestHeightRegistryData = RegRead($REGISTRY_KEY_DIRECTORY, "GuestHeight")
+			Local $guestWidthRegistryData = RegRead($REGISTRY_KEY_DIRECTORY, "GuestWidth")
+			Local $windowHeightRegistryData = RegRead($REGISTRY_KEY_DIRECTORY, "WindowHeight")
+			Local $windowWidthRegistryData = RegRead($REGISTRY_KEY_DIRECTORY, "WindowWidth")
+
+	  If $BSsize[0] <> 860 Or $BSsize[1] <> 720 Then
+		  RegWrite($REGISTRY_KEY_DIRECTORY, "FullScreen", "REG_DWORD", "0")
+		  RegWrite($REGISTRY_KEY_DIRECTORY, "GuestHeight", "REG_DWORD", $DEFAULT_HEIGHT)
+		  RegWrite($REGISTRY_KEY_DIRECTORY, "GuestWidth", "REG_DWORD", $DEFAULT_WIDTH)
+		  RegWrite($REGISTRY_KEY_DIRECTORY, "WindowHeight", "REG_DWORD", $DEFAULT_HEIGHT)
+		  RegWrite($REGISTRY_KEY_DIRECTORY, "WindowWidth", "REG_DWORD", $DEFAULT_WIDTH)
+			SetLog("Please restart your computer for the applied changes to take effect.", $COLOR_ORANGE)
+
 			Else
 				WinActivate($Title)
 
@@ -99,9 +124,24 @@ Func btnStart()
 		Else
 			SetLog("Please Launch The Game", $COLOR_RED)
 		EndIf
+EndFunc
+
+Func btnStart()
+	CreateLogFile()
+
+	SaveConfig()
+	readConfig()
+	applyConfig()
+
+	_GUICtrlEdit_SetText($txtLog, "")
+
+	If WinExists($Title) Then
+		DisableBS($HWnD, $SC_MINIMIZE)
+		DisableBS($HWnD, $SC_CLOSE)
+		Initiate()
 	Else
-		SetLog("BlueStacks was not found!", $COLOR_RED)
-	EndIf
+	  Open()
+	  EndIf
 EndFunc   ;==>btnStart
 
 Func btnStop()
