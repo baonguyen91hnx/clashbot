@@ -1,8 +1,8 @@
 ;This function checks whether the pixel, located in the eyes of the builder in mainscreen, is available
 ;If it is not available, it calls checkObstacles and also waitMainScreen.
 
-Func checkMainScreen() ;Checks if in main screen
-	SetLog("Trying to locate Main Screen", $COLOR_BLUE)
+Func checkMainScreen($Check = True) ;Checks if in main screen
+	If $Check = True Then SetLog("Trying to locate Main Screen", $COLOR_BLUE)
     _WinAPI_EmptyWorkingSet(WinGetProcess($Title)) ; Reduce BlueStacks Memory Usage
 
 	_CaptureRegion()
@@ -14,8 +14,10 @@ Func checkMainScreen() ;Checks if in main screen
 			Click(126, 700, 1, 500)
 			Local $RunApp = StringReplace(_WinAPI_GetProcessFileName(WinGetProcess($Title)), "Frontend", "RunApp")
 			Run($RunApp & " Android com.supercell.clashofclans com.supercell.clashofclans.GameApp")
-		 EndIf
+	    Else
+			$Restart = True
+		EndIf
 		waitMainScreen()
 	WEnd
-	SetLog("Main Screen Located", $COLOR_BLUE)
+	If $Check = True Then SetLog("Main Screen Located", $COLOR_BLUE)
 EndFunc   ;==>checkMainScreen

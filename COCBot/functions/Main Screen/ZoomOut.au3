@@ -9,7 +9,7 @@ Func ZoomOut() ;Zooms out
 		While _GetPixelColor(1, 1) <> Hex(0x000000, 6) And _GetPixelColor(850, 1) <> Hex(0x000000, 6)
 			If _Sleep(600) Then Return
 			If ControlSend($Title, "", "", "{DOWN}") Then $i += 1
-			If $i = 20 Then
+			If $i = 40 Then
 				ExitLoop
 			EndIf
 			_CaptureRegion(0, 0, 860, 2)

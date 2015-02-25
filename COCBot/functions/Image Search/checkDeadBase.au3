@@ -1,12 +1,20 @@
 Func checkDeadBase()
-	Return ZombieSearch() ; just so it compiles
+;    _CaptureRegion()
+;	If _ColorCheck(_GetPixelColor(27, 29), Hex(0x5C5E60, 6), 20) And $SearchCount <= 3 Then
+;	   $NoLeague += 1
+ ;   EndIf
+;	If _ColorCheck(_GetPixelColor(27, 29), Hex(0x5C5E60, 6), 20) And $NoLeague < 3 And $SearchCount >= 3 Then
+;	   Return True ; Check if get 3x village which no league, its a false dead base because reset league features in CoC
+ ;   Else
+	   Return ZombieSearch() ; just so it compiles
+;    EndIf
 EndFunc   ;==>checkDeadBase
 
 ;checkDeadBase Variables:-------------===========================
 GLOBAL $AdjustTolerance=0
 Global $Tolerance[5][11]=[[55,55,55,80,70,70,75,80,0,75,65],[55,55,55,80,80,70,75,80,0,75,65],[55,55,55,80,80,70,75,80,0,75,65],[55,55,55,80,80,60,75,75,0,75,60],[55,55,55,80,80,70,75,80,0,75,65]]
 Global $ZC = 0, $ZombieCount = 0;, $E
-Global $ZombieFileSets = 4 ;Variant Image to use organized as per Folder
+Global $ZombieFileSets = 3 ;Variant Image to use organized as per Folder
 Global $ZSExclude = 0 ;Set to 0 to include Elixir Lvl 6, 1 to include lvl 7 and so on..
 Global $Lx[4] = [0, 400, 0, 400]
 Global $Ly[4] = [0, 0, 265, 265]
@@ -72,7 +80,7 @@ $E[3][10] = @ScriptDir & "\images\ELIX4\E12F9.bmp"
 ;--------------------------------------------------------------------------------------------------------------
 
 Func ZombieSearch()
-   _CaptureRegion(0,0,800,613)
+   _CaptureRegion()
 	$ZombieCount = 0
 	 $ZC = 0
 	 For $s = 0 To ($ZombieFileSets - 1) Step 1
@@ -91,7 +99,7 @@ Func ZombieSearch()
 	 $ZombieCount += $ZC
 	If $ZombieCount > 0 Then
 		Return True
-	Else
+	 Else
 		Return False
 	EndIf
 EndFunc   ;==>ZombieSearch

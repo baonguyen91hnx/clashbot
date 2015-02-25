@@ -15,7 +15,7 @@ Func CompareResources() ;Compares resources and returns true if conditions meet,
 	For $i = 0 To 4
 		If $searchTH = $THText[$i] Then $THL = $i
 	Next
-	
+
 	Switch $THLoc
 	Case "Inside"
 		$THLO = 0
@@ -23,29 +23,55 @@ Func CompareResources() ;Compares resources and returns true if conditions meet,
 		$THLO = 1
 	EndSwitch
 
-	If GUICtrlRead($chkMeetGxE) = $GUI_CHECKED Then
-		If $G = False Or $E = False Then Return False
-	EndIf
+    If $ichkMeetOne = 1 Then
+	   If GUICtrlRead($chkMeetGxE) = $GUI_CHECKED Then
+		   If $G = True Or $E = True Then Return True
+	   EndIf
 
-	If GUICtrlRead($chkMeetDE) = $GUI_CHECKED Then
-		If $D = False Then Return False
-	EndIf
+	   If GUICtrlRead($chkMeetDE) = $GUI_CHECKED Then
+		   If $D = True Then Return True
+	   EndIf
 
-	If GUICtrlRead($chkMeetTrophy) = $GUI_CHECKED Then
-		If $T = False Then Return False
-	 EndIf
+	   If GUICtrlRead($chkMeetTrophy) = $GUI_CHECKED Then
+		   If $T = True Then Return True
+		EndIf
 
-	If GUICtrlRead($chkMeetGorE) = $GUI_CHECKED Then
-		If $G = False And $E = False Then Return False
-	 EndIf
+	   If GUICtrlRead($chkMeetGorE) = $GUI_CHECKED Then
+		   If $G = True And $E = True Then Return True
+		EndIf
 
-	If GUICtrlRead($chkMeetTH) = $GUI_CHECKED Then
-		If $THL = -1 Or $THL > _GUICtrlComboBox_GetCurSel($cmbTH) Then Return False
+	   If GUICtrlRead($chkMeetTH) = $GUI_CHECKED Then
+		   If $THL <> -1 And $THL <= _GUICtrlComboBox_GetCurSel($cmbTH) Then Return True
+	   EndIf
+
+	   If GUICtrlRead($chkMeetTHO) = $GUI_CHECKED Then
+		   If $THLO = 1 Then Return True
+	   EndIf
+	   Return False
+    Else
+	   If GUICtrlRead($chkMeetGxE) = $GUI_CHECKED Then
+		   If $G = False Or $E = False Then Return False
+	   EndIf
+
+	   If GUICtrlRead($chkMeetDE) = $GUI_CHECKED Then
+		   If $D = False Then Return False
+	   EndIf
+
+	   If GUICtrlRead($chkMeetTrophy) = $GUI_CHECKED Then
+		   If $T = False Then Return False
+		EndIf
+
+	   If GUICtrlRead($chkMeetGorE) = $GUI_CHECKED Then
+		   If $G = False And $E = False Then Return False
+		EndIf
+
+	   If GUICtrlRead($chkMeetTH) = $GUI_CHECKED Then
+		   If $THL = -1 Or $THL > _GUICtrlComboBox_GetCurSel($cmbTH) Then Return False
+	   EndIf
+
+	   If GUICtrlRead($chkMeetTHO) = $GUI_CHECKED Then
+		   If $THLO <> 1 Then Return False
+	   EndIf
     EndIf
-
-	If GUICtrlRead($chkMeetTHO) = $GUI_CHECKED Then
-		If $THLO <> 1 Then Return False
-    EndIf
-
 	Return True
 EndFunc   ;==>CompareResources

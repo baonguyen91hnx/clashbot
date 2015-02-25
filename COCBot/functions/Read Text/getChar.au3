@@ -40,7 +40,7 @@ Func getChar(ByRef $x, $y)
 	Local $c1 = Hex(0xE2E3E2, 6), $c2 = Hex(0xFBFBFB, 6), $c3 = Hex(0xE8E9E8, 6)
 	For $i = 1 To 3
 		Local $pixel1[3] = [$x + 6, $y + 1, $c1], $pixel2[3] = [$x + 1, $y + 1, $c2], $pixel3[3] = [$x + 3, $y + 4, $c3]
-		If boolPixelSearch($pixel1, $pixel2, $pixel3, 1) Then
+		If boolPixelSearch($pixel1, $pixel2, $pixel3, 2) Then
 			$x += $width
 			Return "B"
 		Else
@@ -274,10 +274,10 @@ Func getChar(ByRef $x, $y)
 	$x -= 3
 
 	;search for 'j'
-	$width = 3
-	Local $c1 = Hex(0xA0A2A0, 6), $c2 = Hex(0xCFD0CF, 6), $c3 = Hex(0xFEFEFE, 6)
+	$width = 2
+	Local $c1 = Hex(0xA0A2A0, 6), $c2 = Hex(0xFDFDFD, 6), $c3 = Hex(0xFEFEFE, 6)
 	For $i = 1 To 3
-		Local $pixel1[3] = [$x + 1, $y + 0, $c1], $pixel2[3] = [$x + 1, $y + 3, $c2], $pixel3[3] = [$x + 1, $y + 9, $c3]
+		Local $pixel1[3] = [$x + 1, $y + 0, $c1], $pixel2[3] = [$x + 1, $y + 4, $c2], $pixel3[3] = [$x + 1, $y + 9, $c3]
 		If boolPixelSearch($pixel1, $pixel2, $pixel3, 1) Then
 			$x += $width
 			Return "j"
@@ -541,8 +541,9 @@ Func getChar(ByRef $x, $y)
 
 	;search for 'T'
 	$width = 6
+	$x -= 2
 	Local $c1 = Hex(0x707370, 6), $c2 = Hex(0xB7B8B7, 6), $c3 = Hex(0x969896, 6)
-	For $i = 1 To 3
+	For $i = 1 To 5
 		Local $pixel1[3] = [$x + 1, $y + 0, $c1], $pixel2[3] = [$x + 4, $y + 2, $c2], $pixel3[3] = [$x + 2, $y + 8, $c3]
 		If boolPixelSearch($pixel1, $pixel2, $pixel3, 1) Then
 			$x += $width

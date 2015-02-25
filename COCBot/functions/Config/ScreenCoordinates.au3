@@ -60,7 +60,7 @@ Func IdentifyTroopKind($position)
    If _ColorCheck($TroopPixel, Hex(0x60A4D0, 6), 5) Then Return $eWallbreaker ;Check if slot is Wallbreaker
    If _ColorCheck($TroopPixel, Hex(0xF8EB79, 6), 5) Then Return $eKing ;Check if slot is King
    $OtherPixel = _GetPixelColor(68 + (72 * $position), 588)
-   If _ColorCheck($OtherPixel, Hex(0x7031F0, 6), 5) Then Return $eQueen ;Check if slot is Queen
+   If _ColorCheck($OtherPixel, Hex(0x7031F0, 6), 5) Or _ColorCheck($TroopPixel, Hex(0x421E3F, 6), 5) Then Return $eQueen ;Check if slot is Queen <= level 10 Or Check if slot is Queen > level 10
    If _ColorCheck(_GetPixelColor(68 + (72 * $position), 585), Hex(0x68ACD4, 6), 5) Then Return $eCastle ;Check if slot is Clan Castle
    If _ColorCheck(_GetPixelColor(68 + (72 * $position), 632), Hex(0x0426EC, 6), 5) Then Return $eLSpell ;Check if slot is Lightning Spell
    Return -1

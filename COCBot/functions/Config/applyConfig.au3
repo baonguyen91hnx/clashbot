@@ -47,6 +47,12 @@ Func applyConfig() ;Applies the data from config to the controls in GUI
 		GUICtrlSetState($chkMeetTHO, $GUI_UNCHECKED)
 	 EndIf
 
+   If $ichkMeetOne = 1 Then
+		GUICtrlSetState($chkMeetOne, $GUI_CHECKED)
+   Else
+		GUICtrlSetState($chkMeetOne, $GUI_UNCHECKED)
+	 EndIf
+
    If $TakeLootSnapShot = 1 Then
 		GUICtrlSetState($chkTakeLootSS, $GUI_CHECKED)
    Else
@@ -67,15 +73,9 @@ Func applyConfig() ;Applies the data from config to the controls in GUI
 	Switch $iradAttackMode
 		Case 0
 			GUICtrlSetState($radDeadBases, $GUI_CHECKED)
-			GUICtrlSetState($radWeakBases, $GUI_UNCHECKED)
-			GUICtrlSetState($radAllBases, $GUI_UNCHECKED)
 		Case 1
-			GUICtrlSetState($radDeadBases, $GUI_UNCHECKED)
 			GUICtrlSetState($radWeakBases, $GUI_CHECKED)
-			GUICtrlSetState($radAllBases, $GUI_UNCHECKED)
 		Case 2
-			GUICtrlSetState($radDeadBases, $GUI_UNCHECKED)
-			GUICtrlSetState($radWeakBases, $GUI_UNCHECKED)
 			GUICtrlSetState($radAllBases, $GUI_CHECKED)
 	EndSwitch
 
@@ -162,7 +162,7 @@ Func applyConfig() ;Applies the data from config to the controls in GUI
 
 	;Troop Settings--------------------------------------------------------------------------
 	_GUICtrlComboBox_SetCurSel($cmbTroopComp, $icmbTroopComp)
-	 GUICtrlSetData($txtCapacity, $icmbTroopCap)
+	 ;GUICtrlSetData($txtCapacity, $icmbTroopCap)
 	 GUICtrlSetData($txtBarbarians, $BarbariansComp)
 	 GUICtrlSetData($txtArchers, $ArchersComp)
 	 GUICtrlSetData($txtNumGiants, $GiantsComp)
@@ -176,12 +176,38 @@ Func applyConfig() ;Applies the data from config to the controls in GUI
 	_GUICtrlComboBox_SetCurSel($cmbBarrack4, $barrackTroop[3])
 
 	;Other Settings--------------------------------------------------------------------------
+	;Walls
 	If $ichkWalls = 1 Then
 		GUICtrlSetState($chkWalls, $GUI_CHECKED)
 	Else
 		GUICtrlSetState($chkWalls, $GUI_UNCHECKED)
 	EndIf
 	_GUICtrlComboBox_SetCurSel($cmbWalls, $icmbWalls)
+
+	Switch $iUseStorage
+		Case 0
+			GUICtrlSetState($UseGold, $GUI_CHECKED)
+		Case 1
+			GUICtrlSetState($UseElixir, $GUI_CHECKED)
+		Case 2
+			GUICtrlSetState($UseGoldElix, $GUI_CHECKED)
+    EndSwitch
+
+	GUICtrlSetData($txtWallMinGold, $itxtWallMinGold)
+	GUICtrlSetData($txtWallMinElixir, $itxtWallMinElixir)
+	_GUICtrlComboBox_SetCurSel($cmbUnitDelay, $icmbUnitDelay)
+	_GUICtrlComboBox_SetCurSel($cmbWaveDelay, $icmbWaveDelay)
+	If $ichkTrap = 1 Then
+		GUICtrlSetState($chkTrap, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkTrap, $GUI_UNCHECKED)
+	 EndIf
+	If $iRandomspeedatk = 1 Then
+		GUICtrlSetState($Randomspeedatk, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($Randomspeedatk, $GUI_UNCHECKED)
+	 EndIf
+	Randomspeedatk()
 
 	;General Settings--------------------------------------------------------------------------
 	If $frmBotPosX <> -32000 Then WinMove($sBotTitle, "", $frmBotPosX, $frmBotPosY)
@@ -201,4 +227,6 @@ Func applyConfig() ;Applies the data from config to the controls in GUI
 	EndIf
 	_GUICtrlComboBox_SetCurSel($cmbBotCommand, $icmbBotCommand)
 	_GUICtrlComboBox_SetCurSel($cmbBotCond, $icmbBotCond)
+	_GUICtrlComboBox_SetCurSel($cmbHoursStop, $icmbHoursStop)
+	cmbBotCond()
 EndFunc   ;==>applyConfig

@@ -2,6 +2,11 @@
 
 Func BotCommand()
 	If GUICtrlRead($chkBotStop) = $GUI_CHECKED Then
+	   $itxtMaxTrophy = GUICtrlRead($txtMaxTrophy)
+	   $icmbBotCond = _GUICtrlComboBox_GetCurSel($cmbBotCond)
+	   $icmbBotCommand = _GUICtrlComboBox_GetCurSel($cmbBotCommand)
+	   $icmbHoursStop = _GUICtrlComboBox_GetCurSel($cmbHoursStop)
+	   If $icmbBotCond = 13 And $icmbHoursStop <> 0 Then $TimeToStop = $icmbHoursStop*3600000 ; 3600000 = 1 Hours
 
 		Local $TrophyCount = getOther(50, 74, "Trophy")
 		Local $TrophyMax = Number($TrophyCount) > Number($itxtMaxTrophy)
@@ -38,6 +43,11 @@ Func BotCommand()
 				If isElixirFull() Then $MeetCondStop = True
 			Case 12
 				If $TrophyMax Then $MeetCondStop = True
+			Case 13
+				If $UseTimeStop = -1 Then
+				   $UseTimeStop = 1
+			    EndIf
+				If Round(TimerDiff($sTimer)) > $TimeToStop Then $MeetCondStop = True
 		EndSwitch
 
 		If $MeetCondStop Then
@@ -51,12 +61,12 @@ Func BotCommand()
 					$CommandStop = 0 ; Halt Attack
 					If _Sleep(500) Then Return
 				Case 1
-					SetLog("Force Shutdown your PC...", $COLOR_BLUE)
+					SetLog("Force Shutdown PC...", $COLOR_BLUE)
 					If _Sleep(500) Then Return
 					Shutdown(5) ; Force Shutdown
 					Return True
 				Case 2
-					SetLog("Sleep your PC...", $COLOR_BLUE)
+					SetLog("Sleeping PC...", $COLOR_BLUE)
 					If _Sleep(500) Then Return
 					Shutdown(32) ; Sleep / Stand by
 					Return True

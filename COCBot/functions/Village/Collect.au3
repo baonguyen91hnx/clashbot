@@ -1,7 +1,7 @@
 ;Clickes the collector locations
 
 Func Collect()
-Local $collx, $colly
+Local $collx, $colly, $i = 0
 #CS
  	If $collectorPos[0][0] = "" Then
 		LocateCollectors()
@@ -12,14 +12,15 @@ Local $collx, $colly
 	SetLog("Collecting Resources", $COLOR_BLUE)
 	_Sleep(250)
 	Click(1, 1) ;Click Away
-	For $i = 0 To 25
-		If _Sleep(150) Or $RunState = False Then ExitLoop
-	    _CaptureRegion(0,0,800,613)
-	    If _ImageSearch(@ScriptDir & "\images\collect.bmp", 1, $collx, $colly, 30) Then
+	While 1
+		If _Sleep(300) Or $RunState = False Then ExitLoop
+	    _CaptureRegion(0,0,780)
+	    If _ImageSearch(@ScriptDir & "\images\collect.png", 1, $collx, $colly, 20) Then
 			Click($collx, $colly) ;Click collector
-	    Else
+	    Elseif $i >= 20 Then
 			ExitLoop
 		EndIf
+	    $i += 1
 		Click(1, 1) ;Click Away
-	Next
+	WEnd
 EndFunc   ;==>Collect

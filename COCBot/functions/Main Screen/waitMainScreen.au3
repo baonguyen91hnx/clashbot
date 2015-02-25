@@ -14,6 +14,7 @@ Func waitMainScreen() ;Waits for main screen to popup
 	Next
 
 	SetLog("Unable to load Clash Of Clans, Restarting...", $COLOR_RED)
+	$iTimeTroops = 0
 	Local $RestartApp = StringReplace(_WinAPI_GetProcessFileName(WinGetProcess($Title)), "Frontend", "Restart")
 	Run($RestartApp & " Android")
 	If _Sleep(10000) Then Return

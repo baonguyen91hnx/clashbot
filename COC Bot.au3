@@ -1,23 +1,29 @@
 #RequireAdmin
 #AutoIt3Wrapper_UseX64=n
 #pragma compile(Icon, "Icons\cocbot.ico")
-#pragma compile(FileDescription, Clash of Clans Bot - A Free/Open Sourced Clash of Clans bot - https://the.bytecode.club)
-#pragma compile(ProductName, Clash of Clans Bot)
-#pragma compile(ProductVersion, 5.5.1.1)
-#pragma compile(FileVersion, 5.5.1.1)
-#pragma compile(LegalCopyright, © The Bytecode Club)
+#pragma compile(FileDescription, Clash of Clans Bot - A Free Clash of Clans bot - https://the.bytecode.club/)
+#pragma compile(ProductName, TBC Clashbot)
+#pragma compile(ProductVersion, 1.0)
+#pragma compile(FileVersion, 1.0)
+#pragma compile(LegalCopyright, © https://the.bytecode.club/)
 
-$sBotVersion = "5.5.1.1"
-$sBotTitle = "COC Bot v" & $sBotVersion
+$sBotVersion = "5.6"
+$sBotTitle = "TBC Clashbot " & $sBotVersion
 
 If _Singleton($sBotTitle, 1) = 0 Then
 	MsgBox(0, "", "Bot is already running.")
 	Exit
  EndIf
 
+Local $sDestination = (@ScriptDir & "\Icons\logo.jpg")
+
+SplashImageOn("                        Free Clash of CLans Bot Brought To You By https://the.bytecode.club", $sDestination, 500, 80)
+Sleep(3000)
+SplashOff()
+
 If @AutoItX64 = 1 Then
-	MsgBox(0, "", "Don't Run/Compile Script (x64)! try to Run/Compile Script (x86) to getting this bot work." & @CRLF & _
-				  "If this message still appear, try to re-install your AutoIt with newer version.")
+	MsgBox(0, "", "Don't Run/Compile the Script as (x64)! try to Run/Compile the Script as (x86) to get the bot to work." & @CRLF & _
+				  "If this message still appears, try to re-install AutoIt.")
 	Exit
 EndIf
 
@@ -49,9 +55,6 @@ WEnd
 
 Func runBot() ;Bot that runs everything in order
 	While 1
-		SaveConfig()
-		readConfig()
-		applyConfig()
 		$Restart = False
 		$fullArmy = False
 		$CommandStop = -1
@@ -60,26 +63,42 @@ Func runBot() ;Bot that runs everything in order
 		If _Sleep(1000) Then Return
 		ZoomOut()
 		If _Sleep(1000) Then Return
+		checkMainScreen(False)
+		If $Restart = True Then ContinueLoop
 		If BotCommand() Then btnStop()
 		If _Sleep(1000) Then Return
+		checkMainScreen(False)
+		If $Restart = True Then ContinueLoop
 		ReArm()
+		If _Sleep(1000) Then Return
+		checkMainScreen(False)
+		If $Restart = True Then ContinueLoop
+		DonateCC()
 		If _Sleep(1000) Then Return
 		If $CommandStop <> 0 Then
 			Train()
-			If _Sleep(1000) Then ExitLoop
+			If _Sleep(1000) Then Return
 		EndIf
+		checkMainScreen(False)
+		If $Restart = True Then ContinueLoop
 		BoostBarracks()
-		If _Sleep(1000) Then ExitLoop
+		If _Sleep(1000) Then Return
 		RequestCC()
 		If _Sleep(1000) Then Return
-		DonateCC()
-		If _Sleep(1000) Then Return
+		checkMainScreen(False)
+	    If $Restart = True Then ContinueLoop
+		checkMainScreen(False)
+		If $Restart = True Then ContinueLoop
 		Collect()
 		If _Sleep(1000) Then Return
+		checkMainScreen(False)
+		If $Restart = True Then ContinueLoop
 		UpgradeWall()
+
 		If _Sleep(1000) Then Return
 		Idle()
 		If _Sleep(1000) Then Return
+	    If $Restart = True Then ContinueLoop
 		If $CommandStop <> 0 And $CommandStop <> 3 Then
 			AttackMain()
 			If _Sleep(1000) Then Return
@@ -90,10 +109,15 @@ EndFunc   ;==>runBot
 Func Idle() ;Sequence that runs until Full Army
 	Local $TimeIdle = 0 ;In Seconds
 		While $fullArmy = False
-			If $CommandStop = -1 Then SetLog("~~~Waiting for full army~~~", $COLOR_PURPLE)
+			If $CommandStop = -1 Then SetLog("====== Waiting for full army ======", $COLOR_RED)
 			Local $hTimer = TimerInit()
-			If _Sleep(30000) Then ExitLoop
-			checkMainScreen()
+			Local $iReHere = 0
+			while $iReHere < 28
+				$iReHere += 1
+				checkMainScreen(False)
+				If _Sleep(1000) Then ExitLoop
+			    If $Restart = True Then ExitLoop
+			wend
 			If _Sleep(1000) Then ExitLoop
 			ZoomOut()
 			If _Sleep(1000) Then ExitLoop
@@ -108,13 +132,13 @@ Func Idle() ;Sequence that runs until Full Army
 				If _Sleep(1000) Then ExitLoop
 			EndIf
 			If $CommandStop = 0 And $fullArmy Then
-				SetLog("Army Camp and Barracks is full, stop Training...", $COLOR_ORANGE)
+				SetLog("Army Camp and Barracks are full, stop Training...", $COLOR_ORANGE)
 				$CommandStop = 3
 				$fullArmy = False
 			EndIf
 			If $CommandStop = -1 Then
-				If $fullArmy Then ExitLoop
 				DropTrophy()
+				If $fullArmy Then ExitLoop
 				If _Sleep(1000) Then ExitLoop
 			EndIf
 			DonateCC()
@@ -124,6 +148,9 @@ Func Idle() ;Sequence that runs until Full Army
 EndFunc   ;==>Idle
 
 Func AttackMain() ;Main control for attack functions
+		SaveConfig()
+		readConfig()
+		applyConfig()
 		PrepareSearch()
 	 If _Sleep(1000) Then Return
 		VillageSearch($TakeAllTownSnapShot)

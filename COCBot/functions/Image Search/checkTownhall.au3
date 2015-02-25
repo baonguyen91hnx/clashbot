@@ -1,20 +1,19 @@
 Global $atkTH[5]
-$atkTH[0] = @ScriptDir & "\images\TH\townhall6.bmp"
-$atkTH[1] = @ScriptDir & "\images\TH\townhall7.bmp"
-$atkTH[2] = @ScriptDir & "\images\TH\townhall8.bmp"
-$atkTH[3] = @ScriptDir & "\images\TH\townhall9.bmp"
-$atkTH[4] = @ScriptDir & "\images\TH\townhall10.bmp"
-
-Global $Tolerance1 = 80
+For $i = 0 To 4
+   $atkTH[$i] = @ScriptDir & "\images\TH\" & $i+6 & ".bmp"
+Next
+Local $Tolerance1[5] = [90, 90, 90, 85, 85]
 
 Func checkTownhall()
-    If _Sleep(500) Then Return
-	_CaptureRegion()
-   For $i = 0 To 4
-	$THLocation = _ImageSearch($atkTH[$i], 1, $THx, $THy, $Tolerance1) ; Getting TH Location
-	If $THLocation = 1 Then
-		Return $THText[$i]
-	EndIf
+   Local $x = 0
+   For $x = 0 To 3
+	   _CaptureRegion()
+	  For $i = 0 To 4
+	   $THLocation = _ImageSearch($atkTH[$i], 1, $THx, $THy, $Tolerance1[$i]) ; Getting TH Location
+	   If $THLocation = 1 Then
+		   Return $THText[$i]
+	   EndIf
+	  Next
    Next
    If $THLocation = 0 Then Return "-"
 EndFunc

@@ -28,14 +28,10 @@ Func GUIControl($hWind, $iMsg, $wParam, $lParam)
 					chkRequest()
 				Case $tabMain
 					tabMain()
-				Case $chkMeetGorE
-					If GUICtrlRead($chkMeetGorE) = $GUI_CHECKED Then
-						GUICtrlSetState($chkMeetGxE, $GUI_UNCHECKED)
-					EndIf
-				Case $chkMeetGxE
-					If GUICtrlRead($chkMeetGxE) = $GUI_CHECKED Then
-						GUICtrlSetState($chkMeetGorE, $GUI_UNCHECKED)
-					EndIf
+				Case $cmbBotCond
+					 cmbBotCond()
+			    Case $Randomspeedatk
+					 Randomspeedatk()
 			EndSwitch
 		Case 274
 			Switch $wParam
@@ -48,6 +44,11 @@ Func GUIControl($hWind, $iMsg, $wParam, $lParam)
 	EndSwitch
 	Return $GUI_RUNDEFMSG
 EndFunc   ;==>GUIControl
+
+Func SetTime()
+    Local $time = _TicksToTime(Int(TimerDiff($sTimer)), $hour, $min, $sec)
+	If _GUICtrlTab_GetCurSel($tabMain) = 6 Then GUICtrlSetData($lblresultruntime, StringFormat("%02i:%02i:%02i", $hour, $min, $sec))
+EndFunc   ;==>SetTime
 
 Func btnStart()
 	CreateLogFile()
@@ -64,9 +65,9 @@ Func btnStart()
 		If IsArray(ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")) Then
 			Local $BSsize = [ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")[2], ControlGetPos($Title, "_ctl.Window", "[CLASS:BlueStacksApp; INSTANCE:1]")[3]]
 			If $BSsize[0] <> 860 Or $BSsize[1] <> 720 Then
-				SetLog("BlueStacks is not set to 860x720!", $COLOR_RED)
+				SetLog("BlueStacks resolution is not set to 860x720!", $COLOR_RED)
 				SetLog("Download the '860x720.reg' file and run it, restart BlueStacks", $COLOR_ORANGE)
-				SetLog("Download the '860x720.reg' here: http://www.goo.gl/YgQ5II", $COLOR_ORANGE)
+				SetLog("Download the '860x720.reg' here: http://www66.zippyshare.com/d/SX7ZdAuA/198756/860x720.reg", $COLOR_ORANGE)
 			Else
 				WinActivate($Title)
 
@@ -77,22 +78,26 @@ Func btnStart()
 				$RunState = True
 				GUICtrlSetState($cmbBoostBarracks, $GUI_DISABLE)
 				GUICtrlSetState($btnLocateBarracks, $GUI_DISABLE)
+			    GUICtrlSetState($btnLocateArmyCamp, $GUI_DISABLE)
 				GUICtrlSetState($btnSearchMode, $GUI_DISABLE)
 				GUICtrlSetState($cmbTroopComp, $GUI_DISABLE)
 				GUICtrlSetState($chkBackground, $GUI_DISABLE)
-				GUICtrlSetState($btnLocateCollectors, $GUI_DISABLE)
+				GUICtrlSetState($chkNoAttack, $GUI_DISABLE)
+				;GUICtrlSetState($btnLocateCollectors, $GUI_DISABLE)
 				GUICtrlSetState($btnLocateClanCastle, $GUI_DISABLE)
-				GUICtrlSetState($btnLocateTrap, $GUI_DISABLE)
+				GUICtrlSetState($btnLocateTownHall, $GUI_DISABLE)
 				GUICtrlSetState($btnStart, $GUI_HIDE)
 				GUICtrlSetState($btnStop, $GUI_SHOW)
-				If GUICtrlRead($txtCapacity) = 0 And $icmbTroopComp <> 8 Then
-					 MsgBox(0, "", "Don't Forget to Set Your Troops Capacity in Troops Tab!!")
-					 btnStop()
-				  EndIf
+;~ 				If GUICtrlRead($txtCapacity) = 0 And $icmbTroopComp <> 8 Then
+;~ 					 MsgBox(0, "", "Don't Forget to Set Your Troops Capacity in Troops Tab!!")
+;~ 					 btnStop()
+;~ 				  EndIf
+			    $sTimer = TimerInit()
+			    AdlibRegister("SetTime", 1000)
 				runBot()
 			EndIf
 		Else
-			SetLog("Not in Game!", $COLOR_RED)
+			SetLog("Please Launch The Game", $COLOR_RED)
 		EndIf
 	Else
 		SetLog("BlueStacks was not found!", $COLOR_RED)
@@ -105,15 +110,19 @@ Func btnStop()
 		EnableBS($HWnD, $SC_MINIMIZE)
 		EnableBS($HWnD, $SC_CLOSE)
 		GUICtrlSetState($btnLocateBarracks, $GUI_ENABLE)
+		GUICtrlSetState($btnLocateArmyCamp, $GUI_ENABLE)
 		GUICtrlSetState($btnSearchMode, $GUI_ENABLE)
 		GUICtrlSetState($cmbTroopComp, $GUI_ENABLE)
-		GUICtrlSetState($btnLocateCollectors, $GUI_ENABLE)
+		;GUICtrlSetState($btnLocateCollectors, $GUI_ENABLE)
 		GUICtrlSetState($btnLocateClanCastle, $GUI_ENABLE)
-		GUICtrlSetState($btnLocateTrap, $GUI_ENABLE)
+		GUICtrlSetState($btnLocateTownHall, $GUI_ENABLE)
 		GUICtrlSetState($chkBackground, $GUI_ENABLE)
+		GUICtrlSetState($chkNoAttack, $GUI_ENABLE)
 	    GUICtrlSetState($cmbBoostBarracks, $GUI_ENABLE)
 		GUICtrlSetState($btnStart, $GUI_SHOW)
 		GUICtrlSetState($btnStop, $GUI_HIDE)
+		AdlibUnRegister("SetTime")
+		_BlockInputEx(0, "", "", $HWnD)
 
 		FileClose($hLogFileHandle)
 		SetLog("Bot has stopped", $COLOR_ORANGE)
@@ -130,6 +139,16 @@ Func btnLocateBarracks()
 	$RunState = False
 EndFunc   ;==>btnLocateBarracks
 
+Func btnLocateArmyCamp()
+	$RunState = True
+	While 1
+		ZoomOut()
+		LocateBarrack(True)
+		ExitLoop
+	WEnd
+	$RunState = False
+EndFunc   ;==>btnLocateArmyCamp
+
 Func btnLocateClanCastle()
 	$RunState = True
 	While 1
@@ -140,15 +159,15 @@ Func btnLocateClanCastle()
 	$RunState = False
 EndFunc   ;==>btnLocateClanCastle
 
-Func btnLocateTrap()
+Func btnLocateTownHall()
 	$RunState = True
 	While 1
 		ZoomOut()
-		LocateTrap()
+		LocateTownHall()
 		ExitLoop
 	WEnd
 	$RunState = False
-EndFunc   ;==>btnLocateTrap
+EndFunc   ;==>btnLocateTownHall
 
 Func btnSearchMode()
 	While 1
@@ -159,7 +178,7 @@ Func btnSearchMode()
 		GUICtrlSetState($btnSearchMode, $GUI_DISABLE)
 		GUICtrlSetState($cmbTroopComp, $GUI_DISABLE)
 		GUICtrlSetState($chkBackground, $GUI_DISABLE)
-		GUICtrlSetState($btnLocateCollectors, $GUI_DISABLE)
+		;GUICtrlSetState($btnLocateCollectors, $GUI_DISABLE)
 
 		$RunState = True
 		VillageSearch($TakeAllTownSnapShot)
@@ -172,7 +191,7 @@ Func btnSearchMode()
 		GUICtrlSetState($btnSearchMode, $GUI_ENABLE)
 		GUICtrlSetState($cmbTroopComp, $GUI_ENABLE)
 		GUICtrlSetState($chkBackground, $GUI_ENABLE)
-		GUICtrlSetState($btnLocateCollectors, $GUI_ENABLE)
+		;GUICtrlSetState($btnLocateCollectors, $GUI_ENABLE)
 		ExitLoop
 	WEnd
 EndFunc   ;==>btnSearchMode
@@ -218,16 +237,22 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			GUICtrlSetState($txtCapacity, $GUI_ENABLE)
-			GUICtrlSetState($txtBarbarians, $GUI_DISABLE)
-			GUICtrlSetState($txtArchers, $GUI_DISABLE)
-			GUICtrlSetState($txtGoblins, $GUI_DISABLE)
-			GUICtrlSetState($txtNumGiants, $GUI_DISABLE)
-			GUICtrlSetState($txtNumWallbreakers, $GUI_DISABLE)
+			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($txtBarbarians, $GUI_ENABLE)
+			GUICtrlSetState($txtArchers, $GUI_ENABLE)
+			GUICtrlSetState($txtGoblins, $GUI_ENABLE)
+			GUICtrlSetState($txtNumGiants, $GUI_ENABLE)
+			GUICtrlSetState($txtNumWallbreakers, $GUI_ENABLE)
 
 			GUICtrlSetData($txtBarbarians, "0")
 			GUICtrlSetData($txtArchers, "100")
 			GUICtrlSetData($txtGoblins, "0")
+
+			_GUICtrlEdit_SetReadOnly($txtBarbarians, True)
+			_GUICtrlEdit_SetReadOnly($txtArchers, True)
+			_GUICtrlEdit_SetReadOnly($txtGoblins, True)
+			_GUICtrlEdit_SetReadOnly($txtNumGiants, True)
+			_GUICtrlEdit_SetReadOnly($txtNumWallbreakers, True)
 
 			GUICtrlSetData($txtNumGiants, "0")
 			GUICtrlSetData($txtNumWallbreakers, "0")
@@ -236,12 +261,18 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			GUICtrlSetState($txtCapacity, $GUI_ENABLE)
-			GUICtrlSetState($txtBarbarians, $GUI_DISABLE)
-			GUICtrlSetState($txtArchers, $GUI_DISABLE)
-			GUICtrlSetState($txtGoblins, $GUI_DISABLE)
-			GUICtrlSetState($txtNumGiants, $GUI_DISABLE)
-			GUICtrlSetState($txtNumWallbreakers, $GUI_DISABLE)
+			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($txtBarbarians, $GUI_ENABLE)
+			GUICtrlSetState($txtArchers, $GUI_ENABLE)
+			GUICtrlSetState($txtGoblins, $GUI_ENABLE)
+			GUICtrlSetState($txtNumGiants, $GUI_ENABLE)
+			GUICtrlSetState($txtNumWallbreakers, $GUI_ENABLE)
+
+			_GUICtrlEdit_SetReadOnly($txtBarbarians, True)
+			_GUICtrlEdit_SetReadOnly($txtArchers, True)
+			_GUICtrlEdit_SetReadOnly($txtGoblins, True)
+			_GUICtrlEdit_SetReadOnly($txtNumGiants, True)
+			_GUICtrlEdit_SetReadOnly($txtNumWallbreakers, True)
 
 			GUICtrlSetData($txtBarbarians, "100")
 			GUICtrlSetData($txtArchers, "0")
@@ -254,12 +285,18 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			GUICtrlSetState($txtCapacity, $GUI_ENABLE)
-			GUICtrlSetState($txtBarbarians, $GUI_DISABLE)
-			GUICtrlSetState($txtArchers, $GUI_DISABLE)
-			GUICtrlSetState($txtGoblins, $GUI_DISABLE)
-			GUICtrlSetState($txtNumGiants, $GUI_DISABLE)
-			GUICtrlSetState($txtNumWallbreakers, $GUI_DISABLE)
+			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($txtBarbarians, $GUI_ENABLE)
+			GUICtrlSetState($txtArchers, $GUI_ENABLE)
+			GUICtrlSetState($txtGoblins, $GUI_ENABLE)
+			GUICtrlSetState($txtNumGiants, $GUI_ENABLE)
+			GUICtrlSetState($txtNumWallbreakers, $GUI_ENABLE)
+
+			_GUICtrlEdit_SetReadOnly($txtBarbarians, True)
+			_GUICtrlEdit_SetReadOnly($txtArchers, True)
+			_GUICtrlEdit_SetReadOnly($txtGoblins, True)
+			_GUICtrlEdit_SetReadOnly($txtNumGiants, True)
+			_GUICtrlEdit_SetReadOnly($txtNumWallbreakers, True)
 
 			GUICtrlSetData($txtBarbarians, "0")
 			GUICtrlSetData($txtArchers, "0")
@@ -272,12 +309,18 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			GUICtrlSetState($txtCapacity, $GUI_ENABLE)
-			GUICtrlSetState($txtBarbarians, $GUI_DISABLE)
-			GUICtrlSetState($txtArchers, $GUI_DISABLE)
-			GUICtrlSetState($txtGoblins, $GUI_DISABLE)
-			GUICtrlSetState($txtNumGiants, $GUI_DISABLE)
-			GUICtrlSetState($txtNumWallbreakers, $GUI_DISABLE)
+			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($txtBarbarians, $GUI_ENABLE)
+			GUICtrlSetState($txtArchers, $GUI_ENABLE)
+			GUICtrlSetState($txtGoblins, $GUI_ENABLE)
+			GUICtrlSetState($txtNumGiants, $GUI_ENABLE)
+			GUICtrlSetState($txtNumWallbreakers, $GUI_ENABLE)
+
+			_GUICtrlEdit_SetReadOnly($txtBarbarians, True)
+			_GUICtrlEdit_SetReadOnly($txtArchers, True)
+			_GUICtrlEdit_SetReadOnly($txtGoblins, True)
+			_GUICtrlEdit_SetReadOnly($txtNumGiants, True)
+			_GUICtrlEdit_SetReadOnly($txtNumWallbreakers, True)
 
 			GUICtrlSetData($txtBarbarians, "50")
 			GUICtrlSetData($txtArchers, "50")
@@ -290,12 +333,18 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			GUICtrlSetState($txtCapacity, $GUI_ENABLE)
-			GUICtrlSetState($txtBarbarians, $GUI_DISABLE)
-			GUICtrlSetState($txtArchers, $GUI_DISABLE)
-			GUICtrlSetState($txtGoblins, $GUI_DISABLE)
+			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($txtBarbarians, $GUI_ENABLE)
+			GUICtrlSetState($txtArchers, $GUI_ENABLE)
+			GUICtrlSetState($txtGoblins, $GUI_ENABLE)
 			GUICtrlSetState($txtNumGiants, $GUI_ENABLE)
-			GUICtrlSetState($txtNumWallbreakers, $GUI_DISABLE)
+			GUICtrlSetState($txtNumWallbreakers, $GUI_ENABLE)
+
+			_GUICtrlEdit_SetReadOnly($txtBarbarians, True)
+			_GUICtrlEdit_SetReadOnly($txtArchers, True)
+			_GUICtrlEdit_SetReadOnly($txtGoblins, True)
+			_GUICtrlEdit_SetReadOnly($txtNumWallbreakers, True)
+			_GUICtrlEdit_SetReadOnly($txtNumGiants, False)
 
 			GUICtrlSetData($txtBarbarians, "60")
 			GUICtrlSetData($txtArchers, "30")
@@ -308,12 +357,18 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			GUICtrlSetState($txtCapacity, $GUI_ENABLE)
-			GUICtrlSetState($txtBarbarians, $GUI_DISABLE)
-			GUICtrlSetState($txtArchers, $GUI_DISABLE)
-			GUICtrlSetState($txtGoblins, $GUI_DISABLE)
+			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($txtBarbarians, $GUI_ENABLE)
+			GUICtrlSetState($txtArchers, $GUI_ENABLE)
+			GUICtrlSetState($txtGoblins, $GUI_ENABLE)
 			GUICtrlSetState($txtNumGiants, $GUI_ENABLE)
-			GUICtrlSetState($txtNumWallbreakers, $GUI_DISABLE)
+			GUICtrlSetState($txtNumWallbreakers, $GUI_ENABLE)
+
+			_GUICtrlEdit_SetReadOnly($txtBarbarians, True)
+			_GUICtrlEdit_SetReadOnly($txtArchers, True)
+			_GUICtrlEdit_SetReadOnly($txtGoblins, True)
+			_GUICtrlEdit_SetReadOnly($txtNumWallbreakers, True)
+			_GUICtrlEdit_SetReadOnly($txtNumGiants, False)
 
 			GUICtrlSetData($txtBarbarians, "50")
 			GUICtrlSetData($txtArchers, "50")
@@ -326,12 +381,18 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			GUICtrlSetState($txtCapacity, $GUI_ENABLE)
-			GUICtrlSetState($txtBarbarians, $GUI_DISABLE)
-			GUICtrlSetState($txtArchers, $GUI_DISABLE)
-			GUICtrlSetState($txtGoblins, $GUI_DISABLE)
-			GUICtrlSetState($txtNumGiants, $GUI_DISABLE)
-			GUICtrlSetState($txtNumWallbreakers, $GUI_DISABLE)
+			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($txtBarbarians, $GUI_ENABLE)
+			GUICtrlSetState($txtArchers, $GUI_ENABLE)
+			GUICtrlSetState($txtGoblins, $GUI_ENABLE)
+			GUICtrlSetState($txtNumGiants, $GUI_ENABLE)
+			GUICtrlSetState($txtNumWallbreakers, $GUI_ENABLE)
+
+			_GUICtrlEdit_SetReadOnly($txtBarbarians, True)
+			_GUICtrlEdit_SetReadOnly($txtArchers, True)
+			_GUICtrlEdit_SetReadOnly($txtGoblins, True)
+			_GUICtrlEdit_SetReadOnly($txtNumGiants, True)
+			_GUICtrlEdit_SetReadOnly($txtNumWallbreakers, True)
 
 			GUICtrlSetData($txtBarbarians, "60")
 			GUICtrlSetData($txtArchers, "30")
@@ -344,12 +405,18 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			GUICtrlSetState($txtCapacity, $GUI_ENABLE)
-			GUICtrlSetState($txtBarbarians, $GUI_DISABLE)
-			GUICtrlSetState($txtArchers, $GUI_DISABLE)
-			GUICtrlSetState($txtGoblins, $GUI_DISABLE)
+			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($txtBarbarians, $GUI_ENABLE)
+			GUICtrlSetState($txtArchers, $GUI_ENABLE)
+			GUICtrlSetState($txtGoblins, $GUI_ENABLE)
 			GUICtrlSetState($txtNumGiants, $GUI_ENABLE)
 			GUICtrlSetState($txtNumWallbreakers, $GUI_ENABLE)
+
+			_GUICtrlEdit_SetReadOnly($txtBarbarians, True)
+			_GUICtrlEdit_SetReadOnly($txtArchers, True)
+			_GUICtrlEdit_SetReadOnly($txtGoblins, True)
+			_GUICtrlEdit_SetReadOnly($txtNumGiants, False)
+			_GUICtrlEdit_SetReadOnly($txtNumWallbreakers, False)
 
 			GUICtrlSetData($txtBarbarians, "60")
 			GUICtrlSetData($txtArchers, "30")
@@ -362,7 +429,7 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_ENABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_ENABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_ENABLE)
-			GUICtrlSetState($txtCapacity, $GUI_DISABLE)
+			;GUICtrlSetState($txtCapacity, $GUI_DISABLE)
 			GUICtrlSetState($txtBarbarians, $GUI_DISABLE)
 			GUICtrlSetState($txtArchers, $GUI_DISABLE)
 			GUICtrlSetState($txtGoblins, $GUI_DISABLE)
@@ -373,12 +440,18 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
 			GUICtrlSetState($txtBarbarians, $GUI_ENABLE)
 			GUICtrlSetState($txtArchers, $GUI_ENABLE)
 			GUICtrlSetState($txtGoblins, $GUI_ENABLE)
 			GUICtrlSetState($txtNumGiants, $GUI_ENABLE)
 			GUICtrlSetState($txtNumWallbreakers, $GUI_ENABLE)
+
+			_GUICtrlEdit_SetReadOnly($txtBarbarians, False)
+			_GUICtrlEdit_SetReadOnly($txtArchers, False)
+			_GUICtrlEdit_SetReadOnly($txtGoblins, False)
+			_GUICtrlEdit_SetReadOnly($txtNumGiants, False)
+			_GUICtrlEdit_SetReadOnly($txtNumWallbreakers, False)
 
 			GUICtrlSetData($txtBarbarians, $BarbariansComp)
 			GUICtrlSetData($txtArchers, $ArchersComp)
@@ -388,6 +461,28 @@ Func SetComboTroopComp()
 			GUICtrlSetData($txtNumWallbreakers, $WBComp)
 	EndSwitch
 EndFunc   ;==>SetComboTroopComp
+
+Func cmbBotCond()
+   If _GUICtrlComboBox_GetCurSel($cmbBotCond) = 13 Then
+	  If _GUICtrlComboBox_GetCurSel($cmbHoursStop) = 0 Then _GUICtrlComboBox_SetCurSel($cmbHoursStop, 1)
+	  GUICtrlSetState($cmbHoursStop, $GUI_ENABLE)
+   Else
+	  _GUICtrlComboBox_SetCurSel($cmbHoursStop, 0)
+	  GUICtrlSetState($cmbHoursStop, $GUI_DISABLE)
+   EndIf
+EndFunc	  ;==>cmbBotCond
+
+Func Randomspeedatk()
+   If GUICtrlRead($Randomspeedatk) = $GUI_CHECKED Then
+	  $iRandomspeedatk = 1
+	  GUICtrlSetState($cmbUnitDelay, $GUI_DISABLE)
+	  GUICtrlSetState($cmbWaveDelay, $GUI_DISABLE)
+   Else
+	  $iRandomspeedatk = 0
+	  GUICtrlSetState($cmbUnitDelay, $GUI_ENABLE)
+	  GUICtrlSetState($cmbWaveDelay, $GUI_ENABLE)
+   EndIf
+EndFunc   ;==>Randomspeedatk
 
 Func chkBackground()
 	If GUICtrlRead($chkBackground) = $GUI_CHECKED Then
@@ -399,15 +494,25 @@ Func chkBackground()
 	EndIf
 EndFunc   ;==>chkBackground
 
-Func btnLocateCollectors()
-	$RunState = True
-	While 1
-		ZoomOut()
-		LocateCollectors()
-		ExitLoop
-	WEnd
-	$RunState = False
-EndFunc   ;==>btnLocateCollectors
+Func chkNoAttack()
+	If GUICtrlRead($chkBackground) = $GUI_CHECKED Then
+		$CommandStop = 0
+		SetLog("~~~No-Attack Mode Selected~~~", $COLOR_PURPLE)
+	Else
+		$CommandStop = -1
+		SetLog("~~~No-Attack Mode Removed~~~", $COLOR_PURPLE)
+	EndIf
+EndFunc   ;==>chkNoAttack
+
+;~ Func btnLocateCollectors()
+;~ 	$RunState = True
+;~ 	While 1
+;~ 		ZoomOut()
+;~ 		LocateCollectors()
+;~ 		ExitLoop
+;~ 	WEnd
+;~ 	$RunState = False
+;~ EndFunc   ;==>btnLocateCollectors
 
 Func chkRequest()
 	If GUICtrlRead($chkRequest) = $GUI_CHECKED Then

@@ -19,7 +19,7 @@ Func Barch() ;Attack Algorithm for Barch
 		If _Sleep(500) Then ExitLoop
 		Switch $deploySettings
 			Case 0 ;Two sides ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-				SetLog("~Attacking in two sides...")
+				SetLog("~Attacking from two sides...")
 				If _Sleep(1000) Then ExitLoop
 				Local $numBarbPerSpot = Ceiling((($atkTroops[$Barb][1] / 2) / 5) / 2)
 				Local $numArchPerSpot = Ceiling((($atkTroops[$Arch][1] / 2) / 5) / 2)
@@ -66,7 +66,7 @@ Func Barch() ;Attack Algorithm for Barch
 				If _Sleep(1000) Then ExitLoop
 				dropCC($TopLeft[3][0], $TopLeft[3][1], $CC)
 			Case 1 ;Three sides ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-				SetLog("~Attacking in three sides...")
+				SetLog("~Attacking from three sides...")
 				If _Sleep(1000) Then ExitLoop
 				Local $numBarbPerSpot = Ceiling((($atkTroops[$Barb][1] / 3) / 5) / 2)
 				Local $numArchPerSpot = Ceiling((($atkTroops[$Arch][1] / 3) / 5) / 2)
@@ -117,7 +117,7 @@ Func Barch() ;Attack Algorithm for Barch
 				If _Sleep(1000) Then ExitLoop
 				dropCC($TopRight[3][0], $TopRight[3][1], $CC)
 			Case 2 ;Four sides ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-				SetLog("~Attacking in all sides...")
+				SetLog("~Attacking from all sides...")
 				If _Sleep(1000) Then ExitLoop
 				Local $numBarbPerSpot = Ceiling((($atkTroops[$Barb][1] / 4) / 5) / 2)
 				Local $numArchPerSpot = Ceiling((($atkTroops[$Arch][1] / 4) / 5) / 2)
@@ -198,7 +198,7 @@ Func Barch() ;Attack Algorithm for Barch
 
 		;Activate KQ's power
 		If $checkKPower = True Or $checkQPower = True Then
-			SetLog("Waiting " & $delayActivateKQ / 1000 & " seconds before activating King/Queen", $COLOR_GREEN)
+			SetLog("Waiting " & $delayActivateKQ / 1000 & " seconds before activating Hero abilities", $COLOR_GREEN)
 			_Sleep($delayActivateKQ)
 			If $checkKPower = True Then
 				SetLog("Activate King's power", $COLOR_BLUE)

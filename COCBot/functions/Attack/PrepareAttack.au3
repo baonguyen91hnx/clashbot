@@ -3,7 +3,7 @@
 
 Func PrepareAttack($remainding = false) ;Assigns troops
   If $remainding Then
-	  SetLog("Checking remainding unlaunched troops", $COLOR_ORANGE)
+	  SetLog("Checking remainding unused troops", $COLOR_ORANGE)
    Else
 	  SetLog("Preparing to attack", $COLOR_BLUE)
    EndIf
@@ -39,7 +39,7 @@ Func PrepareAttack($remainding = false) ;Assigns troops
 	  If ($troopKind == -1) Then
 		 $atkTroops[$i][1] = 0
 	  ElseIf ($troopKind = $eKing) Or ($troopKind = $eQueen) Or ($troopKind = $eCastle) Then
-		 $atkTroops[$i][1] = 1
+		 $atkTroops[$i][1] = ""
 	  Else
 		 $atkTroops[$i][1] = ReadTroopQuantity($i)
 	  EndIf

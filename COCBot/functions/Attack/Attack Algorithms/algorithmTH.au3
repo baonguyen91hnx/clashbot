@@ -9,7 +9,7 @@ Func algorithmTH() ;Attack Algorithm TH
 			SetLog("Can't get Townhall location", $COLOR_RED)
 		ElseIf $THx > 227 And $THx < 627 And $THy > 151 And $THy < 419 And GUICtrlRead($chkAttackTH) = $GUI_CHECKED Then
 			SetLog("Townhall location (" & $THx & ", " & $THy &")")
-			SetLog("Townhall is in Center of Base. Ignore Attacking Townhall", $COLOR_ORANGE)
+			SetLog("Townhall is in the Center of the Base. Ignore Attacking Townhall", $COLOR_ORANGE)
 			$THLocation = 0
 		Else
 			SetLog("Townhall location (" & $THx & ", " & $THy &")")

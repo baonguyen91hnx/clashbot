@@ -3,9 +3,9 @@
 Func ReturnHome($TakeSS = 1, $GoldChangeCheck = True) ;Return main screen
 		If $GoldChangeCheck = True Then
 			If $checkKPower Or $checkQPower Then
-				If _Sleep(50000 - $delayActivateKQ) Then Return
+				If _Sleep(35000 - $delayActivateKQ) Then Return
 			Else
-				If _Sleep(50000) Then Return
+				If _Sleep(35000) Then Return
 			EndIf
 			While GoldElixirChange()
 				If _Sleep(1000) Then Return
@@ -27,6 +27,7 @@ Func ReturnHome($TakeSS = 1, $GoldChangeCheck = True) ;Return main screen
 			Local $Time = @HOUR & "." & @MIN
 			_CaptureRegion()
 			_GDIPlus_ImageSaveToFile($hBitmap, $dirLoots & $Date & " at " & $Time & ".jpg")
+			;attackReport()
 		EndIf
 
 		If _Sleep(2000) Then Return

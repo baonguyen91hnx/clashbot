@@ -6,7 +6,7 @@ Func RequestCC()
 			If _Sleep(1000) Then Return
 		EndIf
 		While 1
-			SetLog("Requesting for Clan Castle's Troops", $COLOR_BLUE)
+			SetLog("Requesting for Clan Castle Troops", $COLOR_BLUE)
 			Click($CCPos[0], $CCPos[1])
 			If _Sleep(1000) Then ExitLoop
 			_CaptureRegion()
@@ -24,13 +24,14 @@ Func RequestCC()
 					EndIf
 					If _Sleep(1000) Then ExitLoop
 					Click(524, 228)
+					If _Sleep(2000) Then ExitLoop
 					;Click(340, 228)
 				Else
-					SetLog("Request's already been made", $COLOR_ORANGE)
+					SetLog("Request has already been made", $COLOR_ORANGE)
 					Click(1, 1, 2)
 				EndIf
 			Else
-				SetLog("Clan Castle not available", $COLOR_RED)
+				SetLog("Join a clan to donate troops", $COLOR_RED)
 			EndIf
 			ExitLoop
 		WEnd
